@@ -2066,6 +2066,213 @@
       z-index: 6;
     }
 
+    /* v7: Knoten-Schule in Schritten */
+    .knotenspiel {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 12px 14px 14px;
+    }
+
+    .ks-kopf {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      text-align: center;
+    }
+
+    .ks-kopf b {
+      font: 600 1.2rem var(--display);
+      font-variation-settings: "SOFT" 100;
+    }
+
+    .ks-kopf span {
+      font-size: .88rem;
+      color: var(--tinte-weich);
+      font-weight: 600;
+    }
+
+    .ks-punkte {
+      display: flex;
+      gap: 6px;
+    }
+
+    .ks-punkte i {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--sand-2);
+    }
+
+    .ks-punkte i.an {
+      background: var(--salbei);
+    }
+
+    .ks-jetzt {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #fffaf3;
+      border-radius: 20px;
+      padding: 6px 12px;
+      box-shadow: inset 0 0 0 1.5px var(--sand-2);
+    }
+
+    .ks-bild svg {
+      width: 104px;
+      height: 104px;
+      display: block;
+    }
+
+    .ks-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .ks-text small {
+      color: var(--tinte-weich);
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .ks-auftrag {
+      font-size: 1.02rem;
+    }
+
+    .ks-frage {
+      font: 600 1.25rem var(--display);
+      font-variation-settings: "SOFT" 100;
+      text-align: center;
+    }
+
+    .ks-frage.klein {
+      font-size: 1.05rem;
+    }
+
+    .ks-wahl {
+      flex: 1;
+      min-height: 0;
+      display: grid;
+      gap: 10px;
+      align-content: center;
+    }
+
+    .ks-wahl.zwei {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .ks-wahl.drei {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .ks-wahl.zwei:not(.viele) {
+      padding: 0 6%;
+    }
+
+    .ks-kachel {
+      aspect-ratio: 1;
+      min-width: 0;
+      border: 0;
+      border-radius: 20px;
+      background: #fffaf3;
+      box-shadow: inset 0 0 0 1.5px var(--sand-2), 0 4px 0 var(--sand-2);
+      padding: 4px;
+      cursor: pointer;
+      transition: opacity .2s;
+    }
+
+    .ks-kachel svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      pointer-events: none;
+    }
+
+    .ks-kachel.richtig {
+      background: #E4ECDD;
+      box-shadow: inset 0 0 0 3px var(--salbei), 0 4px 0 var(--salbei);
+    }
+
+    .ks-kachel.falsch {
+      box-shadow: inset 0 0 0 3px var(--terrakotta), 0 4px 0 var(--sand-2);
+      opacity: .55;
+    }
+
+    .ks-kachel.weg {
+      visibility: hidden;
+    }
+
+    .ks-info {
+      min-height: 2.6em;
+      text-align: center;
+      font-weight: 600;
+      color: var(--tinte-weich);
+      line-height: 1.3;
+      font-size: .92rem;
+    }
+
+    .ks-info.gut {
+      color: #4E6B42;
+    }
+
+    .ks-info.schlecht {
+      color: var(--terrakotta);
+    }
+
+    .ks-reihe {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+    }
+
+    .ks-platz {
+      flex: 0 1 62px;
+      aspect-ratio: 1;
+      border-radius: 14px;
+      border: 2px dashed var(--sand-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--tinte-weich);
+    }
+
+    .ks-platz.voll {
+      border-style: solid;
+      border-color: var(--salbei);
+      background: #fffaf3;
+    }
+
+    .ks-platz svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .knotenspiel.erkennen {
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .ks-wahl.gross {
+      flex: 0 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .ks-wahl.gross .ks-kachel {
+      width: calc(50% - 5px);
+      max-width: 170px;
+    }
+
     @media (prefers-reduced-motion: reduce) {
 
       .flamme svg,
@@ -2648,6 +2855,7 @@
       return d ? `<svg viewBox="0 0 48 48">${d.s}</svg>` : "";
     }
 
+
     // =====================================================================
     //  KNOTEN (selbst berechnet und gezeichnet)
     //  Jede Leine ist eine Punktliste [x, y, z]. z sagt, was oben liegt:
@@ -2683,16 +2891,20 @@
       ueberhand: {
         name: "Überhandknoten",
         tipp: "Schlaufe legen, Ende durchstecken.",
+        // Schritte: [wie weit das Ende schon gelegt ist (Anteil der Leine), was man tut]. Der erste Eintrag ist die Ausgangslage.
+        schritte: [[.35, "Nimm das Ende der Leine."], [.6, "Lege eine Schlaufe."], [.8, "Stecke das Ende durch die Schlaufe."], [1, "Ziehe beide Enden fest."]],
         leinen: () => [knotenParam(t => Math.sin(t) + 2 * Math.sin(2 * t), t => -(Math.cos(t) - 2 * Math.cos(2 * t)), t => -Math.sin(3 * t), Math.PI, .55, 2.4)]
       },
       achter: {
         name: "Achterknoten",
         tipp: "Schlaufe legen, Ende hinter der Leine herum und von vorn durch die Schlaufe.",
+        schritte: [[.32, "Nimm das Ende der Leine."], [.53, "Lege mit dem Ende eine Schlaufe."], [.7, "Führe das Ende hinter der Leine herum."], [.88, "Stecke das Ende von vorn durch die Schlaufe."], [1, "Ziehe fest. Fertig ist die Acht!"]],
         leinen: () => [knotenGlatt([[100, 198, 0], [100, 160, 0], [100, 112, 0], [100, 72, 0], [104, 46, 0], [122, 30, 0], [146, 40, 0], [153, 70, 0], [141, 99, 0], [120, 110, .6], [100, 112, 1], [76, 118, .6], [62, 136, 0], [74, 152, -.6], [100, 150, -1], [127, 150, -.4], [143, 131, .3], [130, 104, 1], [113, 88, 0], [100, 80, -1], [82, 72, -.3], [56, 54, 0], [34, 32, 0]], 12)]
       },
       halbschlag: {
         name: "Halbschlag",
         tipp: "Leine über die Stange, dann das Ende einmal um die eigene Leine.",
+        schritte: [[.38, "Nimm das Ende der Leine."], [.5, "Lege die Leine über die Stange."], [.72, "Führe das Ende um die eigene Leine herum."], [1, "Stecke das Ende durch die Schlinge und ziehe fest."]],
         stange: [0, 58, 200, 22],
         leinen: () => [knotenGlatt([[64, 196, 1], [74, 140, 1], [82, 100, 1], [88, 74, 1], [96, 56, 0], [104, 64, -5], [108, 76, -5], [112, 86, 0], [114, 98, 2], [100, 106, 3], [80, 108, 3], [66, 114, -1], [74, 126, -2], [96, 132, 0], [126, 150, 0], [146, 180, 0]])]
       }
@@ -2726,7 +2938,7 @@
           const la = laengen[a][i] + (laengen[a][i + 1] - laengen[a][i]) * t, lb = laengen[b][j] + (laengen[b][j + 1] - laengen[b][j]) * u;
           const x = p[0] + rx * t, y = p[1] + ry * t;
           if (kreuz.some(c => Math.hypot(c.x - x, c.y - y) < 4)) continue;
-          kreuz.push(za >= zb ? { leine: a, pos: la, x, y } : { leine: b, pos: lb, x, y });
+          kreuz.push(za >= zb ? { leine: a, pos: la, uLeine: b, unter: lb, x, y } : { leine: b, pos: lb, uLeine: a, unter: la, x, y });
         }
       }
       return { leinen, laengen, kreuz, stange };
@@ -2758,7 +2970,8 @@
         d: knotenD(knotenStueck(leinen[s.i], laengen[s.i], s.von, s.bis)), start: s.von, laenge: s.bis - s.von, leine: s.i,
         dRand: s.kurz ? knotenD(knotenStueck(leinen[s.i], laengen[s.i], s.von + s.kurz, s.bis - s.kurz)) : null, kurz: s.kurz || 0
       }));
-      const kr = kreuz.map(c => ({ i: c.leine, von: Math.max(0, c.pos - 15), bis: c.pos + 15, kurz: 4 }));
+      // opt.tausch: Kreuzungen, bei denen absichtlich die falsche Leine oben liegt (für falsche Antwortbilder)
+      const kr = kreuz.map((c, n) => opt.tausch && opt.tausch.includes(n) ? { i: c.uLeine, von: Math.max(0, c.unter - 15), bis: c.unter + 15, kurz: 4 } : { i: c.leine, von: Math.max(0, c.pos - 15), bis: c.pos + 15, kurz: 4 });
       function zeichne(liste, farbeFn, dash) {
         return liste.map(s => {
           if (!s.d) return "";
@@ -2783,14 +2996,43 @@
       } else {
         // Nachfahren: Ziel-Leine blass, darüber der schon geschaffte Teil in Farbe. Andere Leinen in Farbe.
         const f = (i) => i === opt.nr ? blass() : farbe(i);
-        const lagen = (liste) => zeichne(liste, f) + zeichne(liste.filter(s => s.leine === opt.nr), farbe, opt.fortschritt);
-        inhalt = lagen(basis) + stangeSVG + lagen(stuecke(vorne)) + lagen(stuecke(kr));
+        const lagen = (liste) => (opt.ohneRest ? zeichne(liste.filter(s => s.leine !== opt.nr), farbe) : zeichne(liste, f)) + zeichne(liste.filter(s => s.leine === opt.nr), farbe, opt.fortschritt);
+        // opt.stangeVorn: Stange über allem = Leine liegt falsch hinter der Stange (falsches Antwortbild)
+        inhalt = opt.stangeVorn ? lagen(basis) + lagen(stuecke(kr)) + stangeSVG : lagen(basis) + stangeSVG + lagen(stuecke(vorne)) + lagen(stuecke(kr));
+      }
+      if (opt.pfeil && opt.nr != null && opt.fortschritt != null) {
+        // Pfeilspitze am Leinenende zeigt, wohin das Ende gerade geht
+        const l = leinen[opt.nr], L = laengen[opt.nr];
+        let i = 1;
+        while (i < l.length - 1 && L[i] < opt.fortschritt) i++;
+        const a = l[Math.max(0, i - 4)], b = l[i];
+        const w = Math.atan2(b[1] - a[1], b[0] - a[0]), c = Math.cos(w), s = Math.sin(w);
+        const pt = (x, y) => (b[0] + x * c - y * s).toFixed(1) + " " + (b[1] + x * s + y * c).toFixed(1);
+        inhalt += `<path d="M${pt(13, 0)}L${pt(1, -8)}L${pt(1, 8)}Z" fill="#D9483B" stroke="#fff" stroke-width="2"/>`;
       }
       return `<svg viewBox="0 0 200 200"${opt.attr || ""}><g fill="none" stroke-linejoin="round">${inhalt}</g>${opt.extra || ""}</svg>`;
     }
     const KNOTEN_FERTIG = {};
     function knotenFertig(name) { return KNOTEN_FERTIG[name] || (KNOTEN_FERTIG[name] = knotenBerechnen(KNOTEN[name])); }
     Object.keys(KNOTEN).forEach(name => Object.defineProperty(BILDER, "knoten_" + name, { get: () => knotenSVG(knotenFertig(name)), enumerable: true }));
+
+    // Bild von Schritt nr eines Knotens (0 = Ausgangslage). falsch = absichtlich falsch gelegte Variante
+    function knotenSchrittSVG(name, nr, falsch) {
+      const k = knotenFertig(name), L = k.laengen[0], tot = L[L.length - 1], st = KNOTEN[name].schritte;
+      const bis = tot * st[nr][0], opt = { nr: 0, fortschritt: bis, ohneRest: true, pfeil: nr < st.length - 1 };
+      if (falsch && nr > 0) {
+        // die Kreuzungen, die in diesem Schritt dazukommen, falsch herum legen (sonst die aus dem Schritt davor)
+        const neu = (n) => {
+          const von = n > 0 ? tot * st[n - 1][0] : -1, b = tot * st[n][0];
+          return k.kreuz.map((c, i) => [Math.max(c.pos, c.unter), i]).filter(([m]) => m > von && m <= b).map(x => x[1]);
+        };
+        let t = neu(nr);
+        if (!t.length && k.stange && nr === 1) opt.stangeVorn = true;
+        else if (!t.length && nr > 1) t = neu(nr - 1);
+        opt.tausch = t;
+      }
+      return knotenSVG(k, opt);
+    }
 
     // Bilder für "Richtig löschen" und "Einsatzbereit"
     const FLAMME_KLEIN = (x, y, s = 1) => `<g transform="translate(${x} ${y}) scale(${s})"><path d="M0-16c4 7 9 10 9 17a9 9 0 0 1-18 0c0-5 3-7 4-11 1 3 2 4 3 4-1-4 0-7 2-10z" fill="#F07A2E"/><path d="M0-3c2 3 4 4 4 7a4 4 0 0 1-8 0c0-2 2-3 2-5 1 1 1 2 2 2z" fill="#F5C400"/></g>`;
@@ -3334,68 +3576,154 @@
       {
         name: "Knoten-Schule",
         icon: `<svg viewBox="0 0 40 40"><path d="M6 34C14 26 12 10 21 8s12 10 4 15-14 2-11-5 14-4 20 16" fill="none" stroke="#F6ECDF" stroke-width="4" stroke-linecap="round"/></svg>`,
-        anleitung: "Lerne Feuerwehrknoten! Fahre die Leine mit dem Finger vom Startpunkt bis zum Ende nach. So siehst du, wie der Knoten gelegt wird. Jeder fertige Knoten gibt 30 Bonuspunkte.",
-        kurz: "Fahre die Leine mit dem Finger nach!",
+        get anleitung() { return zustand.stufe === "kids" ? "Hier lernst du Feuerwehrknoten kennen! Du siehst drei Bilder. Nur auf einem ist der Knoten schon fertig. Tippe auf das richtige Bild!" : zustand.stufe === "schwer" ? "Lerne, wie ein Feuerwehrknoten Schritt für Schritt entsteht! Tippe die Bilder in der richtigen Reihenfolge an. Achtung: Ein Bild ist falsch gelegt, da liegt die falsche Leine oben. Das bleibt übrig! Jeder richtige Schritt gibt 10 Punkte, ein fertiger Knoten 30 Bonuspunkte." : this.anleitungSchritte; },
+        get kurz() { return zustand.stufe === "kids" ? "Welches Bild ist der fertige Knoten?" : zustand.stufe === "schwer" ? "Tippe die Schritte der Reihe nach an!" : "Welcher Schritt kommt als Nächstes?"; },
+        anleitungSchritte: "Lerne, wie ein Feuerwehrknoten Schritt für Schritt entsteht! Schau dir an, wie weit der Knoten schon ist, und tippe auf das Bild, das als Nächstes kommt. Achte genau darauf, welche Leine oben und welche unten liegt. Jeder richtige Schritt gibt 15 Punkte, ein fertiger Knoten 30 Bonuspunkte.",
         start(feld, stufe, fertig) {
           const kids = zustand.stufe === "kids";
-          const folge = kids ? ["ueberhand"] : [["ueberhand", "achter"], ["achter", "halbschlag", "ueberhand"], ["achter", "halbschlag"]][stufe];
-          const toleranz = kids ? 24 : [20, 17, 15][stufe];
-          let punkte = 0, nr = 0, knoten, gesamt, fort, gezaehlt, fertigGelegt, druck = false, neuZeichnen = true;
+          // Löschzwerge: fertigen Knoten erkennen. Kleinbrand: 2 Bilder mit Anleitung. Mittelbrand: 3 Bilder, Tipp erst nach Fehler.
+          // Großbrand: alle Schritte selbst in die richtige Reihenfolge bringen, ein falsch gelegtes Bild ist darunter.
+          const modus = kids ? "erkennen" : ["weiter2", "weiter3", "reihe"][stufe];
+          const folge = mischen(kids ? ["ueberhand", "achter", "halbschlag"] : [["ueberhand", "achter"], ["achter", "halbschlag", "ueberhand"], ["achter", "halbschlag", "ueberhand"]][stufe]);
+          let punkte = 0, nr = 0, name, schritte, schritt, gesperrt = false;
           feld.style.background = "linear-gradient(#F6ECDF, #EADAC4)";
-          const auftrag = document.createElement("div");
-          auftrag.className = "auftrag knoten-auftrag";
-          const flaeche = document.createElement("div");
-          flaeche.className = "knoten-flaeche";
-          feld.append(flaeche, auftrag);
+          const box = document.createElement("div");
+          box.className = "knotenspiel " + modus;
+          feld.appendChild(box);
+          const plus = (p, text) => { punkte += p; mgPunkte(punkte); zeigePunkte(feld, "50%", "40%", text || "+" + p); };
+          function falsch(kachel) {
+            tonFalsch(); vibriere([60, 40, 60]);
+            if (!kids) { punkte = Math.max(0, punkte - 5); mgPunkte(punkte); zeigePunkte(feld, "50%", "40%", "−5", true); }
+            kachel.classList.add("falsch");
+            kachel.animate([{ transform: "translateX(-6px)" }, { transform: "translateX(6px)" }, { transform: "none" }], 250);
+          }
+          function kachel(svg, ok, klick) {
+            const b = document.createElement("button");
+            b.className = "ks-kachel";
+            b.innerHTML = svg;
+            if (ok) b.dataset.ok = "1";
+            b.addEventListener("pointerdown", (ev) => { ev.preventDefault(); if (!uhr.pausiert && !gesperrt) klick(b); });
+            return b;
+          }
+          function knotenFertigGelegt() {
+            gesperrt = true;
+            tonRichtig(); vibriere(40);
+            plus(30, KNOTEN[name].name + " fertig! +30");
+            nach(1500, neuerKnoten);
+          }
+          // ---------- Löschzwerge: Welches Bild ist der fertige Knoten? ----------
+          function erkennen() {
+            const letzter = schritte.length - 1;
+            // Teilschritte als falsche Bilder; den Schritt direkt vor dem Ende nur, wenn sonst zu wenige da sind
+            let teile = [];
+            for (let i = 0; i < letzter - 1; i++) teile.push(i);
+            if (teile.length < 2) teile.push(letzter - 1);
+            teile = mischen(teile).slice(0, 2);
+            box.innerHTML = `<div class="ks-frage">Welches Bild ist der fertige Knoten?</div><div class="ks-wahl gross"></div><div class="ks-info"></div>`;
+            const wahl = box.querySelector(".ks-wahl");
+            mischen([letzter, ...teile]).forEach(i => wahl.appendChild(kachel(knotenSchrittSVG(name, i), i === letzter, (b) => {
+              const info = box.querySelector(".ks-info");
+              if (i === letzter) {
+                gesperrt = true; b.classList.add("richtig");
+                info.textContent = "Super! Das ist ein " + KNOTEN[name].name + ".";
+                info.className = "ks-info gut";
+                automatischVorlesen(info.textContent);
+                tonRichtig(); vibriere(30); plus(20);
+                nach(1800, neuerKnoten);
+              } else {
+                falsch(b);
+                info.textContent = "Da fehlt noch etwas. Der Knoten ist noch nicht fertig.";
+                info.className = "ks-info schlecht";
+              }
+            })));
+            automatischVorlesen("Welches Bild ist der fertige Knoten?");
+          }
+          // ---------- Kleinbrand und Mittelbrand: Was kommt als Nächstes? ----------
+          function weiterAufbau() {
+            box.innerHTML = `<div class="ks-kopf"><b>${KNOTEN[name].name}</b><span class="ks-punkte"></span></div>
+          <div class="ks-jetzt"><div class="ks-bild"></div><div class="ks-text"><small>So weit bist du</small><span class="ks-auftrag"></span></div></div>
+          <div class="ks-frage klein">Was kommt als Nächstes?</div><div class="ks-wahl"></div><div class="ks-info"></div>`;
+            weiterFrage();
+          }
+          function weiterFrage() {
+            gesperrt = false;
+            const n = schritte.length - 1, ziel = schritt + 1;
+            box.querySelector(".ks-punkte").innerHTML = schritte.slice(1).map((_, i) => `<i class="${i < schritt ? "an" : ""}"></i>`).join("");
+            box.querySelector(".ks-bild").innerHTML = knotenSchrittSVG(name, schritt);
+            const auftrag = box.querySelector(".ks-auftrag"), info = box.querySelector(".ks-info");
+            auftrag.textContent = modus === "weiter2" ? "Jetzt: " + schritte[ziel][1] : "Gesucht: Schritt " + ziel + " von " + n;
+            if (modus === "weiter2") automatischVorlesen(schritte[ziel][1]);
+            info.textContent = ""; info.className = "ks-info";
+            // falsche Bilder: zu weit gesprungen (oder ein anderer Knoten), und bei 3 Bildern dieser Schritt falsch herum gelegt
+            const andere = folge.find(k => k !== name) || Object.keys(KNOTEN).find(k => k !== name);
+            const sprung = ziel < n ? knotenSchrittSVG(name, ziel + 1) : knotenSchrittSVG(andere, KNOTEN[andere].schritte.length - 1);
+            const bilder = [[knotenSchrittSVG(name, ziel), true], [sprung, false]];
+            if (modus === "weiter3") bilder.push([knotenSchrittSVG(name, ziel, true), false]);
+            const wahl = box.querySelector(".ks-wahl");
+            wahl.className = "ks-wahl " + (bilder.length === 3 ? "drei" : "zwei");
+            wahl.innerHTML = "";
+            mischen(bilder).forEach(([svg, ok]) => wahl.appendChild(kachel(svg, ok, (b) => {
+              if (ok) {
+                gesperrt = true; b.classList.add("richtig");
+                info.textContent = "Richtig! " + schritte[ziel][1];
+                info.className = "ks-info gut";
+                schritt = ziel;
+                if (schritt === n) { box.querySelector(".ks-bild").innerHTML = knotenSchrittSVG(name, n); knotenFertigGelegt(); return; }
+                tonRichtig(); vibriere(25); plus(15);
+                nach(modus === "weiter2" ? 1300 : 1100, weiterFrage);
+              } else {
+                falsch(b);
+                info.textContent = svg === sprung ? "Nicht so schnell! Was kommt genau jetzt?" + (modus === "weiter3" ? " Tipp: " + schritte[ziel][1] : "") : "Schau genau, welche Leine oben liegt. Tipp: " + schritte[ziel][1];
+                info.className = "ks-info schlecht";
+              }
+            })));
+          }
+          // ---------- Großbrand: Schritte in die richtige Reihenfolge bringen ----------
+          function reihe() {
+            const n = schritte.length - 1;
+            const falschNr = 1 + Math.floor(Math.random() * n);
+            box.innerHTML = `<div class="ks-kopf"><b>${KNOTEN[name].name}</b><span>Lege die Schritte in die richtige Reihenfolge!</span></div>
+          <div class="ks-reihe"></div><div class="ks-wahl ${n + 1 > 4 ? "drei" : "zwei"} viele"></div><div class="ks-info">Achtung: Ein Bild ist falsch gelegt. Das bleibt übrig!</div>`;
+            const reiheEl = box.querySelector(".ks-reihe"), wahl = box.querySelector(".ks-wahl"), info = box.querySelector(".ks-info");
+            reiheEl.innerHTML = `<div class="ks-platz voll">${knotenSchrittSVG(name, 0)}</div>` + schritte.slice(1).map((_, i) => `<div class="ks-platz">${i + 1}</div>`).join("");
+            const kacheln = [];
+            for (let i = 1; i <= n; i++) kacheln.push({ i, svg: knotenSchrittSVG(name, i) });
+            kacheln.push({ i: -1, svg: knotenSchrittSVG(name, falschNr, true) });
+            mischen(kacheln).forEach(k => {
+              const b = kachel(k.svg, k.i === 1, (b) => {
+                if (k.i === schritt + 1) {
+                  schritt++;
+                  b.classList.add("weg"); delete b.dataset.ok;
+                  const platz = reiheEl.children[schritt];
+                  platz.innerHTML = k.svg; platz.classList.add("voll");
+                  info.textContent = schritt + ". " + schritte[schritt][1];
+                  info.className = "ks-info gut";
+                  const naechste = wahl.querySelector(`[data-i="${schritt + 1}"]`);
+                  if (naechste) naechste.dataset.ok = "1";
+                  if (schritt === n) { knotenFertigGelegt(); return; }
+                  tonRichtig(); vibriere(25); plus(10);
+                } else {
+                  falsch(b);
+                  info.textContent = k.i === -1 ? "Dieses Bild ist falsch gelegt! Schau, welche Leine oben liegt." : "Das kommt später.";
+                  info.className = "ks-info schlecht";
+                  nach(700, () => b.classList.remove("falsch"));
+                }
+              });
+              b.dataset.i = k.i;
+              wahl.appendChild(b);
+            });
+          }
           function neuerKnoten() {
-            const name = folge[nr++ % folge.length];
-            knoten = knotenFertig(name);
-            const L = knoten.laengen[0];
-            gesamt = L[L.length - 1];
-            fort = 0; gezaehlt = 0; fertigGelegt = false; neuZeichnen = true;
-            auftrag.innerHTML = kids ? `<b>Fahre die Leine nach!</b>` : `<b>${KNOTEN[name].name}</b><span>${KNOTEN[name].tipp}</span>`;
+            name = folge[nr++ % folge.length];
+            schritte = KNOTEN[name].schritte;
+            schritt = 0; gesperrt = false;
+            box.animate([{ opacity: 0 }, { opacity: 1 }], 250);
+            if (modus === "erkennen") erkennen();
+            else if (modus === "reihe") reihe();
+            else weiterAufbau();
           }
-          function punktBei(laenge) {
-            const l = knoten.leinen[0], L = knoten.laengen[0];
-            let i = 0;
-            while (i < L.length - 1 && L[i + 1] < laenge) i++;
-            return l[i];
-          }
-          function zeichnen() {
-            const p = punktBei(fort);
-            const start = fort < 2 ? `<text x="${p[0]}" y="${p[1] + 22}" text-anchor="middle" font-size="11" font-weight="700" fill="#B3141C" font-family="Outfit, Arial, sans-serif">START</text>` : "";
-            flaeche.innerHTML = knotenSVG(knoten, { nr: 0, fortschritt: fort, extra: fertigGelegt ? "" : `<circle class="knoten-ziel" cx="${p[0]}" cy="${p[1]}" r="9"/>${start}` });
-          }
-          function folgen(ev) {
-            if (uhr.pausiert || fertigGelegt) return;
-            const svg = flaeche.querySelector("svg");
-            if (!svg) return;
-            const pt = svg.createSVGPoint();
-            pt.x = ev.clientX; pt.y = ev.clientY;
-            const q = pt.matrixTransform(svg.getScreenCTM().inverse());
-            const l = knoten.leinen[0], L = knoten.laengen[0];
-            let bester = -1;
-            for (let i = 0; i < l.length; i++) {
-              if (L[i] < fort - 6 || L[i] > fort + 30) continue;
-              if (Math.hypot(l[i][0] - q.x, l[i][1] - q.y) < toleranz) bester = Math.max(bester, L[i]);
-            }
-            if (bester <= fort) return;
-            fort = bester; neuZeichnen = true;
-            while (fort - gezaehlt >= 30) { gezaehlt += 30; punkte += 3; mgPunkte(punkte); ton(420 + (fort / gesamt) * 500, .03, "triangle"); }
-            if (fort >= gesamt - 5) {
-              fort = gesamt; fertigGelegt = true;
-              punkte += 30; mgPunkte(punkte);
-              zeigePunkte(feld, "50%", "45%", "Geschafft! +30");
-              tonRichtig(); vibriere(40);
-              nach(1100, neuerKnoten);
-            }
-          }
-          flaeche.addEventListener("pointerdown", (ev) => { ev.preventDefault(); druck = true; folgen(ev); });
-          flaeche.addEventListener("pointermove", (ev) => { if (druck) { ev.preventDefault(); folgen(ev); } });
-          window.addEventListener("pointerup", () => druck = false);
           neuerKnoten();
-          jedesBild(() => { if (neuZeichnen) { neuZeichnen = false; zeichnen(); } });
-          zeitbalken(mgDauer() + 5000, () => fertig(punkte));
+          zeitbalken(mgDauer() + (kids ? 12000 : [15000, 15000, 12000][stufe]), () => fertig(punkte));
         }
       },
       {

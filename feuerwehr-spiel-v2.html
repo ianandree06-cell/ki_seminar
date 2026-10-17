@@ -514,6 +514,7 @@
     .zeit-um {
       position: absolute;
       inset: 0;
+      z-index: 10;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1002,6 +1003,388 @@
       }
     }
 
+    /* Modus und Rekord */
+    .auswahl.zwei {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .spieler-zeile[hidden] {
+      display: none;
+    }
+
+    .spieler-liste.einzel .spieler-zeile button,
+    #spieler-liste.einzel .spieler-zeile button {
+      display: none;
+    }
+
+    .rekord {
+      margin-top: 12px;
+      padding: 11px 14px;
+      border-radius: 14px;
+      background: #fffaf3;
+      border: 1.5px solid var(--sand-2);
+      color: var(--tinte-weich);
+      font-size: .95rem;
+      line-height: 1.4;
+    }
+
+    .rekord b {
+      color: var(--rot);
+    }
+
+    .rekord-gross {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      text-align: center;
+      padding: 6px 0;
+    }
+
+    .rekord-gross b {
+      font-family: var(--display);
+      font-variation-settings: "SOFT" 100;
+      font-size: 1.3rem;
+      line-height: 1.25;
+    }
+
+    .rekord-gross span {
+      color: var(--tinte-weich);
+    }
+
+    .zw-punkte {
+      text-align: center;
+      color: var(--safran);
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    /* Einsatzfahrt */
+    .strasse.hell {
+      background: #4A3A38;
+    }
+
+    .strasse.hell .rand {
+      background: #F6ECDF;
+      opacity: .9;
+      width: 6px;
+    }
+
+    .objekt {
+      position: absolute;
+      width: 58px;
+      margin-left: -29px;
+      filter: drop-shadow(0 0 2px rgba(255, 255, 255, .9)) drop-shadow(0 6px 5px rgba(0, 0, 0, .35));
+    }
+
+    .objekt svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .objekt.bake {
+      width: 76px;
+      margin-left: -38px;
+    }
+
+    .objekt.unfall {
+      width: 50px;
+      margin-left: -25px;
+    }
+
+    .objekt.tropfen {
+      width: 38px;
+      margin-left: -19px;
+      animation: schweben .8s ease-in-out infinite alternate;
+    }
+
+    .objekt .bl {
+      animation: blau .5s infinite;
+    }
+
+    .objekt .bl.b {
+      animation-delay: .25s;
+    }
+
+    @keyframes schweben {
+      to {
+        transform: translateY(-5px) scale(1.06);
+      }
+    }
+
+    .pfeil {
+      position: absolute;
+      bottom: 10px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(246, 236, 223, .14);
+      color: rgba(246, 236, 223, .7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .pfeil svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .pfeil.links {
+      left: 14px;
+    }
+
+    .pfeil.rechts {
+      right: 14px;
+    }
+
+    /* Wimmelbild */
+    .halle {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .regal {
+      position: absolute;
+      left: 6%;
+      right: 6%;
+      height: 6px;
+      border-radius: 3px;
+      background: #CBAE90;
+    }
+
+    .tor {
+      position: absolute;
+      left: 20%;
+      right: 20%;
+      top: 8%;
+      height: 50%;
+      border-radius: 120px 120px 0 0;
+      border: 6px solid rgba(201, 98, 63, .18);
+      border-bottom: 0;
+    }
+
+    .auftrag {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      padding: 8px 16px 8px 12px;
+      border-radius: 99px;
+      background: var(--tinte);
+      color: var(--sand);
+      font-size: 1rem;
+      box-shadow: 0 8px 18px -8px rgba(0, 0, 0, .6);
+    }
+
+    .auftrag span {
+      opacity: .7;
+    }
+
+    .auftrag svg {
+      width: 30px;
+      height: 30px;
+      background: var(--sand);
+      border-radius: 50%;
+      padding: 3px;
+    }
+
+    .ding {
+      position: absolute;
+      cursor: pointer;
+      transition: opacity .3s;
+    }
+
+    .ding svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .ding.gefunden {
+      opacity: .15;
+    }
+
+    /* Notruf */
+    .telefon {
+      position: absolute;
+      inset: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .anzeige {
+      background: var(--tinte);
+      color: var(--sand);
+      border-radius: 22px;
+      padding: 12px;
+      text-align: center;
+      transition: background .2s;
+    }
+
+    .telefon.verbunden .anzeige {
+      background: #4E6B42;
+    }
+
+    .anzeige small {
+      opacity: .65;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-size: .72rem;
+    }
+
+    .nummer {
+      font: 700 2.6rem var(--display);
+      letter-spacing: .25em;
+    }
+
+    .nummer span {
+      opacity: .35;
+      transition: opacity .1s;
+    }
+
+    .nummer span.ok {
+      opacity: 1;
+      color: var(--safran);
+    }
+
+    .tastatur {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .taste {
+      border: 0;
+      border-radius: 22px;
+      background: #fffaf3;
+      box-shadow: inset 0 0 0 1.5px var(--sand-2), 0 4px 0 var(--sand-2);
+      font: 600 1.7rem var(--text);
+      color: var(--tinte);
+      cursor: pointer;
+    }
+
+    /* Pumpendruck */
+    .pumpe {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 16px;
+    }
+
+    .manometer {
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .druckwert {
+      font: 700 2rem var(--display);
+      font-variant-numeric: tabular-nums;
+      color: var(--tinte-weich);
+      transition: color .2s;
+    }
+
+    .pumpe.im-ziel .druckwert {
+      color: #4E6B42;
+    }
+
+    .strahl {
+      width: 22px;
+      flex: 1;
+      max-height: 120px;
+      border-radius: 11px;
+      background: linear-gradient(#BFE3F7, #5BB6F0);
+      transform-origin: bottom;
+      transition: transform .1s;
+    }
+
+    .pumpknopf {
+      width: 100%;
+      max-width: 280px;
+      padding: 22px;
+      border: 0;
+      border-radius: 99px;
+      background: var(--rot);
+      color: var(--sand);
+      font: 700 1.2rem var(--text);
+      box-shadow: 0 8px 0 #7A0E14;
+      cursor: pointer;
+    }
+
+    .pumpknopf.aktiv {
+      transform: translateY(6px);
+      box-shadow: 0 2px 0 #7A0E14;
+    }
+
+    /* Memory */
+    .memory {
+      position: absolute;
+      inset: 12px;
+      display: grid;
+      gap: 10px;
+      grid-auto-rows: 1fr;
+    }
+
+    .mkarte {
+      perspective: 600px;
+      cursor: pointer;
+    }
+
+    .m-innen {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform .3s;
+      transform-style: preserve-3d;
+    }
+
+    .mkarte.offen .m-innen {
+      transform: rotateY(180deg);
+    }
+
+    .m-rueck,
+    .m-vorne {
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .m-rueck {
+      background: var(--rot) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><g fill='none' stroke='%23F6ECDF' stroke-opacity='.35' stroke-width='3'><path d='M8 34a12 12 0 0 1 24 0'/><path d='M14 34a6 6 0 0 1 12 0'/></g></svg>") center / 55% no-repeat;
+    }
+
+    .m-vorne {
+      background: #fffaf3;
+      transform: rotateY(180deg);
+      box-shadow: inset 0 0 0 1.5px var(--sand-2);
+    }
+
+    .m-vorne svg {
+      width: 62%;
+      height: 62%;
+    }
+
+    .mkarte.paar .m-vorne {
+      background: #E4ECDD;
+      box-shadow: inset 0 0 0 2px var(--salbei);
+    }
+
     /* Pause */
     #pause {
       position: fixed;
@@ -1033,6 +1416,411 @@
 
     body.pausiert * {
       animation-play-state: paused !important;
+    }
+
+
+    /* v5: Kids-Modus, Vorlesen, Quiz-Zeit, Betreuer-Modus */
+    input,
+    textarea,
+    select {
+      user-select: text;
+      -webkit-user-select: text;
+    }
+
+    #wahl-stufe {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .quiz-zeit {
+      margin-top: -4px;
+    }
+
+    .quiz-rechts {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .vorlesen {
+      width: 40px;
+      height: 40px;
+      flex: 0 0 40px;
+      border-radius: 50%;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      background: rgba(246, 236, 223, .16);
+      color: var(--sand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .vorlesen svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .vorlesen.dunkel {
+      background: var(--rot);
+      color: var(--sand);
+    }
+
+    .vorlesen.spricht {
+      animation: puls .8s infinite;
+    }
+
+    .mg-karte .vorlesen {
+      margin-left: auto;
+    }
+
+    .antworten.kacheln {
+      display: grid;
+      grid-template-columns: repeat(var(--sp, 3), 1fr);
+      gap: 10px;
+    }
+
+    .antworten.kacheln .antwort {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 14px 6px 12px;
+      border-radius: 24px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1rem;
+      min-height: 130px;
+    }
+
+    .antworten.kacheln .antwort .sym {
+      width: 72px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .antworten.kacheln .antwort .sym svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .antworten.kacheln .antwort.breit-sym .sym {
+      width: 100%;
+      height: 72px;
+    }
+
+    .antworten.kacheln .antwort.richtig .sym,
+    .antworten.kacheln .antwort.falsch .sym {
+      filter: drop-shadow(0 0 4px rgba(255, 255, 255, .8));
+    }
+
+    #s-quiz.kids .frage {
+      font-size: 1.7rem;
+    }
+
+    #s-quiz.kids .erklaerung p {
+      font-size: 1.15rem;
+    }
+
+    .ergebnis.zeit {
+      color: var(--terrakotta);
+    }
+
+    /* Einsatzfahrt: Legende und Tropfen mit Punkten */
+    .legende {
+      position: absolute;
+      z-index: 4;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(1.25);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 12px 18px;
+      border-radius: 22px;
+      background: rgba(42, 23, 21, .88);
+      color: var(--sand);
+      font-weight: 600;
+      white-space: nowrap;
+      pointer-events: none;
+      transition: all .5s cubic-bezier(.3, .7, .3, 1);
+    }
+
+    .legende.klein {
+      top: 8px;
+      transform: translate(-50%, 0) scale(.82);
+      flex-direction: row;
+      gap: 14px;
+      padding: 6px 14px;
+      background: rgba(42, 23, 21, .94);
+    }
+
+    .legende span {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .legende svg {
+      width: 26px;
+      height: 26px;
+      flex: 0 0 26px;
+    }
+
+    .legende b.lg-plus {
+      color: #8FD3FF;
+    }
+
+    .legende b.lg-minus {
+      color: #FF8A6E;
+    }
+
+    .objekt.tropfen i {
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      transform: translateX(-50%);
+      font: normal 700 .8rem var(--text);
+      color: #fff;
+      background: #1F7FC4;
+      border-radius: 99px;
+      padding: 1px 6px;
+      white-space: nowrap;
+    }
+
+    .punkte-popup.wasser {
+      color: #BFE9FF;
+      font-size: 2rem;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, .6);
+    }
+
+    .strasse~.punkte-popup.minus,
+    .punkte-popup.minus.gross {
+      font-size: 1.8rem;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, .6);
+    }
+
+    /* Betreuer-Modus */
+    .start-unten {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .be-info {
+      color: var(--sand);
+      opacity: .85;
+      text-align: center;
+      margin: 0;
+      line-height: 1.45;
+    }
+
+    .be-frage {
+      padding: 14px 4px;
+      border-bottom: 1.5px dashed var(--sand-2);
+    }
+
+    .be-frage:last-child {
+      border-bottom: 0;
+    }
+
+    .be-frage .chip {
+      background: var(--sand-2);
+      color: var(--tinte-weich);
+      font-size: .72rem;
+      padding: 4px 10px;
+    }
+
+    .be-frage p {
+      margin: 8px 0 4px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .be-frage .richtig-text {
+      color: #4E6B42;
+      font-size: .92rem;
+    }
+
+    .be-frage .richtig-text::before {
+      content: "✓ ";
+      font-weight: 700;
+    }
+
+    .be-knoepfe {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .be-knoepfe button,
+    .mini {
+      flex: 1;
+      border: 1.5px solid var(--sand-2);
+      background: #fffaf3;
+      border-radius: 14px;
+      padding: 10px;
+      font: 600 .95rem var(--text);
+      color: var(--tinte);
+      cursor: pointer;
+    }
+
+    .be-knoepfe button.loeschen {
+      color: var(--terrakotta);
+    }
+
+    .be-knoepfe button.loeschen.sicher {
+      background: var(--terrakotta);
+      border-color: var(--terrakotta);
+      color: #fff;
+    }
+
+    .be-reihe {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .be-reihe .mini {
+      flex: none;
+      width: 100%;
+    }
+
+    .mini.gefahr {
+      color: var(--terrakotta);
+    }
+
+    .mini.gefahr.sicher {
+      background: var(--terrakotta);
+      color: #fff;
+      border-color: var(--terrakotta);
+    }
+
+    .feld {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .feld:last-child {
+      margin-bottom: 0;
+    }
+
+    .feld>span {
+      font-weight: 600;
+      font-size: .78rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--tinte-weich);
+    }
+
+    .feld input,
+    .feld textarea,
+    .feld select,
+    .be-text {
+      width: 100%;
+      font: 500 1.02rem var(--text);
+      color: var(--tinte);
+      padding: 12px 14px;
+      border: 1.5px solid var(--sand-2);
+      border-radius: 14px;
+      background: #fffaf3;
+      resize: vertical;
+    }
+
+    .feld input:focus,
+    .feld textarea:focus,
+    .be-text:focus {
+      outline: none;
+      border-color: var(--safran);
+      box-shadow: 0 0 0 3px rgba(232, 163, 61, .25);
+    }
+
+    .feld input.ok-feld {
+      border-color: var(--salbei);
+      background: #F1F5EC;
+    }
+
+    .ant-zeile {
+      display: flex;
+      gap: 8px;
+    }
+
+    .ant-zeile input {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .ant-zeile select {
+      width: 42%;
+      flex: 0 0 42%;
+      padding: 12px 8px;
+      font-size: .9rem;
+    }
+
+    .be-text {
+      min-height: 140px;
+      font: 400 .85rem/1.4 ui-monospace, Menlo, monospace;
+    }
+
+    .be-meldung {
+      margin: 10px 0 0;
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-weight: 600;
+      background: #E4ECDD;
+      color: #3F5A35;
+    }
+
+    .be-meldung.fehler {
+      background: #fdeee7;
+      color: var(--terrakotta);
+    }
+
+    .be-meldung:empty {
+      display: none;
+    }
+
+    .be-bild {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--tinte-weich);
+      font-size: .92rem;
+    }
+
+    .be-bild svg,
+    .be-bild .sms,
+    .be-bild .news {
+      width: 90px;
+      max-height: 70px;
+      flex: 0 0 90px;
+      font-size: .5rem;
+    }
+
+    .vorlesen[hidden] {
+      display: none;
+    }
+
+    .be-hinweis {
+      margin: 14px 0 8px;
+      color: var(--tinte-weich);
+      line-height: 1.4;
+      font-size: .95rem;
+    }
+
+    #be-teilen .btn {
+      margin-top: 10px;
+      background: var(--rot);
+      color: var(--sand);
+    }
+
+    #be-stand {
+      margin-top: 12px;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1079,16 +1867,27 @@
     </svg>
     <div class="eyebrow">Das Jugendfeuerwehr-Duell</div>
     <h1 id="titel">Blaulicht Battle</h1>
-    <p class="start-text">Minigames, Quizfragen, Punkte.<br>Ein Handy geht reihum.</p>
+    <p class="start-text">Minigames, Quizfragen, Punkte.<br>In der Gruppe oder allein auf Rekordjagd.</p>
     <div style="flex:1"></div>
-    <button class="btn haupt" onclick="zeige('s-setup')">Los geht's</button>
+    <div class="start-unten">
+      <button class="btn haupt" onclick="zeige('s-setup')">Los geht's</button>
+      <button class="btn leise" onclick="betreuerOeffnen()">Betreuer-Modus · Fragen bearbeiten</button>
+    </div>
   </section>
 
   <!-- ================= EINSTELLUNGEN ================= -->
   <section class="screen" id="s-setup">
     <h2>Wer spielt mit?</h2>
     <div class="karte">
-      <div class="label">Spieler · 2 bis 8</div>
+      <div class="label">Spielmodus</div>
+      <div class="auswahl zwei" id="wahl-modus">
+        <button class="wahl" data-wert="gruppe">Gruppe<small>2 bis 8 Spieler</small></button>
+        <button class="wahl" data-wert="einzel">Allein<small>Rekord knacken</small></button>
+      </div>
+      <div id="rekord-info"></div>
+    </div>
+    <div class="karte">
+      <div class="label" id="spieler-label">Spieler · 2 bis 8</div>
       <div id="spieler-liste"></div>
       <div class="fehlertext" id="name-fehler">Gib erst einen Namen ein</div>
       <button class="plus" id="btn-plus" onclick="spielerHinzu('', true)">+ Spieler hinzufügen</button>
@@ -1096,6 +1895,7 @@
     <div class="karte">
       <div class="label">Schwierigkeit</div>
       <div class="auswahl" id="wahl-stufe">
+        <button class="wahl" data-wert="kids">Kids<small>6–9 Jahre</small></button>
         <button class="wahl" data-wert="leicht">Leicht<small>10–12 Jahre</small></button>
         <button class="wahl" data-wert="mittel">Mittel<small>13–14 Jahre</small></button>
         <button class="wahl" data-wert="schwer">Schwer<small>15–17 Jahre</small></button>
@@ -1115,7 +1915,7 @@
   <!-- ================= ÜBERGABE ================= -->
   <section class="screen" id="s-uebergabe">
     <div class="eyebrow" id="ueb-runde">Runde 1 von 5</div>
-    <div style="text-align:center;color:var(--sand);opacity:.8">Gib das Handy an</div>
+    <div style="text-align:center;color:var(--sand);opacity:.8" id="ueb-vorher">Gib das Handy an</div>
     <div class="name-gross" id="ueb-name">Name</div>
     <div class="karte mg-karte">
       <div class="mg-icon" id="ueb-icon"></div>
@@ -1123,6 +1923,12 @@
         <div class="mg-titel" id="ueb-spiel"></div>
         <p class="mg-text" id="ueb-anleitung"></p>
       </div>
+      <button class="vorlesen dunkel" id="ueb-vorlesen" onclick="uebVorlesen()" aria-label="Vorlesen"><svg
+          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M4 5h10a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 4v-4H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" />
+          <path d="M19 8a4 4 0 0 1 0 5M21.5 5.5a7.5 7.5 0 0 1 0 10" />
+        </svg></button>
     </div>
     <div style="flex:1"></div>
     <button class="btn haupt" onclick="minigameStarten()">Ich bin bereit</button>
@@ -1139,7 +1945,16 @@
 
   <!-- ================= QUIZ ================= -->
   <section class="screen" id="s-quiz">
-    <div class="quiz-kopf"><span id="quiz-spieler">Name</span><span class="chip" id="quiz-kat">Quiz</span></div>
+    <div class="quiz-kopf"><span id="quiz-spieler">Name</span><span class="quiz-rechts"><span class="chip"
+          id="quiz-kat">Quiz</span><button class="vorlesen" id="quiz-vorlesen" onclick="quizVorlesen()"
+          aria-label="Frage vorlesen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 5h10a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 4v-4H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" />
+            <path d="M19 8a4 4 0 0 1 0 5M21.5 5.5a7.5 7.5 0 0 1 0 10" />
+          </svg></button></span></div>
+    <div class="zeitbalken quiz-zeit">
+      <div id="quiz-zeit"></div>
+    </div>
     <div class="karte">
       <div class="bild" id="quiz-bild"></div>
       <p class="frage" id="quiz-frage">Frage</p>
@@ -1154,21 +1969,97 @@
 
   <!-- ================= ZWISCHENSTAND ================= -->
   <section class="screen" id="s-zwischen">
-    <div class="eyebrow">Zwischenstand</div>
-    <h2 id="zw-titel">Nach Runde 1</h2>
+    <div class="eyebrow">Spieler fertig</div>
+    <h2 id="zw-titel">Anna ist fertig</h2>
+    <div class="zw-punkte" id="zw-punkte"></div>
     <div class="karte" id="zw-liste"></div>
     <div style="flex:1"></div>
-    <button class="btn haupt" onclick="uebergabeZeigen()">Weiter</button>
+    <button class="btn haupt" id="zw-weiter" onclick="naechsterSpieler()">Weiter</button>
   </section>
 
   <!-- ================= SIEGEREHRUNG ================= -->
   <section class="screen" id="s-ende">
-    <div class="eyebrow">Siegerehrung</div>
+    <div class="eyebrow" id="ende-eyebrow">Siegerehrung</div>
     <h1 id="sieger-titel">Gewonnen!</h1>
     <div class="podest" id="podest"></div>
     <div class="karte" id="end-liste"></div>
     <button class="btn haupt" onclick="nochmal()">Nochmal spielen</button>
     <button class="btn leise" onclick="zeige('s-setup')">Neue Spieler oder Einstellungen</button>
+  </section>
+
+  <!-- ================= BETREUER-MODUS ================= -->
+  <section class="screen" id="s-betreuer">
+    <div class="eyebrow">Betreuer-Modus</div>
+    <h2>Fragen verwalten</h2>
+    <p class="be-info">Ändere Fragen für deine Gruppe, leg neue an oder lösche welche. Alles bleibt auf diesem Handy
+      gespeichert.</p>
+    <div class="karte">
+      <div class="label">Schwierigkeit</div>
+      <div class="auswahl zwei" id="be-stufe">
+        <button class="wahl" data-wert="kids">Kids<small>6–9 Jahre</small></button>
+        <button class="wahl" data-wert="leicht">Leicht<small>10–12 Jahre</small></button>
+        <button class="wahl" data-wert="mittel">Mittel<small>13–14 Jahre</small></button>
+        <button class="wahl" data-wert="schwer">Schwer<small>15–17 Jahre</small></button>
+      </div>
+      <div class="rekord" id="be-stand"></div>
+      <p class="be-meldung" id="be-meldung"></p>
+    </div>
+    <button class="btn haupt" onclick="frageBearbeiten(-1)">+ Neue Frage</button>
+    <div class="karte">
+      <div class="label">Mit anderen Betreuern teilen</div>
+      <div class="be-reihe">
+        <button class="mini" onclick="exportieren()">Fragen als Text exportieren</button>
+        <button class="mini" onclick="importOeffnen()">Fragen-Text importieren</button>
+        <button class="mini gefahr" id="be-reset" onclick="aufStandard()">Diese Stufe auf Standard zurücksetzen</button>
+      </div>
+      <div id="be-teilen" hidden>
+        <p class="be-hinweis" id="be-hinweis"></p>
+        <textarea class="be-text" id="be-text" spellcheck="false" autocomplete="off"></textarea>
+        <button class="btn" id="be-aktion"></button>
+      </div>
+      <p class="be-meldung" id="be-tmeldung"></p>
+    </div>
+    <div class="karte" id="be-liste"></div>
+    <button class="btn leise" onclick="zeige('s-start')">Zurück zum Start</button>
+  </section>
+
+  <!-- ================= FRAGE BEARBEITEN ================= -->
+  <section class="screen" id="s-edit">
+    <div class="eyebrow" id="ed-stufe">Stufe</div>
+    <h2 id="ed-titel">Neue Frage</h2>
+    <div class="karte">
+      <label class="feld"><span>Kategorie</span><input id="ed-kat" list="ed-kats" maxlength="24"
+          placeholder="z. B. Brandschutz" autocomplete="off"></label>
+      <datalist id="ed-kats"></datalist>
+      <div class="feld"><span>Art der Frage</span>
+        <div class="auswahl zwei" id="ed-typ">
+          <button class="wahl" data-wert="normal">Antworten<small>bis zu 4</small></button>
+          <button class="wahl" data-wert="echtfake">Echt oder Fake</button>
+        </div>
+      </div>
+      <label class="feld"><span>Frage</span><textarea id="ed-frage" rows="3" maxlength="220"
+          placeholder="Was möchtest du fragen?"></textarea></label>
+      <div class="feld be-bild" id="ed-bild" hidden></div>
+      <div id="ed-normal">
+        <div class="feld"><span>Richtige Antwort</span>
+          <div id="ed-richtig"></div>
+        </div>
+        <div class="feld"><span>Falsche Antworten · mindestens eine</span>
+          <div id="ed-falsch" style="display:flex;flex-direction:column;gap:8px"></div>
+        </div>
+      </div>
+      <div class="feld" id="ed-echtfake" hidden><span>Was ist richtig?</span>
+        <div class="auswahl zwei" id="ed-ef">
+          <button class="wahl" data-wert="0">Echt</button>
+          <button class="wahl" data-wert="1">Fake</button>
+        </div>
+      </div>
+      <label class="feld"><span>Erklärung nach der Antwort</span><textarea id="ed-erkl" rows="3" maxlength="320"
+          placeholder="Kurz erklären, warum das richtig ist"></textarea></label>
+      <div class="fehlertext" id="ed-fehler"></div>
+    </div>
+    <button class="btn haupt" onclick="frageSpeichern()">Speichern</button>
+    <button class="btn leise" onclick="betreuerZeigen()">Abbrechen</button>
   </section>
 
   <script>
@@ -1235,9 +2126,66 @@
     //  Im Spiel werden die Antworten automatisch gemischt.
     //  Optional:  bild: "name"  zeigt ein Bild aus BILDER über der Frage.
     //  Echt oder Fake: a: ["Echt", "Fake"], fest: true, r: 0 (Echt richtig) oder r: 1 (Fake richtig)
+    //  Kids-Fragen: zusätzlich i: ["symbol", ...] mit einem Bild pro Antwort (siehe SYMBOLE).
+    //  Fragen kann man auch direkt im Spiel im Betreuer-Modus ändern.
     // =====================================================================
     const FRAGEN = {
+      // KIDS (6 bis 9 Jahre): kurze Fragen, Antworten mit Bildern.
+      //   i: ["symbol", ...] gehört zu den Antworten in a (gleiche Reihenfolge, richtige zuerst).
+      //   Symbole: Namen aus ICONS, "txt:112" (Text im Kreis), "farbe:#B3141C" (Farbkreis), "bild:auto_blau" (Bild aus BILDER)
+      kids: [
+        { k: "Notruf", f: "Welche Nummer rufst du, wenn es brennt?", a: ["112", "5", "99"], i: ["txt:112", "txt:5", "txt:99"], e: "Die 112! Da kommt die Feuerwehr." },
+        { k: "Kleidung", f: "Was trägt die Feuerwehr auf dem Kopf?", a: ["Helm", "Eis", "Ball"], i: ["helm", "eis", "ball"], e: "Der Helm schützt den Kopf." },
+        { k: "Löschen", f: "Womit löscht die Feuerwehr ein Feuer?", a: ["Wasser", "Apfel", "Buch"], i: ["wasser", "apfel", "buch"], e: "Mit Wasser! Das kühlt das Feuer." },
+        { k: "Sicherheit", f: "Was piept laut, wenn es im Haus raucht?", a: ["Rauchmelder", "Sonne", "Teddy"], i: ["rauchmelder", "sonne", "teddy"], e: "Der Rauchmelder piept und weckt dich." },
+        { k: "Sicherheit", f: "Wie gehst du raus, wenn es brennt?", a: ["Treppe", "Aufzug"], i: ["treppe", "aufzug"], e: "Immer die Treppe! Der Aufzug kann stecken bleiben." },
+        { k: "Fahrzeuge", f: "Welche Farbe hat ein Feuerwehrauto?", a: ["Rot", "Grün", "Lila"], i: ["farbe:#B3141C", "farbe:#43A047", "farbe:#8E24AA"], e: "Feuerwehrautos sind rot." },
+        { k: "Fahrzeuge", f: "Was blinkt auf dem Dach vom Feuerwehrauto?", a: ["Blaulicht", "Apfel", "Eis"], i: ["blaulicht", "apfel", "eis"], e: "Das Blaulicht! Dann wissen alle: Platz machen." },
+        { k: "Sicherheit", f: "Was ist heiß und gefährlich?", a: ["Feuer", "Eis", "Ball"], i: ["feuer", "eis", "ball"], e: "Feuer ist heiß. Nicht anfassen!" },
+        { k: "Geräte", f: "Womit kommt die Feuerwehr zu hohen Fenstern?", a: ["Leiter", "Ball", "Buch"], i: ["leiter", "ball", "buch"], e: "Mit der Leiter kommt die Feuerwehr nach oben." },
+        { k: "Kleidung", f: "Was zieht die Feuerwehr an die Füße?", a: ["Stiefel", "Eis", "Apfel"], i: ["stiefel", "eis", "apfel"], e: "Feste Stiefel schützen die Füße." },
+        { k: "Erste Hilfe", f: "Was hilft bei einer kleinen Wunde?", a: ["Verbandkasten", "Ball", "Sonne"], i: ["verband", "ball", "sonne"], e: "Im Verbandkasten sind Pflaster." },
+        { k: "Geräte", f: "Womit sprechen Feuerwehrleute miteinander?", a: ["Funkgerät", "Teddy", "Eis"], i: ["funk", "teddy", "eis"], e: "Mit dem Funkgerät können sie sich weit hören." },
+        { k: "Geräte", f: "Wo holt die Feuerwehr auf der Straße Wasser?", a: ["Hydrant", "Apfel", "Buch"], i: ["hydrant", "apfel", "buch"], e: "Am Hydranten kommt Wasser raus." },
+        { k: "Geräte", f: "Was löscht ein kleines Feuer schnell?", a: ["Feuerlöscher", "Ball", "Teddy"], i: ["loescher", "ball", "teddy"], e: "Ein Feuerlöscher. Den benutzen aber Erwachsene." },
+        { k: "Sicherheit", f: "Im Zimmer ist Rauch. Wo ist die Luft besser?", a: ["Unten", "Oben"], i: ["pfeil_unten", "pfeil_oben"], e: "Unten! Krabbel auf dem Boden raus." },
+        { k: "Sicherheit", f: "Darfst du mit Streichhölzern spielen?", a: ["Nein", "Ja"], i: ["txt:Nein", "txt:Ja"], e: "Nein! Streichhölzer sind kein Spielzeug." },
+        { k: "Zeichen", f: "Welche Farbe hat das Notausgang-Schild?", a: ["Grün", "Rot", "Blau"], i: ["farbe:#1E8449", "farbe:#C0392B", "farbe:#1F5FAD"], e: "Grün! Es zeigt dir den Weg nach draußen." },
+        { k: "Kleidung", f: "Was setzt die Feuerwehr auf, um im Rauch zu atmen?", a: ["Atemschutzmaske", "Eis", "Sonne"], i: ["maske", "eis", "sonne"], e: "Mit der Maske atmen sie saubere Luft." },
+        { k: "Geräte", f: "Was stellt die Feuerwehr auf die Straße, damit Autos aufpassen?", a: ["Leitkegel", "Teddy", "Apfel"], i: ["kegel", "teddy", "apfel"], e: "Leitkegel sind orange und gut zu sehen." },
+        { k: "Geräte", f: "Womit leuchtet die Feuerwehr im Dunkeln?", a: ["Taschenlampe", "Apfel", "Ball"], i: ["lampe", "apfel", "ball"], e: "Mit der Taschenlampe sieht man im Dunkeln." },
+        { k: "Notruf", f: "Wer kommt, wenn du 112 rufst?", a: ["Feuerwehr", "Teddy", "Eiswagen"], i: ["bild:auto_blau", "teddy", "eis"], e: "Die Feuerwehr und der Rettungsdienst kommen." },
+        { k: "Geräte", f: "Wo fließt das Wasser durch?", a: ["Schlauch", "Buch", "Apfel"], i: ["schlauch", "buch", "apfel"], e: "Durch den Schlauch fließt das Wasser zum Feuer." },
+        { k: "Feuerwehr", f: "Was gehört NICHT zur Feuerwehr?", a: ["Ball", "Helm", "Leiter"], i: ["ball", "helm", "leiter"], e: "Der Ball! Helm und Leiter braucht die Feuerwehr." },
+        { k: "Feuerwehr", f: "Was gehört NICHT zur Feuerwehr?", a: ["Eis", "Axt", "Schlauch"], i: ["eis", "axt", "schlauch"], e: "Das Eis! Mit der Axt und dem Schlauch arbeitet die Feuerwehr." },
+        { k: "Geräte", f: "Womit macht die Feuerwehr eine klemmende Tür auf?", a: ["Axt", "Apfel", "Teddy"], i: ["axt", "apfel", "teddy"], e: "Mit Werkzeug wie der Axt." },
+        { k: "Sicherheit", f: "Wo hängt der Rauchmelder?", a: ["Oben an der Decke", "Unten am Boden"], i: ["pfeil_oben", "pfeil_unten"], e: "Oben! Rauch steigt nach oben." },
+        { k: "Zeichen", f: "Welche Farbe hat ein Achtung-Schild?", a: ["Gelb", "Lila", "Rosa"], i: ["farbe:#F5C400", "farbe:#8E24AA", "farbe:#F48FB1"], e: "Gelb heißt: Achtung, Gefahr!" },
+        { k: "Notruf", f: "Was sagst du beim Notruf zuerst?", a: ["Wo ich bin", "Mein Lieblingsessen"], i: ["txt:Wo?", "apfel"], e: "Sag zuerst, wo du bist. Dann weiß die Feuerwehr, wohin sie fahren muss." }
+      ],
       leicht: [
+        { k: "Kleidung", f: "Wie heißt die Schutzkleidung der Feuerwehr mit Helm, Jacke, Hose, Handschuhen und Stiefeln?", a: ["Persönliche Schutzausrüstung", "Sportausrüstung", "Schlafanzug", "Regenkleidung"], e: "Abgekürzt PSA. Sie schützt vor Hitze, Flammen, Schnitten und Stößen." },
+        { k: "Kleidung", f: "Warum hat die Feuerwehrjacke Leuchtstreifen?", a: ["Damit man gut gesehen wird", "Weil es schön aussieht", "Damit sie wärmer ist", "Damit sie leichter ist"], e: "Die Streifen reflektieren Licht. So sehen Autofahrer die Einsatzkräfte auch nachts." },
+        { k: "Kleidung", f: "Was schützt am Feuerwehrhelm Augen und Gesicht?", a: ["Das Visier", "Der Kinnriemen", "Die Lampe", "Der Aufkleber"], e: "Das Visier klappt man vor das Gesicht, z. B. gegen Funken und Splitter." },
+        { k: "Kleidung", f: "Was gehört NICHT zur Schutzkleidung?", a: ["Flip-Flops", "Helm", "Handschuhe", "Sicherheitsstiefel"], e: "Im Einsatz braucht man feste Stiefel. Flip-Flops schützen nicht." },
+        { k: "Feuerwehr", f: "Wofür steht die Abkürzung 'FF'?", a: ["Freiwillige Feuerwehr", "Feuer frei", "Fahr flott", "Flammen fest"], e: "Die meisten Feuerwehren in Deutschland sind Freiwillige Feuerwehren." },
+        { k: "Feuerwehr", f: "Wie heißt das Haus der Freiwilligen Feuerwehr oft?", a: ["Gerätehaus", "Turnhalle", "Rathaus", "Bahnhof"], e: "Bei der Freiwilligen Feuerwehr heißt es meist Gerätehaus, bei der Berufsfeuerwehr Feuerwache." },
+        { k: "Feuerwehr", f: "Retten, Löschen, Bergen und ...?", a: ["Schützen", "Singen", "Schlafen", "Kochen"], e: "Das sind die vier Hauptaufgaben der Feuerwehr." },
+        { k: "Feuerwehr", f: "Helfen Freiwillige Feuerwehrleute als Beruf?", a: ["Nein, sie helfen ehrenamtlich", "Ja, nur als Beruf", "Nur am Wochenende gegen Geld", "Nur im Sommer"], e: "Sie haben einen anderen Beruf oder gehen zur Schule und helfen in ihrer Freizeit." },
+        { k: "Feuerwehr", f: "Wie werden Freiwillige Feuerwehrleute alarmiert?", a: ["Mit Meldeempfänger oder Sirene", "Mit einem Brief", "Mit der Zeitung", "Gar nicht"], e: "Der kleine Meldeempfänger (Piepser) oder eine Handy-App ruft sie zum Einsatz." },
+        { k: "Feuerwehr", f: "Was bedeutet der Befehl 'Wasser marsch!'?", a: ["Das Wasser soll fließen", "Alle sollen laufen", "Pause machen", "Schläuche einrollen"], e: "Mit 'Wasser marsch!' gibt die Pumpe das Wasser in die Schläuche." },
+        { k: "Feuerwehr", f: "Rettet die Feuerwehr auch Tiere?", a: ["Ja, zum Beispiel Katzen oder Pferde", "Nein, nie", "Nur Fische", "Nur Dinosaurier"], e: "Tierrettung gehört auch zu den Aufgaben, z. B. ein Pferd im Graben." },
+        { k: "Feuerwehr", f: "Was macht die Feuerwehr bei Hochwasser?", a: ["Sandsäcke legen und Keller auspumpen", "Nichts", "Nur zuschauen", "Fische fangen"], e: "Mit Sandsäcken und Pumpen schützt sie Häuser vor dem Wasser." },
+        { k: "Feuerwehr", f: "Wozu dient der Schlauchturm am Gerätehaus?", a: ["Nasse Schläuche aufhängen und trocknen", "Ausschau nach Feuer halten", "Für die Sirene", "Zum Klettern in der Pause"], e: "In dem hohen Turm hängen die Schläuche zum Trocknen." },
+        { k: "Technik", f: "Wofür hat ein Löschfahrzeug eine Pumpe?", a: ["Damit das Wasser mit Druck durch die Schläuche fließt", "Zum Reifen aufpumpen", "Für Musik", "Zum Kühlen des Motors"], e: "Die Feuerlöschpumpe drückt das Wasser durch die Schläuche bis zum Strahlrohr." },
+        { k: "Notruf", f: "Was passiert, wenn man aus Spaß die 112 anruft?", a: ["Es ist verboten und blockiert echte Hilfe", "Nichts", "Man bekommt einen Preis", "Die Feuerwehr freut sich"], e: "Notrufmissbrauch ist strafbar. In der Zeit kann jemand anderes nicht durchkommen." },
+        { k: "Brandschutz", f: "Was machst du mit einer brennenden Kerze, wenn du den Raum verlässt?", a: ["Ausblasen", "Brennen lassen", "Zudecken", "Ans Fenster stellen"], e: "Kerzen nie unbeaufsichtigt brennen lassen." },
+        { k: "Brandschutz", f: "Eine Steckdose qualmt. Was darfst du auf keinen Fall?", a: ["Mit Wasser löschen", "Erwachsene holen", "Den Raum verlassen", "112 rufen"], e: "Wasser leitet Strom. Das ist lebensgefährlich!" },
+        { k: "Brandschutz", f: "Was solltest du beim Rauchmelder regelmäßig machen?", a: ["Die Prüftaste drücken", "Ihn abhängen", "Ihn anmalen", "Ihn zukleben"], e: "Mit der Prüftaste testest du, ob er noch piept." },
+        { k: "Brandschutz", f: "Wo treffen sich alle, nachdem sie ein brennendes Haus verlassen haben?", a: ["Am Sammelplatz", "Im Keller", "Im Haus", "Auf dem Dach"], e: "Am Sammelplatz sieht man, ob alle draußen sind." },
+        { k: "Zeichen", f: "Was ist ein roter Kasten mit Glasscheibe und Knopf an der Wand?", a: ["Ein Feuermelder", "Ein Briefkasten", "Ein Lichtschalter", "Eine Klingel"], e: "Am Druckknopfmelder löst du den Feueralarm aus." },
+        { k: "Brandschutz", f: "Wo darf man ein Lagerfeuer machen?", a: ["Nur an erlaubten Feuerstellen", "Im Wald, wo man will", "Im Zimmer", "Im Heu"], e: "Im Wald und auf trockenen Wiesen ist offenes Feuer gefährlich und oft verboten." },
+        { k: "Technik", f: "Was macht man mit einem benutzten Feuerlöscher?", a: ["Neu füllen oder prüfen lassen", "Wegwerfen in den Wald", "Wieder aufhängen wie er ist", "Verstecken"], e: "Ein benutzter Löscher muss wieder gefüllt werden, damit er beim nächsten Mal funktioniert." },
         { k: "Notruf", f: "Welche Nummer wählst du, wenn es brennt?", a: ["112", "110", "115", "911"], e: "Die 112 ist der Notruf für Feuerwehr und Rettungsdienst, in ganz Europa und kostenlos." },
         { k: "Notruf", f: "Welche Nummer hat die Polizei?", a: ["110", "112", "116", "100"], e: "Die Polizei erreichst du unter 110. Feuerwehr und Rettungsdienst unter 112." },
         { k: "Notruf", f: "Was sagst du beim Notruf als Erstes?", a: ["Wo ist es passiert?", "Wie spät es ist", "Wie alt ich bin", "Meine Lieblingsfarbe"], e: "Die Leitstelle muss zuerst wissen, WO etwas passiert ist, damit Hilfe losfahren kann." },
@@ -1282,6 +2230,10 @@
         { k: "Echt oder Fake?", bild: "news_112", f: "Diese Nachricht wird gerade oft geteilt. Echt oder Fake?", a: ["Echt", "Fake"], fest: true, r: 1, e: "Fake! Der Notruf 112 ist immer kostenlos. Viel geteilt heißt nicht wahr, prüfe die Quelle." }
       ],
       mittel: [
+        { k: "Kleidung", f: "Was tragen Atemschutzgeräteträger unter dem Helm, um Kopf und Hals zu schützen?", a: ["Eine Flammschutzhaube", "Eine Wollmütze", "Ein Stirnband", "Nichts"], e: "Die Flammschutzhaube schützt Ohren, Hals und Nacken vor Hitze." },
+        { k: "Kleidung", f: "Warum sollte man unter der Einsatzkleidung keine Kunstfaser tragen?", a: ["Sie kann bei Hitze schmelzen und auf der Haut kleben", "Sie kratzt", "Sie ist zu bunt", "Sie ist zu teuer"], e: "Baumwolle oder spezielle Unterwäsche ist besser, weil Kunstfaser schmilzt." },
+        { k: "Kleidung", f: "Was haben Feuerwehrstiefel zum Schutz?", a: ["Zehenschutzkappe und durchtrittsichere Sohle", "Rollen", "Absätze", "Löcher zum Lüften"], e: "So schützen die Stiefel vor herabfallenden Teilen und Nägeln." },
+        { k: "Kleidung", f: "Warum gibt es Handschuhe in verschiedenen Arten?", a: ["Für Brandbekämpfung und für technische Hilfe", "Nur wegen der Farbe", "Für Sommer und Winter", "Damit man Funk bedienen kann"], e: "Brandschutzhandschuhe schützen vor Hitze, Hilfeleistungshandschuhe vor Schnitten." },
         { k: "Brandschutz", f: "Welche Brandklasse gilt für brennende Gase?", a: ["C", "A", "B", "F"], e: "Brandklasse C: Gase wie Propan oder Erdgas." },
         { k: "Brandschutz", f: "Was entziehst du einem Feuer mit einer Löschdecke?", a: ["Den Sauerstoff", "Die Farbe", "Den Brennstoff", "Den Rauch"], e: "Die Decke erstickt das Feuer: Es bekommt keine Luft mehr." },
         { k: "Brandschutz", f: "Auf welche drei Arten breitet sich Wärme aus?", a: ["Leitung, Strömung, Strahlung", "Wind, Regen, Schnee", "Rauch, Ruß, Asche", "Druck, Zug, Stoß"], e: "Wärmeleitung (durch Material), Wärmeströmung (heiße Gase steigen auf) und Wärmestrahlung." },
@@ -1318,6 +2270,9 @@
         { k: "Echt oder Fake?", bild: "news_rauchmelder", f: "Stimmt diese Meldung?", a: ["Echt", "Fake"], fest: true, r: 0, e: "Echt! In allen Bundesländern gilt eine Rauchmelderpflicht für Wohnungen." }
       ],
       schwer: [
+        { k: "Kleidung", f: "Woraus besteht moderne Einsatzkleidung oft?", a: ["Aramidfasern, die schwer entflammbar sind", "Baumwolle ohne Beschichtung", "Plastikfolie", "Wolle"], e: "Aramid (z. B. Nomex) brennt kaum und schützt vor Hitze." },
+        { k: "Kleidung", f: "Welche Norm regelt die Schutzkleidung für die Brandbekämpfung?", a: ["EN 469", "DIN A4", "ISO 9001", "EN 112"], e: "Die EN 469 legt fest, wie gut Feuerwehr-Schutzkleidung vor Hitze und Flammen schützen muss." },
+        { k: "Kleidung", f: "Warum muss Einsatzkleidung nach einem Brand gereinigt werden?", a: ["Ruß und Brandrückstände können giftig sein", "Damit sie gut riecht", "Wegen der Farbe", "Muss sie nicht"], e: "Brandrauch hinterlässt Schadstoffe. Deshalb gilt: Kleidung nach dem Einsatz wechseln und reinigen." },
         { k: "Brandschutz", f: "Welche Brandklasse gilt für brennende Metalle?", a: ["D", "C", "B", "E"], e: "Brandklasse D: Metalle wie Magnesium oder Aluminium. Hier braucht man Spezial-Löschpulver." },
         { k: "Brandschutz", f: "Welche Brandklasse gilt für Speiseöle und -fette?", a: ["F", "B", "D", "A"], e: "Brandklasse F gibt es für Fettbrände in Küchen. Dafür gibt es spezielle Fettbrandlöscher." },
         { k: "Brandschutz", f: "Welche Brandklasse gibt es heute nicht mehr?", a: ["E", "D", "F", "C"], e: "Die Brandklasse E (elektrische Anlagen) wurde abgeschafft. Moderne Löscher geben an, bis zu welcher Spannung sie geeignet sind." },
@@ -1390,10 +2345,65 @@
     }
 
     // =====================================================================
+    //  FEUERWEHR-SYMBOLE (für Wimmelbild und Memory, selbst gezeichnet)
+    // =====================================================================
+    const ICONS = {
+      helm: { n: "Helm", s: `<path d="M7 31a17 17 0 0 1 34 0z" fill="#B3141C"/><path d="M24 14v17" stroke="#7A0E14" stroke-width="3"/><rect x="3" y="30" width="42" height="7" rx="3.5" fill="#7A0E14"/><rect x="13" y="23" width="8" height="3" rx="1.5" fill="#F6ECDF" opacity=".8"/>` },
+      loescher: { n: "Feuerlöscher", s: `<rect x="16" y="14" width="16" height="30" rx="6" fill="#C0392B"/><rect x="20" y="8" width="8" height="7" fill="#444"/><path d="M28 10h8l2 4" stroke="#444" stroke-width="3" fill="none"/><path d="M20 12q-10 2-10 14v8" stroke="#2A1715" stroke-width="3" fill="none" stroke-linecap="round"/><rect x="16" y="24" width="16" height="7" fill="#F6ECDF"/>` },
+      hydrant: { n: "Hydrant", s: `<rect x="17" y="12" width="14" height="28" rx="3" fill="#C0392B"/><path d="M15 13a9 8 0 0 1 18 0z" fill="#C0392B"/><rect x="21" y="3" width="6" height="5" rx="1" fill="#8A1017"/><rect x="10" y="20" width="7" height="8" rx="2" fill="#8A1017"/><rect x="31" y="20" width="7" height="8" rx="2" fill="#8A1017"/><rect x="13" y="40" width="22" height="5" rx="2" fill="#8A1017"/>` },
+      axt: { n: "Feuerwehraxt", s: `<g transform="rotate(25 24 24)"><rect x="22" y="4" width="5" height="40" rx="2.5" fill="#8B5A2B"/><path d="M27 6c8 0 13 5 13 12l-13 2z" fill="#9AA3AD"/><path d="M22 8l-6 2 6 4z" fill="#9AA3AD"/></g>` },
+      schlauch: { n: "Schlauch", s: `<circle cx="24" cy="26" r="17" fill="#F6ECDF" stroke="#BCAA92" stroke-width="2.5"/><circle cx="24" cy="26" r="11.5" fill="none" stroke="#BCAA92" stroke-width="2.5"/><circle cx="24" cy="26" r="6" fill="none" stroke="#BCAA92" stroke-width="2.5"/><rect x="34" y="4" width="9" height="12" rx="2" fill="#9AA3AD"/>` },
+      leiter: { n: "Leiter", s: `<g stroke="#8E969E" stroke-linecap="round"><path d="M15 4v40M33 4v40" stroke-width="4"/><path d="M15 10h18M15 18h18M15 26h18M15 34h18M15 42h18" stroke-width="3"/></g>` },
+      rauchmelder: { n: "Rauchmelder", s: `<circle cx="24" cy="24" r="18" fill="#fff" stroke="#BDB3A8" stroke-width="2.5"/><circle cx="24" cy="24" r="9" fill="none" stroke="#BDB3A8" stroke-width="2.5"/><circle cx="33" cy="15" r="2.8" fill="#E53935"/>` },
+      funk: { n: "Funkgerät", s: `<rect x="15" y="12" width="18" height="32" rx="4" fill="#2A1715"/><rect x="28" y="2" width="3" height="12" rx="1.5" fill="#2A1715"/><rect x="18" y="16" width="12" height="8" rx="1.5" fill="#8FC9A9"/><g fill="#8a6e68"><circle cx="20" cy="30" r="2"/><circle cx="28" cy="30" r="2"/><circle cx="20" cy="37" r="2"/><circle cx="28" cy="37" r="2"/></g>` },
+      stiefel: { n: "Stiefel", s: `<path d="M14 5h14v24l12 6v9H14z" fill="#2A1715"/><rect x="14" y="19" width="14" height="4" fill="#F5C400"/><rect x="14" y="40" width="26" height="4" fill="#6B5A57"/>` },
+      verband: { n: "Verbandkasten", s: `<rect x="6" y="12" width="36" height="28" rx="5" fill="#1E8449"/><rect x="18" y="6" width="12" height="7" rx="2" fill="none" stroke="#1E8449" stroke-width="3"/><path d="M24 18v16M16 26h16" stroke="#fff" stroke-width="5"/>` },
+      kegel: { n: "Leitkegel", s: `<path d="M24 4l11 36H13z" fill="#F07A2E"/><path d="M20.4 17h7.2l2 7H18.4zM16.6 30h14.8l1.5 5H15.1z" fill="#fff"/><rect x="8" y="39" width="32" height="5" rx="2" fill="#F07A2E"/>` },
+      lampe: { n: "Taschenlampe", s: `<rect x="6" y="19" width="26" height="10" rx="3" fill="#2A1715"/><path d="M32 15h5l4-4v26l-4-4h-5z" fill="#E8A33D"/><path d="M44 17l3-2M44 24h3M44 31l3 2" stroke="#E8A33D" stroke-width="2.2" stroke-linecap="round"/>` },
+      blaulicht: { n: "Blaulicht", s: `<path d="M12 32a12 14 0 0 1 24 0z" fill="#3B7BE0"/><path d="M17 23a7 7 0 0 1 6-5" stroke="#CFE3FF" stroke-width="3" fill="none" stroke-linecap="round"/><rect x="8" y="32" width="32" height="8" rx="3" fill="#2A1715"/>` },
+      maske: { n: "Atemschutzmaske", s: `<ellipse cx="24" cy="20" rx="14" ry="16" fill="#5A4A47"/><ellipse cx="24" cy="17" rx="10" ry="9" fill="#BFD9E6"/><circle cx="24" cy="36" r="7" fill="#2A1715"/><circle cx="24" cy="36" r="3" fill="#9AA3AD"/>` }
+    };
+    const icon = (k) => `<svg viewBox="0 0 48 48">${ICONS[k].s}</svg>`;
+
+    // =====================================================================
+    //  BILDSYMBOLE FÜR DEN KIDS-MODUS (selbst gezeichnet)
+    //  Bei Kids-Fragen steht in i: ["symbol", ...] zu jeder Antwort ein Symbol.
+    //  Erlaubt: Namen aus ICONS oder SYMBOLE, "txt:112" (Text im Kreis),
+    //  "farbe:#B3141C" (Farbkreis), "bild:auto_blau" (Bild aus BILDER).
+    // =====================================================================
+    const SYMBOLE = {
+      eis: { n: "Eis", s: `<circle cx="18" cy="19" r="7" fill="#F48FB1"/><circle cx="30" cy="19" r="7" fill="#FFF3C4"/><circle cx="24" cy="12" r="7" fill="#8D5B3C"/><path d="M15 23h18l-9 22z" fill="#D9A066"/><path d="M19 27l9 7M23 24l8 6M17 30l6 5" stroke="#B57E45" stroke-width="1.5"/>` },
+      ball: { n: "Ball", s: `<circle cx="24" cy="24" r="19" fill="#3B7BE0"/><path d="M24 5c-9 6-9 32 0 38" stroke="#F5C400" stroke-width="6" fill="none"/><path d="M24 5c9 6 9 32 0 38" stroke="#E53935" stroke-width="6" fill="none"/><circle cx="24" cy="24" r="19" fill="none" stroke="#1F4F9A" stroke-width="2"/><ellipse cx="15" cy="15" rx="4" ry="2.5" fill="#fff" opacity=".5" transform="rotate(-40 15 15)"/>` },
+      apfel: { n: "Apfel", s: `<path d="M24 15c-4-3-15-3-16 8-1 10 6 20 11 20 2 0 3-1 5-1s3 1 5 1c5 0 12-10 11-20-1-11-12-11-16-8z" fill="#E53935"/><path d="M24 15c0-4 1-7 3-10" stroke="#6B4A2B" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M26 9c4-4 9-4 11-2-2 4-7 5-11 2z" fill="#43A047"/><ellipse cx="15" cy="23" rx="2.5" ry="5" fill="#fff" opacity=".35"/>` },
+      buch: { n: "Buch", s: `<path d="M5 11c7-2 13-1 19 3v28c-6-4-12-5-19-3z" fill="#3B7BE0"/><path d="M43 11c-7-2-13-1-19 3v28c6-4 12-5 19-3z" fill="#5B9BE0"/><path d="M9 17c4-1 8 0 11 2M9 23c4-1 8 0 11 2M9 29c4-1 8 0 11 2M28 19c3-2 7-3 11-2M28 25c3-2 7-3 11-2M28 31c3-2 7-3 11-2" stroke="#fff" stroke-width="2" opacity=".75" fill="none" stroke-linecap="round"/>` },
+      sonne: { n: "Sonne", s: `<g stroke="#F5A800" stroke-width="3.5" stroke-linecap="round"><path d="M24 3v7M24 38v7M3 24h7M38 24h7M9 9l5 5M34 34l5 5M39 9l-5 5M14 34l-5 5"/></g><circle cx="24" cy="24" r="10" fill="#F5C400"/>` },
+      teddy: { n: "Teddy", s: `<g fill="#A86B3C"><circle cx="14" cy="9" r="5"/><circle cx="34" cy="9" r="5"/><circle cx="12" cy="30" r="4.5"/><circle cx="36" cy="30" r="4.5"/><circle cx="16" cy="43" r="4.5"/><circle cx="32" cy="43" r="4.5"/><ellipse cx="24" cy="34" rx="11" ry="10"/><circle cx="24" cy="16" r="10"/></g><ellipse cx="24" cy="20" rx="4.5" ry="3.5" fill="#E2B88A"/><circle cx="20" cy="14" r="1.6" fill="#2A1715"/><circle cx="28" cy="14" r="1.6" fill="#2A1715"/><circle cx="24" cy="19" r="1.6" fill="#2A1715"/><ellipse cx="24" cy="35" rx="6" ry="5" fill="#E2B88A"/>` },
+      wasser: { n: "Wasser", s: `<path d="M24 3c7 11 14 18 14 27a14 14 0 0 1-28 0c0-9 7-16 14-27z" fill="#5BB6F0"/><path d="M16 31a8 8 0 0 0 6 8" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>` },
+      feuer: { n: "Feuer", s: `<path d="M24 3c6 11 15 16 15 28a15 15 0 0 1-30 0c0-9 5-12 7-19 2 5 4 7 5 7-2-7 1-12 3-16z" fill="#F07A2E"/><path d="M24 24c3 5 7 7 7 12a7 7 0 0 1-14 0c0-4 3-6 4-9 1 2 2 3 3 3z" fill="#F5C400"/>` },
+      treppe: { n: "Treppe", s: `<path d="M4 44V35h10v-9h10v-9h10V8h10v36z" fill="#8FA383"/><path d="M4 35h10v-9h10v-9h10V8h10" stroke="#4E6B42" stroke-width="2.5" fill="none" stroke-linejoin="round"/>` },
+      aufzug: { n: "Aufzug", s: `<rect x="7" y="3" width="34" height="42" rx="3" fill="#9AA3AD"/><rect x="11" y="13" width="26" height="30" fill="#5A4A47"/><path d="M24 13v30" stroke="#9AA3AD" stroke-width="2"/><path d="M16 10l3-4 3 4zM26 6l3 4 3-4z" fill="#F6ECDF"/>` },
+      pfeil_unten: { n: "Unten", s: `<circle cx="24" cy="24" r="21" fill="#5B6F8A"/><path d="M24 11v24M14 26l10 10 10-10" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>` },
+      pfeil_oben: { n: "Oben", s: `<circle cx="24" cy="24" r="21" fill="#5B6F8A"/><path d="M24 37V13M14 22l10-10 10 10" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>` }
+    };
+    function symbol(s) {
+      if (!s) return "";
+      if (s.startsWith("txt:")) {
+        const t = html(s.slice(4));
+        const gr = t.length <= 2 ? 22 : t.length <= 3 ? 17 : t.length <= 4 ? 13 : 11;
+        return `<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="21" fill="#B3141C"/><text x="24" y="24" dy=".36em" text-anchor="middle" font-size="${gr}" font-weight="700" fill="#F6ECDF" font-family="Outfit, Arial, sans-serif">${t}</text></svg>`;
+      }
+      if (s.startsWith("farbe:")) return `<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="${s.slice(6).replace(/[^#0-9a-fA-F]/g, "")}" stroke="#fff" stroke-width="3"/></svg>`;
+      if (s.startsWith("bild:")) return BILDER[s.slice(5)] || "";
+      const d = ICONS[s] || SYMBOLE[s];
+      return d ? `<svg viewBox="0 0 48 48">${d.s}</svg>` : "";
+    }
+
+    // =====================================================================
     //  MINIGAMES
     //  Jedes Minigame ist ein Eintrag in dieser Liste. Neues Minigame:
     //  Objekt mit name, icon, anleitung und start(feld, stufe, fertig).
-    //  stufe: 0 = leicht, 1 = mittel, 2 = schwer.
+    //  kurz: ganz kurze Anleitung für den Kids-Modus (wird vorgelesen).
+    //  stufe: 0 = leicht (auch Kids), 1 = mittel, 2 = schwer. Spieldauer immer mgDauer().
     //  Zeitsteuerung immer über nach(), alle() und jedesBild(), dann klappt die Pause.
     //  "fertig(punkte)" aufrufen, wenn es vorbei ist.
     // =====================================================================
@@ -1402,6 +2412,7 @@
         name: "Feuer löschen",
         icon: `<svg viewBox="0 0 64 82"><path d="M32 2c9 17 26 26 26 48a26 26 0 0 1-52 0c0-15 9-21 12-33 3 9 6 12 9 12-3-12 1-20 5-27z" fill="#F6ECDF"/></svg>`,
         anleitung: "Tippe so schnell du kannst auf die Flammen. Jedes gelöschte Feuer gibt 10 Punkte. Lässt du eins brennen, breitet es sich aus!",
+        kurz: "Tippe auf die Flammen!",
         start(feld, stufe, fertig) {
           const neuAlle = [950, 700, 480][stufe];
           const tippsProFeuer = [1, 1, 2][stufe];
@@ -1443,13 +2454,14 @@
           const zufall = () => feuer(12 + Math.random() * 76, 18 + Math.random() * 70);
           zufall(); zufall();
           alle(neuAlle, zufall);
-          zeitbalken(15000, () => fertig(punkte));
+          zeitbalken(mgDauer(), () => fertig(punkte));
         }
       },
       {
         name: "Schläuche kuppeln",
         icon: `<svg viewBox="0 0 40 40"><circle cx="13" cy="20" r="9" fill="none" stroke="#F6ECDF" stroke-width="4"/><circle cx="27" cy="20" r="9" fill="none" stroke="#F6ECDF" stroke-width="4"/></svg>`,
         anleitung: "Tippe links auf eine Kupplung und dann rechts auf die mit gleicher Farbe und gleichem Zeichen. Jede Verbindung gibt 15 Punkte.",
+        kurz: "Tippe zwei gleiche Kupplungen an!",
         start(feld, stufe, fertig) {
           const anzahl = [3, 4, 5][stufe];
           const SORTEN = [
@@ -1518,25 +2530,28 @@
             }));
           }
           durchgang();
-          zeitbalken(15000, () => { aktiv = false; fertig(punkte); });
+          zeitbalken(mgDauer(), () => { aktiv = false; fertig(punkte); });
         }
       },
       {
-        name: "Ausweichen",
+        name: "Einsatzfahrt",
         icon: `<svg viewBox="0 0 40 40"><rect x="12" y="4" width="16" height="32" rx="5" fill="#F6ECDF"/><rect x="14" y="10" width="5" height="3" rx="1" fill="#3B7BE0"/><rect x="21" y="10" width="5" height="3" rx="1" fill="#3B7BE0"/></svg>`,
-        anleitung: "Das Löschfahrzeug ist auf Einsatzfahrt. Tippe links oder rechts, um die Spur zu wechseln. Jedes überholte Hindernis gibt 10 Punkte, ein Zusammenstoß kostet 20.",
+        anleitung: "Bring das Löschfahrzeug sicher zum Einsatz! Tippe links oder rechts, um die Spur zu wechseln. Eine Spur ist immer frei. Fahr durch die blauen Wassertropfen: jeder gibt +10 Punkte! Weichst du einer Absperrung nicht aus, gibt es −15.",
+        kurz: "Tippe links oder rechts. Sammle die blauen Tropfen!",
         start(feld, stufe, fertig) {
           const SPUREN = [100 / 6, 300 / 6, 500 / 6];
-          const tempo = [32, 45, 58][stufe];            // % der Feldhöhe pro Sekunde
-          const neuAlle = [1050, 820, 620][stufe];
-          const doppelt = [0, .2, .38][stufe];          // Wahrscheinlichkeit für zwei Hindernisse auf einmal
-          let spur = 1, punkte = 0, geschuetztBis = 0, strich = 0;
-          const hindernisse = [];
-          feld.style.background = "#3B2C2A";
+          const tempo = [30, 40, 50][stufe];            // % der Feldhöhe pro Sekunde
+          const reiheAlle = [1300, 1050, 850][stufe];   // ms zwischen zwei Hindernis-Reihen
+          const zweiZu = [0, .35, .6][stufe];           // Wahrscheinlichkeit, dass 2 von 3 Spuren zu sind
+          let spur = 1, frei = 1, punkte = 0, geschuetztBis = 0, strich = 0;
+          const objekte = [];
+          feld.style.background = "#4A3A38";
           const strasse = document.createElement("div");
-          strasse.className = "strasse";
+          strasse.className = "strasse hell";
           strasse.innerHTML = `<div class="rand" style="left:0"></div><div class="rand" style="right:0"></div>
-        <div class="linie" style="left:33.33%"></div><div class="linie" style="left:66.66%"></div>`;
+        <div class="linie" style="left:33.33%"></div><div class="linie" style="left:66.66%"></div>
+        <div class="pfeil links"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="pfeil rechts"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`;
           const auto = document.createElement("div");
           auto.className = "auto";
           auto.innerHTML = AUTO_SVG;
@@ -1545,11 +2560,7 @@
           feld.appendChild(strasse);
           const linien = strasse.querySelectorAll(".linie");
 
-          strasse.addEventListener("pointerdown", (ev) => {
-            ev.preventDefault();
-            if (uhr.pausiert) return;
-            const r = strasse.getBoundingClientRect();
-            const richtung = ev.clientX - r.left < r.width / 2 ? -1 : 1;
+          function wechseln(richtung) {
             const neu = Math.max(0, Math.min(2, spur + richtung));
             if (neu === spur) return;
             spur = neu;
@@ -1558,51 +2569,318 @@
             auto.classList.add(richtung < 0 ? "links" : "rechts");
             setTimeout(() => auto.classList.remove("links", "rechts"), 180);
             ton(380, .04, "triangle");
+          }
+          strasse.addEventListener("pointerdown", (ev) => {
+            ev.preventDefault();
+            if (uhr.pausiert) return;
+            const r = strasse.getBoundingClientRect();
+            wechseln(ev.clientX - r.left < r.width / 2 ? -1 : 1);
           });
 
-          function neu() {
-            const spuren = mischen([0, 1, 2]).slice(0, Math.random() < doppelt ? 2 : 1);
-            spuren.forEach(s => {
-              const art = ["pylon", "oel", "wagen", "wagen"][Math.floor(Math.random() * 4)];
-              const el = document.createElement("div");
-              el.className = "hindernis " + art;
-              el.innerHTML = HINDERNIS[art]();
-              el.style.left = SPUREN[s] + "%";
-              el.style.top = "-20%";
-              strasse.insertBefore(el, auto);
-              hindernisse.push({ el, spur: s, y: -20, hoehe: art === "wagen" ? 20 : 12 });
-            });
+          const ARTEN = {
+            kegel: { h: 12, svg: () => icon("kegel") },
+            bake: {
+              h: 10, svg: () => `<svg viewBox="0 0 60 44"><rect x="8" y="22" width="5" height="20" fill="#9AA3AD"/><rect x="47" y="22" width="5" height="20" fill="#9AA3AD"/>
+          <rect x="2" y="12" width="56" height="14" rx="3" fill="#fff"/><path d="M8 12h10l-8 14H2v-4zM26 12h10l-8 14H18zM44 12h10l-8 14H36zM58 18v8h-4z" fill="#E53935"/>
+          <circle class="bl" cx="10" cy="7" r="5" fill="#F5C400"/><circle class="bl b" cx="50" cy="7" r="5" fill="#F5C400"/></svg>` },
+            unfall: {
+              h: 17, svg: () => {
+                const f = ["#E8A33D", "#5B9BE0", "#8FCB7A", "#F6ECDF"][Math.floor(Math.random() * 4)];
+                return `<svg viewBox="0 0 54 84"><rect x="6" y="4" width="42" height="76" rx="13" fill="${f}" stroke="#fff" stroke-width="3"/><rect x="11" y="58" width="32" height="12" rx="5" fill="#2A1715" opacity=".7"/><rect x="11" y="16" width="32" height="11" rx="5" fill="#2A1715" opacity=".7"/>
+            <path d="M27 32l11 19H16z" fill="#fff" stroke="#E53935" stroke-width="3.5" stroke-linejoin="round"/></svg>`;
+              }
+            },
+            tropfen: { h: 9, svg: () => `<svg viewBox="0 0 40 48"><path d="M20 3c8 12 15 20 15 29a15 15 0 0 1-30 0c0-9 7-17 15-29z" fill="#5BB6F0" stroke="#fff" stroke-width="3"/><path d="M13 31a7 7 0 0 0 5 8" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg>` }
+          };
+          // Legende: erst groß in der Mitte, dann klein oben
+          const legende = document.createElement("div");
+          legende.className = "legende";
+          legende.innerHTML = `<span>${ARTEN.tropfen.svg()} einsammeln <b class="lg-plus">+10</b></span><span>${icon("kegel")} ausweichen <b class="lg-minus">−15</b></span>`;
+          strasse.appendChild(legende);
+          nach(1800, () => legende.classList.add("klein"));
+          function objekt(s, art) {
+            const el = document.createElement("div");
+            el.className = "objekt " + art;
+            el.innerHTML = ARTEN[art].svg() + (art === "tropfen" ? "<i>+10</i>" : "");
+            el.style.left = SPUREN[s] + "%";
+            el.style.top = "-20%";
+            strasse.insertBefore(el, auto);
+            objekte.push({ el, spur: s, y: -20, h: ARTEN[art].h, art });
+          }
+          // Die freie Spur wandert höchstens eine Spur weiter, dafür reicht immer ein Tipp
+          function reihe() {
+            frei = Math.max(0, Math.min(2, frei + [-1, 0, 1][Math.floor(Math.random() * 3)]));
+            const andere = [0, 1, 2].filter(s => s !== frei);
+            const zu = Math.random() < zweiZu ? andere : [andere[Math.floor(Math.random() * 2)]];
+            zu.forEach(s => objekt(s, ["kegel", "bake", "unfall"][Math.floor(Math.random() * 3)]));
+            if (Math.random() < .55) objekt(frei, "tropfen");
           }
 
           jedesBild((dt) => {
             strich = (strich + tempo * dt * 6) % 70;
             linien.forEach(l => l.style.backgroundPositionY = strich + "px");
-            for (let i = hindernisse.length - 1; i >= 0; i--) {
-              const h = hindernisse[i];
-              h.y += tempo * dt;
-              h.el.style.top = h.y + "%";
-              if (h.spur === spur && h.y + h.hoehe > 76 && h.y < 94 && jetzt() > geschuetztBis) {
-                punkte = Math.max(0, punkte - 20); mgPunkte(punkte);
-                zeigePunkte(feld, SPUREN[spur] + "%", "70%", "−20", true);
-                geschuetztBis = jetzt() + 1000;
-                auto.classList.remove("treffer"); void auto.offsetWidth; auto.classList.add("treffer");
-                ton(150, .3, "sawtooth"); vibriere(180);
-                h.el.remove(); hindernisse.splice(i, 1);
-              } else if (h.y > 102) {
+            for (let i = objekte.length - 1; i >= 0; i--) {
+              const o = objekte[i];
+              o.y += tempo * dt;
+              o.el.style.top = o.y + "%";
+              const trifft = o.spur === spur && o.y + o.h > 77 && o.y < 95;
+              if (trifft && o.art === "tropfen") {
                 punkte += 10; mgPunkte(punkte);
-                h.el.remove(); hindernisse.splice(i, 1);
+                zeigePunkte(feld, SPUREN[spur] + "%", "70%", "+10", false, "wasser");
+                ton(880, .08, "triangle"); vibriere(20);
+                o.el.remove(); objekte.splice(i, 1);
+              } else if (trifft && jetzt() > geschuetztBis) {
+                punkte = Math.max(0, punkte - 15); mgPunkte(punkte);
+                zeigePunkte(feld, SPUREN[spur] + "%", "68%", "−15", true, "gross");
+                geschuetztBis = jetzt() + 900;
+                auto.classList.remove("treffer"); void auto.offsetWidth; auto.classList.add("treffer");
+                ton(150, .3, "sawtooth"); vibriere(160);
+                o.el.remove(); objekte.splice(i, 1);
+              } else if (o.y > 102) {
+                if (o.art !== "tropfen") { punkte += 5; mgPunkte(punkte); }
+                o.el.remove(); objekte.splice(i, 1);
               }
             }
           });
-          neu();
-          alle(neuAlle, neu);
-          zeitbalken(15000, () => fertig(punkte));
+          nach(400, reihe);
+          alle(reiheAlle, reihe);
+          zeitbalken(mgDauer(), () => fertig(punkte));
+        }
+      },
+      {
+        name: "Wimmelbild",
+        icon: `<svg viewBox="0 0 40 40"><circle cx="17" cy="17" r="10" fill="none" stroke="#F6ECDF" stroke-width="4"/><path d="M25 25l9 9" stroke="#F6ECDF" stroke-width="5" stroke-linecap="round"/></svg>`,
+        anleitung: "In der Fahrzeughalle liegt alles durcheinander. Oben steht, was du suchen sollst. Finde es und tippe darauf! Jeder Fund gibt 15 Punkte.",
+        kurz: "Finde das Ding und tippe drauf!",
+        start(feld, stufe, fertig) {
+          const anzahl = [9, 12, 14][stufe];
+          const groesse = [62, 52, 44][stufe];
+          const drehen = [0, 18, 40][stufe];
+          let punkte = 0, gesucht = null, offen = [];
+          feld.style.background = "linear-gradient(#EFE2D0 0 58%, #D9BFA3 58% 60%, #CBAE90 60%)";
+          const halle = document.createElement("div");
+          halle.className = "halle";
+          halle.innerHTML = `<div class="regal" style="top:22%"></div><div class="regal" style="top:40%"></div><div class="tor"></div>`;
+          const auftrag = document.createElement("div");
+          auftrag.className = "auftrag";
+          feld.append(halle, auftrag);
+
+          function neuesBild() {
+            feld.querySelectorAll(".ding").forEach(e => e.remove());
+            const arten = mischen(Object.keys(ICONS)).slice(0, anzahl);
+            const spalten = 3, zeilen = Math.ceil(anzahl / spalten);
+            const plaetze = mischen([...Array(spalten * zeilen).keys()]).slice(0, anzahl);
+            arten.forEach((art, i) => {
+              const p = plaetze[i];
+              const x = ((p % spalten) + .5 + (Math.random() - .5) * .5) * 100 / spalten;
+              const y = 16 + ((Math.floor(p / spalten) + .5 + (Math.random() - .5) * .4) * 82 / zeilen);
+              const el = document.createElement("div");
+              el.className = "ding";
+              el.innerHTML = icon(art);
+              el.style.cssText = `left:${x}%;top:${y}%;width:${groesse}px;height:${groesse}px;transform:translate(-50%,-50%) rotate(${(Math.random() * 2 - 1) * drehen}deg);`;
+              el.addEventListener("pointerdown", (ev) => {
+                ev.preventDefault();
+                if (uhr.pausiert || el.classList.contains("gefunden")) return;
+                if (art === gesucht) {
+                  el.classList.add("gefunden");
+                  punkte += 15; mgPunkte(punkte);
+                  zeigePunkte(feld, x + "%", y + "%", "+15");
+                  tonRichtig(); vibriere(25);
+                  offen = offen.filter(a => a !== art);
+                  naechstes();
+                } else {
+                  el.animate([{ marginLeft: "0" }, { marginLeft: "-6px" }, { marginLeft: "6px" }, { marginLeft: "0" }], 260);
+                  tonFalsch();
+                }
+              });
+              feld.appendChild(el);
+            });
+            offen = mischen(arten);
+            naechstes();
+          }
+          function naechstes() {
+            if (!offen.length) { nach(300, neuesBild); auftrag.innerHTML = "Alles gefunden!"; return; }
+            gesucht = offen[0];
+            auftrag.innerHTML = `<span>Finde:</span>${icon(gesucht)}<b>${ICONS[gesucht].n}</b>`;
+            auftrag.animate([{ transform: "translateX(-50%) scale(1.08)" }, { transform: "translateX(-50%) scale(1)" }], 250);
+          }
+          neuesBild();
+          zeitbalken(mgDauer(), () => fertig(punkte));
+        }
+      },
+      {
+        name: "Notruf 112",
+        icon: `<svg viewBox="0 0 40 40"><path d="M12 6l5 1 2 7-3 2a16 16 0 0 0 8 8l2-3 7 2 1 5c0 2-2 4-4 4C18 32 8 22 8 10c0-2 2-4 4-4z" fill="#F6ECDF"/></svg>`,
+        anleitung: "Wähle so oft wie möglich die 112! Jeder richtige Notruf gibt 20 Punkte. Achtung: Bei mittel und schwer werden die Tasten gemischt.",
+        kurz: "Tippe eins, eins, zwei!",
+        start(feld, stufe, fertig) {
+          let punkte = 0, eingabe = "";
+          feld.style.background = "linear-gradient(#F6ECDF, #EADAC4)";
+          const box = document.createElement("div");
+          box.className = "telefon";
+          box.innerHTML = `<div class="anzeige"><small>Wähle</small><div class="nummer"></div></div><div class="tastatur"></div>`;
+          feld.appendChild(box);
+          const nummer = box.querySelector(".nummer"), tastatur = box.querySelector(".tastatur");
+          const ZIFFERN = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "*", "0", "#"];
+          function anzeigen() {
+            nummer.innerHTML = "112".split("").map((z, i) => `<span class="${i < eingabe.length ? "ok" : ""}">${z}</span>`).join("");
+          }
+          function tasten(gemischt) {
+            const reihenfolge = gemischt ? mischen(ZIFFERN) : ZIFFERN;
+            tastatur.innerHTML = "";
+            reihenfolge.forEach(z => {
+              const t = document.createElement("button");
+              t.className = "taste";
+              t.textContent = z;
+              t.addEventListener("pointerdown", (ev) => {
+                ev.preventDefault();
+                if (uhr.pausiert) return;
+                t.animate([{ transform: "scale(.88)" }, { transform: "scale(1)" }], 150);
+                if (z === "112"[eingabe.length]) {
+                  eingabe += z;
+                  ton(500 + eingabe.length * 120, .07, "triangle");
+                  if (eingabe === "112") {
+                    punkte += 20; mgPunkte(punkte);
+                    zeigePunkte(feld, "50%", "40%", "+20");
+                    tonRichtig(); vibriere(40);
+                    eingabe = "";
+                    box.classList.add("verbunden");
+                    setTimeout(() => box.classList.remove("verbunden"), 250);
+                    if (stufe >= 1) tasten(true);
+                  } else if (stufe === 2) tasten(true);
+                } else {
+                  eingabe = "";
+                  tonFalsch(); vibriere([50, 40, 50]);
+                  box.animate([{ transform: "translateX(-6px)" }, { transform: "translateX(6px)" }, { transform: "none" }], 250);
+                }
+                anzeigen();
+              });
+              tastatur.appendChild(t);
+            });
+          }
+          tasten(stufe >= 1);
+          anzeigen();
+          zeitbalken(mgDauer(), () => fertig(punkte));
+        }
+      },
+      {
+        name: "Pumpendruck",
+        icon: `<svg viewBox="0 0 40 40"><path d="M6 28a14 14 0 0 1 28 0" fill="none" stroke="#F6ECDF" stroke-width="4" stroke-linecap="round"/><path d="M20 28l7-9" stroke="#F6ECDF" stroke-width="4" stroke-linecap="round"/></svg>`,
+        anleitung: "Du bist Maschinist! Halte den Knopf gedrückt, damit der Druck steigt. Lass los, damit er sinkt. Halte die Nadel im grünen Bereich, so lange du kannst.",
+        kurz: "Halte den Knopf. Bleib im grünen Feld!",
+        start(feld, stufe, fertig) {
+          const breite = [3, 2.2, 1.5][stufe];          // halbe Breite des grünen Bereichs in bar
+          const wandert = [0, .9, 1.8][stufe];          // wie weit der grüne Bereich hin- und herwandert
+          let druck = 2, gedrueckt = false, zeitImZiel = 0, punkte = 0;
+          feld.style.background = "linear-gradient(#F6ECDF, #EADAC4)";
+          const box = document.createElement("div");
+          box.className = "pumpe";
+          box.innerHTML = `<svg class="manometer" viewBox="0 0 220 130">
+          <path d="M20 115a90 90 0 0 1 180 0" fill="none" stroke="#E2D3BF" stroke-width="22" stroke-linecap="round"/>
+          <path class="zone" fill="none" stroke="#8FA383" stroke-width="22"/>
+          <g class="skala" font-family="Outfit, sans-serif" font-size="11" fill="#6B4A44" text-anchor="middle"></g>
+          <g class="nadel"><path d="M110 115 L106 112 L110 34 L114 112 Z" fill="#B3141C"/></g>
+          <circle cx="110" cy="115" r="10" fill="#2A1715"/>
+        </svg>
+        <div class="druckwert">0,0 bar</div>
+        <div class="strahl"></div>
+        <button class="pumpknopf">Gedrückt halten</button>`;
+          feld.appendChild(box);
+          const zone = box.querySelector(".zone"), nadel = box.querySelector(".nadel"), wert = box.querySelector(".druckwert");
+          const strahl = box.querySelector(".strahl"), knopf = box.querySelector(".pumpknopf");
+          const MAX = 16;
+          const winkel = (bar) => -90 + (bar / MAX) * 180;
+          const punkt = (bar, r) => { const w = (winkel(bar) - 90) * Math.PI / 180; return [110 + r * Math.cos(w), 115 + r * Math.sin(w)]; };
+          box.querySelector(".skala").innerHTML = [0, 4, 8, 12, 16].map(b => { const [x, y] = punkt(b, 66); return `<text x="${x}" y="${y + 4}">${b}</text>`; }).join("");
+          function zoneZeichnen(mitte) {
+            const a = punkt(Math.max(0, mitte - breite), 90), b = punkt(Math.min(MAX, mitte + breite), 90);
+            zone.setAttribute("d", `M${a[0]} ${a[1]}A90 90 0 0 1 ${b[0]} ${b[1]}`);
+          }
+          const an = (ev) => { ev.preventDefault(); if (!uhr.pausiert) { gedrueckt = true; knopf.classList.add("aktiv"); } };
+          const aus = () => { gedrueckt = false; knopf.classList.remove("aktiv"); };
+          box.addEventListener("pointerdown", an);
+          window.addEventListener("pointerup", aus);
+          window.addEventListener("pointercancel", aus);
+          let start = jetzt();
+          jedesBild((dt) => {
+            if (uhr.pausiert) return;
+            druck += (gedrueckt ? 7 : -5.5) * dt;
+            druck = Math.max(0, Math.min(MAX, druck));
+            const mitte = 8 + Math.sin((jetzt() - start) / 1300) * wandert;
+            zoneZeichnen(mitte);
+            nadel.setAttribute("transform", `rotate(${winkel(druck)} 110 115)`);
+            wert.textContent = druck.toFixed(1).replace(".", ",") + " bar";
+            const drin = Math.abs(druck - mitte) <= breite;
+            box.classList.toggle("im-ziel", drin);
+            strahl.style.transform = `scaleY(${.15 + druck / MAX})`;
+            if (drin) {
+              zeitImZiel += dt;
+              const neu = Math.floor(zeitImZiel * 10);
+              if (neu !== punkte) { punkte = neu; mgPunkte(punkte); }
+            }
+          });
+          zeitbalken(mgDauer(), () => {
+            window.removeEventListener("pointerup", aus);
+            window.removeEventListener("pointercancel", aus);
+            fertig(punkte);
+          });
+        }
+      },
+      {
+        name: "Memory",
+        icon: `<svg viewBox="0 0 40 40"><rect x="5" y="8" width="13" height="18" rx="3" fill="#F6ECDF"/><rect x="22" y="14" width="13" height="18" rx="3" fill="none" stroke="#F6ECDF" stroke-width="3"/></svg>`,
+        anleitung: "Decke zwei Karten auf und finde die Paare mit gleichen Feuerwehr-Sachen. Jedes Paar gibt 15 Punkte.",
+        kurz: "Finde zwei gleiche Bilder!",
+        start(feld, stufe, fertig) {
+          const paare = [3, 4, 6][stufe];
+          const spalten = [2, 2, 3][stufe];
+          let punkte = 0, offen = [], gesperrt = false;
+          feld.style.background = "linear-gradient(#F6ECDF, #EADAC4)";
+          const brett = document.createElement("div");
+          brett.className = "memory";
+          brett.style.gridTemplateColumns = `repeat(${spalten}, 1fr)`;
+          feld.appendChild(brett);
+          function legen() {
+            brett.innerHTML = "";
+            const arten = mischen(Object.keys(ICONS)).slice(0, paare);
+            let rest = paare;
+            mischen([...arten, ...arten]).forEach(art => {
+              const k = document.createElement("div");
+              k.className = "mkarte";
+              k.innerHTML = `<div class="m-innen"><div class="m-rueck"></div><div class="m-vorne">${icon(art)}</div></div>`;
+              k.addEventListener("pointerdown", (ev) => {
+                ev.preventDefault();
+                if (uhr.pausiert || gesperrt || k.classList.contains("offen")) return;
+                k.classList.add("offen");
+                ton(520, .05, "triangle");
+                offen.push({ k, art });
+                if (offen.length < 2) return;
+                const [a, b] = offen; offen = [];
+                if (a.art === b.art) {
+                  a.k.classList.add("paar"); b.k.classList.add("paar");
+                  punkte += 15; mgPunkte(punkte);
+                  tonRichtig(); vibriere(25);
+                  if (--rest === 0) nach(500, legen);
+                } else {
+                  gesperrt = true;
+                  nach(650, () => { a.k.classList.remove("offen"); b.k.classList.remove("offen"); gesperrt = false; });
+                }
+              });
+              brett.appendChild(k);
+            });
+          }
+          legen();
+          zeitbalken(mgDauer(), () => fertig(punkte));
         }
       }
     ];
 
     const PUNKTE_RICHTIG = 100;
-    const STUFEN = ["leicht", "mittel", "schwer"];
+    const STUFEN = ["kids", "leicht", "mittel", "schwer"];
+    const STUFEN_NAME = { kids: "Kids", leicht: "Leicht", mittel: "Mittel", schwer: "Schwer" };
+    const QUIZ_ZEIT = { kids: 30000, leicht: 25000, mittel: 20000, schwer: 15000 };   // Zeit pro Quizfrage in ms
+    function mgDauer() { return zustand.stufe === "kids" ? 20000 : 15000; }           // Zeit pro Minigame in ms
+    function mgStufe() { return Math.max(0, STUFEN.indexOf(zustand.stufe) - 1); }      // Kids spielen wie leicht
 
     // =====================================================================
     //  AB HIER: Spielablauf (muss für neue Fragen nicht geändert werden)
@@ -1610,7 +2888,7 @@
     const $ = (id) => document.getElementById(id);
     const zustand = {
       spieler: [], stufe: "leicht", runden: 5,
-      runde: 0, aktSpieler: 0, fragenStapel: [], mgReihenfolge: [], laeuft: false
+      runde: 0, aktSpieler: 0, mgReihenfolge: [], laeuft: false, modus: "gruppe"
     };
 
     $("titel").textContent = SPIELNAME;
@@ -1620,7 +2898,7 @@
     let letzterTipp = 0;
     document.addEventListener("touchend", (e) => {
       const t = Date.now();
-      if (t - letzterTipp < 350 && !e.target.closest("input")) e.preventDefault();
+      if (t - letzterTipp < 350 && !e.target.closest("input, textarea, select")) e.preventDefault();
       letzterTipp = t;
     }, { passive: false });
     document.addEventListener("dblclick", (e) => e.preventDefault(), { passive: false });
@@ -1656,6 +2934,7 @@
 
     function pauseAn() {
       uhr.pausiert = true;
+      vorleseStopp();
       document.body.classList.add("pausiert");
       $("abbruch-btn").textContent = "Spiel beenden";
       $("abbruch-btn").dataset.sicher = "";
@@ -1676,6 +2955,7 @@
     }
 
     function zeige(id) {
+      vorleseStopp();
       document.querySelectorAll(".screen").forEach(s => s.classList.remove("aktiv"));
       $(id).classList.add("aktiv");
       $(id).scrollTop = 0;
@@ -1722,24 +3002,59 @@
     }
     function speichern() {
       try {
+        const alt = speicherLaden();
         localStorage.setItem("fw-spiel", JSON.stringify({
+          ...alt,
           sound: soundAn,
           namen: [...document.querySelectorAll("#spieler-liste input")].map(i => i.value.trim()),
-          stufe: zustand.stufe, runden: zustand.runden
+          modus: zustand.modus, stufe: zustand.stufe, runden: zustand.runden
         }));
       } catch (e) { }
     }
 
+    // ---------- Rekorde im Einzelmodus (pro Schwierigkeit und Rundenzahl) ----------
+    function rekordSchluessel() { return zustand.stufe + "-" + zustand.runden; }
+    function rekordLesen() { return (speicherLaden().rekorde || {})[rekordSchluessel()] || null; }
+    function rekordSchreiben(name, punkte) {
+      try {
+        const g = speicherLaden();
+        g.rekorde = g.rekorde || {};
+        g.rekorde[rekordSchluessel()] = { name, punkte };
+        localStorage.setItem("fw-spiel", JSON.stringify(g));
+      } catch (e) { }
+    }
+    function rekordAnzeigen() {
+      const r = rekordLesen();
+      const stufe = STUFEN_NAME[zustand.stufe];
+      $("rekord-info").innerHTML = zustand.modus !== "einzel" ? "" : r
+        ? `<div class="rekord">Rekord bei ${stufe}, ${zustand.runden} Runden: <b>${r.punkte} Punkte</b> von ${html(r.name)}</div>`
+        : `<div class="rekord">Noch kein Rekord bei ${stufe}, ${zustand.runden} Runden. Stell den ersten auf!</div>`;
+    }
+
     function setupVorbereiten() {
       const liste = $("spieler-liste");
-      if (liste.children.length) return;
-      const g = speicherLaden();
-      const namen = g.namen && g.namen.length >= 2 ? g.namen : ["", ""];
-      namen.forEach(n => spielerHinzu(n));
-      zustand.stufe = STUFEN.includes(g.stufe) ? g.stufe : "leicht";
-      zustand.runden = [3, 5, 7].includes(g.runden) ? g.runden : 5;
+      if (!liste.children.length) {
+        const g = speicherLaden();
+        const namen = g.namen && g.namen.length >= 2 ? g.namen : ["", ""];
+        namen.forEach(n => spielerHinzu(n));
+        zustand.modus = g.modus === "einzel" ? "einzel" : "gruppe";
+        zustand.stufe = STUFEN.includes(g.stufe) ? g.stufe : "leicht";
+        zustand.runden = [3, 5, 7].includes(g.runden) ? g.runden : 5;
+      }
+      auswahlSetzen("wahl-modus", zustand.modus);
       auswahlSetzen("wahl-stufe", zustand.stufe);
       auswahlSetzen("wahl-runden", String(zustand.runden));
+      modusAnzeigen();
+    }
+
+    function modusAnzeigen() {
+      const einzel = zustand.modus === "einzel";
+      [...$("spieler-liste").children].forEach((z, i) => z.hidden = einzel && i > 0);
+      $("spieler-liste").classList.toggle("einzel", einzel);
+      $("spieler-label").textContent = einzel ? "Dein Name" : "Spieler · 2 bis 8";
+      $("btn-plus").hidden = einzel || $("spieler-liste").children.length >= 8;
+      $("name-fehler").classList.remove("zeigen");
+      rekordAnzeigen();
     }
 
     function spielerHinzu(name, fokus) {
@@ -1757,22 +3072,24 @@
       const weg = document.createElement("button");
       weg.textContent = "✕";
       weg.setAttribute("aria-label", "Spieler entfernen");
-      weg.onclick = () => { if (liste.children.length > 2) { zeile.remove(); plusKnopf(); } };
+      weg.onclick = () => { if (liste.children.length > 2) { zeile.remove(); modusAnzeigen(); } };
       zeile.append(input, weg);
       liste.appendChild(zeile);
-      plusKnopf();
+      $("btn-plus").hidden = liste.children.length >= 8;
       if (fokus) input.focus();
     }
-    function plusKnopf() { $("btn-plus").hidden = $("spieler-liste").children.length >= 8; }
 
     function auswahlSetzen(gruppe, wert) {
       document.querySelectorAll("#" + gruppe + " .wahl").forEach(b => b.classList.toggle("gewaehlt", b.dataset.wert === wert));
     }
+    document.querySelectorAll("#wahl-modus .wahl").forEach(b => b.onclick = () => {
+      zustand.modus = b.dataset.wert; auswahlSetzen("wahl-modus", b.dataset.wert); modusAnzeigen(); ton(600, .06, "triangle");
+    });
     document.querySelectorAll("#wahl-stufe .wahl").forEach(b => b.onclick = () => {
-      zustand.stufe = b.dataset.wert; auswahlSetzen("wahl-stufe", b.dataset.wert); ton(600, .06, "triangle");
+      zustand.stufe = b.dataset.wert; auswahlSetzen("wahl-stufe", b.dataset.wert); rekordAnzeigen(); ton(600, .06, "triangle");
     });
     document.querySelectorAll("#wahl-runden .wahl").forEach(b => b.onclick = () => {
-      zustand.runden = parseInt(b.dataset.wert); auswahlSetzen("wahl-runden", b.dataset.wert); ton(600, .06, "triangle");
+      zustand.runden = parseInt(b.dataset.wert); auswahlSetzen("wahl-runden", b.dataset.wert); rekordAnzeigen(); ton(600, .06, "triangle");
     });
 
     function mischen(arr) {
@@ -1782,8 +3099,9 @@
     }
 
     // ---------- Spielablauf ----------
+    // Jeder Spieler spielt alle seine Runden am Stück, erst dann geht das Handy weiter.
     function spielStarten() {
-      const inputs = [...document.querySelectorAll("#spieler-liste input")];
+      const inputs = [...document.querySelectorAll("#spieler-liste .spieler-zeile:not([hidden]) input")];
       const leer = inputs.filter(i => !i.value.trim());
       if (leer.length) {
         leer.forEach(i => { i.classList.remove("fehler"); void i.offsetWidth; i.classList.add("fehler"); });
@@ -1793,21 +3111,21 @@
         tonFalsch(); vibriere([60, 40, 60]);
         return;
       }
-      zustand.spieler = inputs.map(i => ({ name: i.value.trim(), punkte: 0 }));
+      zustand.spieler = inputs.map(i => ({ name: i.value.trim(), punkte: 0, fertig: false }));
+      vorleseFreischalten();
       speichern();
       ton(440, .1, "triangle"); ton(660, .15, "triangle", .1);
       nochmal();
     }
 
     function nochmal() {
-      zustand.spieler.forEach(s => s.punkte = 0);
+      zustand.spieler.forEach(s => { s.punkte = 0; s.fertig = false; });
       zustand.runde = 0; zustand.aktSpieler = 0; zustand.laeuft = true;
-      zustand.fragenStapel = mischen(FRAGEN[zustand.stufe]);
+      // Alle Spieler bekommen dieselben Minigames in derselben Reihenfolge, jede Runde ein anderes
       zustand.mgReihenfolge = mischen(MINIGAMES.map((_, i) => i));
       uebergabeZeigen();
     }
 
-    // Jede Runde ein anderes Minigame: zufällige Reihenfolge, dann der Reihe nach im Kreis
     function aktuellesMinigame() {
       const r = zustand.mgReihenfolge;
       return MINIGAMES[r[zustand.runde % r.length]];
@@ -1815,12 +3133,19 @@
 
     function uebergabeZeigen() {
       const mg = aktuellesMinigame();
+      const sp = zustand.spieler[zustand.aktSpieler];
+      const ersteRunde = zustand.runde === 0;
+      const einzel = zustand.modus === "einzel";
       $("ueb-runde").textContent = `Runde ${zustand.runde + 1} von ${zustand.runden}`;
-      $("ueb-name").textContent = zustand.spieler[zustand.aktSpieler].name;
+      $("ueb-vorher").textContent = ersteRunde ? (einzel ? "Bereit?" : "Gib das Handy an") : `${sp.punkte} Punkte bisher`;
+      $("ueb-name").textContent = sp.name;
       $("ueb-icon").innerHTML = mg.icon;
       $("ueb-spiel").textContent = mg.name;
-      $("ueb-anleitung").textContent = mg.anleitung;
+      const kids = zustand.stufe === "kids";
+      $("ueb-anleitung").textContent = kids ? mg.kurz : mg.anleitung;
+      uebText = `${sp.name}, du bist dran! ${mg.name}. ${kids ? mg.kurz : mg.anleitung}`;
       zeige("s-uebergabe");
+      if (kids && soundAn) vorlesen(uebText, $("ueb-vorlesen"));
     }
 
     function minigameStarten() {
@@ -1843,7 +3168,7 @@
         cd.textContent = "Los!"; ton(880, .2, "triangle");
         nach(450, () => {
           cd.remove();
-          mg.start(feld, STUFEN.indexOf(zustand.stufe), (punkte) => {
+          mg.start(feld, mgStufe(), (punkte) => {
             uhrLeeren();
             zustand.spieler[zustand.aktSpieler].punkte += punkte;
             const ende = document.createElement("div");
@@ -1860,8 +3185,8 @@
 
     function mgPunkte(p) { $("mg-punkte").textContent = p + " Pkt"; }
 
-    function zeitbalken(dauer, ende) {
-      const balken = $("mg-zeit");
+    function zeitbalken(dauer, ende, id = "mg-zeit") {
+      const balken = $(id);
       const start = jetzt();
       jedesBild(() => {
         const rest = Math.max(0, 1 - (jetzt() - start) / dauer);
@@ -1871,20 +3196,100 @@
       nach(dauer, ende);
     }
 
-    function zeigePunkte(feld, left, top, text, minus) {
+    function zeigePunkte(feld, left, top, text, minus, extra) {
       const p = document.createElement("div");
-      p.className = "punkte-popup" + (minus ? " minus" : "");
+      p.className = "punkte-popup" + (minus ? " minus" : "") + (extra ? " " + extra : "");
       p.textContent = text;
       p.style.left = left; p.style.top = top;
       feld.appendChild(p);
       setTimeout(() => p.remove(), 700);
     }
 
+    // ---------- Vorlesen (Kids-Modus und Lautsprecher-Knopf) ----------
+    const SPRECHEN = "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+    let deStimme = null;
+    function stimmeSuchen() {
+      try {
+        const v = speechSynthesis.getVoices();
+        deStimme = v.find(x => /^de[-_]DE/i.test(x.lang)) || v.find(x => /^de/i.test(x.lang)) || null;
+      } catch (e) { }
+    }
+    if (SPRECHEN) { stimmeSuchen(); try { speechSynthesis.onvoiceschanged = stimmeSuchen; } catch (e) { } }
+    document.querySelectorAll(".vorlesen").forEach(b => b.hidden = !SPRECHEN);
+    function vorlesen(text, knopf) {
+      if (!SPRECHEN || !text) return;
+      try {
+        speechSynthesis.cancel();
+        document.querySelectorAll(".vorlesen.spricht").forEach(b => b.classList.remove("spricht"));
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = "de-DE";
+        u.rate = zustand.stufe === "kids" ? .9 : 1;
+        if (deStimme) u.voice = deStimme;
+        if (knopf) { knopf.classList.add("spricht"); u.onend = u.onerror = () => knopf.classList.remove("spricht"); }
+        speechSynthesis.speak(u);
+      } catch (e) { }
+    }
+    function vorleseStopp() {
+      if (!SPRECHEN) return;
+      try { speechSynthesis.cancel(); } catch (e) { }
+      document.querySelectorAll(".vorlesen.spricht").forEach(b => b.classList.remove("spricht"));
+    }
+    // iPhones erlauben Sprache erst nach einem Tipp. Darum beim Spielstart einmal leise "sprechen".
+    function vorleseFreischalten() {
+      if (!SPRECHEN) return;
+      try { const u = new SpeechSynthesisUtterance(" "); u.volume = 0; u.lang = "de-DE"; speechSynthesis.speak(u); } catch (e) { }
+    }
+    let uebText = "", quizText = "";
+    function uebVorlesen() { vorlesen(uebText, $("ueb-vorlesen")); }
+    function quizVorlesen() { vorlesen(quizText, $("quiz-vorlesen")); }
+
+    // ---------- Fragen: Standard oder eigene Fragen aus dem Betreuer-Modus ----------
+    function fragenEigen(stufe) {
+      const e = (speicherLaden().fragenEigen || {})[stufe];
+      return Array.isArray(e) && e.length ? e : null;
+    }
+    function fragenFuer(stufe) { return fragenEigen(stufe) || FRAGEN[stufe]; }
+    function fragenSichern(stufe, liste) {
+      try {
+        const g = speicherLaden();
+        g.fragenEigen = g.fragenEigen || {};
+        if (liste) g.fragenEigen[stufe] = liste; else delete g.fragenEigen[stufe];
+        if (g.stapel) delete g.stapel[stufe];
+        localStorage.setItem("fw-spiel", JSON.stringify(g));
+      } catch (e) { }
+    }
+    // Der Fragenstapel bleibt über mehrere Spiele gespeichert: erst wenn alle Fragen
+    // einer Stufe einmal dran waren, wird neu gemischt. So wiederholt sich nichts so schnell.
+    function naechsteFrage() {
+      const set = fragenFuer(zustand.stufe);
+      let g = speicherLaden();
+      const st = (g.stapel || {})[zustand.stufe];
+      let rest = st && st.n === set.length && Array.isArray(st.rest) ? st.rest.filter(i => i >= 0 && i < set.length) : [];
+      const zuletzt = st ? st.zuletzt : -1;
+      if (!rest.length) {
+        rest = mischen(set.map((_, i) => i));
+        if (rest.length > 1 && rest[rest.length - 1] === zuletzt) [rest[0], rest[rest.length - 1]] = [rest[rest.length - 1], rest[0]];
+      }
+      const i = rest.pop();
+      try {
+        g = speicherLaden();
+        g.stapel = g.stapel || {};
+        g.stapel[zustand.stufe] = { n: set.length, rest, zuletzt: i };
+        localStorage.setItem("fw-spiel", JSON.stringify(g));
+      } catch (e) { }
+      return set[i];
+    }
+
+    // ---------- Quiz mit Zeitbalken ----------
     function quizZeigen() {
-      if (!zustand.fragenStapel.length) zustand.fragenStapel = mischen(FRAGEN[zustand.stufe]);
-      const frage = zustand.fragenStapel.pop();
+      uhrLeeren();
+      const frage = naechsteFrage();
+      const kids = zustand.stufe === "kids";
       const richtigIndex = frage.r || 0;
-      const antworten = frage.a.map((text, i) => ({ text, ok: i === richtigIndex }));
+      const antworten = frage.a.map((text, i) => ({ text, ok: i === richtigIndex, sym: frage.i ? frage.i[i] || "" : "" }));
+      const reihe = frage.fest ? antworten : mischen(antworten);
+      const mitSymbol = kids && reihe.some(x => x.sym);
+      $("s-quiz").classList.toggle("kids", kids);
       $("quiz-spieler").textContent = zustand.spieler[zustand.aktSpieler].name;
       $("quiz-kat").textContent = frage.k || "Quiz";
       $("quiz-bild").innerHTML = frage.bild ? (BILDER[frage.bild] || "") : "";
@@ -1892,55 +3297,289 @@
       $("quiz-frage").textContent = frage.f;
       $("quiz-erklaerung").hidden = true;
       $("quiz-weiter").hidden = true;
+      $("quiz-zeit").style.transform = "scaleX(1)";
+      $("quiz-zeit").classList.remove("knapp");
       const box = $("quiz-antworten");
-      box.className = "antworten" + (antworten.length === 2 ? " zwei" : "");
+      box.className = "antworten" + (mitSymbol ? " kacheln" : reihe.length === 2 ? " zwei" : "");
+      box.style.setProperty("--sp", reihe.length === 4 ? 2 : reihe.length);
       box.innerHTML = "";
+      quizText = frage.f + " " + reihe.map(x => x.text).join("? Oder ") + "?";
       let beantwortet = false;
-      (frage.fest ? antworten : mischen(antworten)).forEach(ant => {
+
+      function aufloesen(gewaehlt) {
+        if (beantwortet) return;
+        beantwortet = true;
+        uhrLeeren();
+        const ok = !!(gewaehlt && gewaehlt.dataset.ok);
+        [...box.children].forEach(x => x.classList.add(x.dataset.ok ? "richtig" : (x === gewaehlt ? "falsch" : "blass")));
+        if (ok) { zustand.spieler[zustand.aktSpieler].punkte += PUNKTE_RICHTIG; tonRichtig(); vibriere(50); }
+        else { tonFalsch(); vibriere([70, 40, 70]); }
+        const erg = $("quiz-ergebnis");
+        erg.className = "ergebnis " + (ok ? "gut" : gewaehlt ? "schlecht" : "zeit");
+        erg.textContent = ok ? `Richtig! +${PUNKTE_RICHTIG} Punkte` : gewaehlt ? "Leider falsch." : "Zeit abgelaufen!";
+        const loesung = ok ? "" : `Richtig ist: ${antworten[richtigIndex].text}. `;
+        $("quiz-text").textContent = loesung + (frage.e || "");
+        $("quiz-erklaerung").hidden = false;
+        $("quiz-weiter").hidden = false;
+        quizText = erg.textContent + " " + loesung + (frage.e || "");
+        if (kids && soundAn) vorlesen(quizText, $("quiz-vorlesen"));
+        setTimeout(() => $("quiz-weiter").scrollIntoView({ behavior: "smooth", block: "end" }), 80);
+      }
+
+      reihe.forEach(ant => {
         const b = document.createElement("button");
         b.className = "btn antwort";
-        b.textContent = ant.text;
-        b.onclick = () => {
-          if (beantwortet) return;
-          beantwortet = true;
-          [...box.children].forEach((x, i) => x.classList.add(x === b ? "x" : "blass"));
-          box.querySelectorAll(".btn").forEach(x => {
-            if (x.textContent === antworten[richtigIndex].text) { x.classList.remove("blass"); x.classList.add("richtig"); }
-          });
-          if (!ant.ok) { b.classList.remove("blass"); b.classList.add("falsch"); }
-          if (ant.ok) { zustand.spieler[zustand.aktSpieler].punkte += PUNKTE_RICHTIG; tonRichtig(); vibriere(50); }
-          else { tonFalsch(); vibriere([70, 40, 70]); }
-          const erg = $("quiz-ergebnis");
-          erg.className = "ergebnis " + (ant.ok ? "gut" : "schlecht");
-          erg.textContent = ant.ok ? `Richtig! +${PUNKTE_RICHTIG} Punkte` : `Leider falsch.`;
-          $("quiz-text").textContent = frage.e;
-          $("quiz-erklaerung").hidden = false;
-          $("quiz-weiter").hidden = false;
-          setTimeout(() => $("quiz-weiter").scrollIntoView({ behavior: "smooth", block: "end" }), 80);
-        };
+        if (mitSymbol) {
+          const sy = symbol(ant.sym);
+          if (sy) {
+            const d = document.createElement("div");
+            d.className = "sym";
+            d.innerHTML = sy;
+            b.appendChild(d);
+            if (ant.sym.startsWith("bild:")) b.classList.add("breit-sym");
+          }
+          if (!ant.sym.startsWith("txt:")) { const s = document.createElement("span"); s.textContent = ant.text; b.appendChild(s); }
+          b.setAttribute("aria-label", ant.text);
+        } else b.textContent = ant.text;
+        b.dataset.ok = ant.ok ? "1" : "";
+        b.onclick = () => aufloesen(b);
         box.appendChild(b);
       });
       zeige("s-quiz");
+      zeitbalken(QUIZ_ZEIT[zustand.stufe] || 20000, () => aufloesen(null), "quiz-zeit");
+      if (kids && soundAn) vorlesen(quizText, $("quiz-vorlesen"));
+    }
+
+    // ---------- Betreuer-Modus ----------
+    let beStufe = "leicht", beIndex = -1, edTyp = "normal", edEF = 1, edAlt = null;
+    function betreuerOeffnen() {
+      beStufe = STUFEN.includes(zustand.stufe) ? zustand.stufe : "leicht";
+      betreuerZeigen();
+    }
+    function betreuerZeigen(meldung) {
+      auswahlSetzen("be-stufe", beStufe);
+      $("be-teilen").hidden = true;
+      $("be-tmeldung").textContent = "";
+      listeZeichnen();
+      beMeldung(meldung || "");
+      zeige("s-betreuer");
+    }
+    function beMeldung(text, fehler) { const m = $("be-meldung"); m.textContent = text; m.classList.toggle("fehler", !!fehler); }
+    function beTMeldung(text, fehler) { const m = $("be-tmeldung"); m.textContent = text; m.classList.toggle("fehler", !!fehler); }
+    function listeZeichnen() {
+      const liste = fragenFuer(beStufe);
+      $("be-stand").innerHTML = `<b>${liste.length} Fragen</b> bei ${STUFEN_NAME[beStufe]} · ${fragenEigen(beStufe) ? "eigene Fragen deiner Gruppe" : "Standard-Fragen"}`;
+      $("be-liste").innerHTML = liste.map((f, i) => `<div class="be-frage"><span class="chip">${html(f.k || "Quiz")}</span>
+    <p>${html(f.f)}</p><div class="richtig-text">${html(f.a[f.r || 0] || "")}</div>
+    <div class="be-knoepfe"><button onclick="frageBearbeiten(${i})">Bearbeiten</button><button class="loeschen" onclick="frageLoeschen(${i}, this)">Löschen</button></div></div>`).join("");
+      const r = $("be-reset");
+      r.classList.remove("sicher");
+      r.textContent = "Diese Stufe auf Standard zurücksetzen";
+      r.hidden = !fragenEigen(beStufe);
+    }
+    document.querySelectorAll("#be-stufe .wahl").forEach(b => b.onclick = () => {
+      beStufe = b.dataset.wert; auswahlSetzen("be-stufe", beStufe);
+      $("be-teilen").hidden = true; beTMeldung(""); beMeldung(""); listeZeichnen(); ton(600, .06, "triangle");
+    });
+    function zweimalTippen(knopf, frage, aktion) {
+      if (!knopf.classList.contains("sicher")) {
+        const alt = knopf.textContent;
+        knopf.classList.add("sicher");
+        knopf.textContent = frage;
+        setTimeout(() => { if (knopf.isConnected && knopf.classList.contains("sicher")) { knopf.classList.remove("sicher"); knopf.textContent = alt; } }, 3500);
+        return;
+      }
+      aktion();
+    }
+    function frageLoeschen(i, knopf) {
+      zweimalTippen(knopf, "Wirklich löschen?", () => {
+        const liste = fragenFuer(beStufe).slice();
+        if (liste.length <= 1) return beMeldung("Mindestens eine Frage muss bleiben.", true);
+        liste.splice(i, 1);
+        fragenSichern(beStufe, liste);
+        listeZeichnen();
+        beMeldung("Frage gelöscht.");
+      });
+    }
+    function aufStandard() {
+      zweimalTippen($("be-reset"), "Sicher? Eigene Fragen dieser Stufe gehen verloren", () => {
+        fragenSichern(beStufe, null);
+        listeZeichnen();
+        beMeldung("Die Standard-Fragen sind wieder da.");
+      });
+    }
+
+    function symbolAuswahl(wert) {
+      const s = document.createElement("select");
+      s.setAttribute("aria-label", "Bild zur Antwort");
+      const eintraege = [["", "ohne Bild"], ...Object.entries({ ...ICONS, ...SYMBOLE }).map(([k, v]) => [k, v.n]).sort((a, b) => a[1].localeCompare(b[1], "de"))];
+      if (wert && !eintraege.some(e => e[0] === wert)) eintraege.splice(1, 0, [wert, "Bild wie bisher"]);
+      eintraege.forEach(([k, n]) => { const o = document.createElement("option"); o.value = k; o.textContent = n; s.appendChild(o); });
+      s.value = wert || "";
+      return s;
+    }
+    function antwortZeile(id, wert, sym, richtig) {
+      const z = document.createElement("div");
+      z.className = "ant-zeile";
+      const inp = document.createElement("input");
+      inp.id = id; inp.maxLength = 90; inp.autocomplete = "off"; inp.value = wert || "";
+      inp.placeholder = richtig ? "Die richtige Antwort" : "Falsche Antwort";
+      if (richtig) inp.className = "ok-feld";
+      z.appendChild(inp);
+      if (beStufe === "kids") { const s = symbolAuswahl(sym); s.id = id + "-sym"; z.appendChild(s); }
+      return z;
+    }
+    function frageBearbeiten(i) {
+      beIndex = i;
+      const f = i >= 0 ? fragenFuer(beStufe)[i] : null;
+      edAlt = f;
+      $("ed-stufe").textContent = "Stufe " + STUFEN_NAME[beStufe];
+      $("ed-titel").textContent = f ? "Frage bearbeiten" : "Neue Frage";
+      const kats = [...new Set(STUFEN.flatMap(s => fragenFuer(s).map(x => x.k).filter(Boolean)))].sort((a, b) => a.localeCompare(b, "de"));
+      $("ed-kats").innerHTML = kats.map(k => `<option value="${html(k)}"></option>`).join("");
+      $("ed-kat").value = f ? f.k || "" : "";
+      $("ed-frage").value = f ? f.f : "";
+      $("ed-erkl").value = f ? f.e || "" : "";
+      edTyp = f && f.fest ? "echtfake" : "normal";
+      edEF = f && f.fest ? (f.r || 0) : 1;
+      const bild = f && f.bild && BILDER[f.bild];
+      $("ed-bild").hidden = !bild;
+      $("ed-bild").innerHTML = bild ? `${BILDER[f.bild]}<span>Das Bild zu dieser Frage bleibt erhalten.</span>` : "";
+      const a = f && !f.fest ? f.a : [];
+      const sy = f && f.i ? f.i : [];
+      $("ed-richtig").innerHTML = "";
+      $("ed-richtig").appendChild(antwortZeile("ed-a0", a[0], sy[0], true));
+      $("ed-falsch").innerHTML = "";
+      [1, 2, 3].forEach(n => $("ed-falsch").appendChild(antwortZeile("ed-a" + n, a[n], sy[n], false)));
+      $("ed-fehler").classList.remove("zeigen");
+      typAnzeigen();
+      zeige("s-edit");
+    }
+    function typAnzeigen() {
+      auswahlSetzen("ed-typ", edTyp);
+      auswahlSetzen("ed-ef", String(edEF));
+      $("ed-normal").hidden = edTyp !== "normal";
+      $("ed-echtfake").hidden = edTyp !== "echtfake";
+    }
+    document.querySelectorAll("#ed-typ .wahl").forEach(b => b.onclick = () => { edTyp = b.dataset.wert; typAnzeigen(); });
+    document.querySelectorAll("#ed-ef .wahl").forEach(b => b.onclick = () => { edEF = parseInt(b.dataset.wert); typAnzeigen(); });
+    function edFehler(text) {
+      const f = $("ed-fehler");
+      f.textContent = text;
+      f.classList.remove("zeigen"); void f.offsetWidth; f.classList.add("zeigen");
+      tonFalsch();
+    }
+    function frageSpeichern() {
+      const k = $("ed-kat").value.trim() || "Quiz";
+      const f = $("ed-frage").value.trim();
+      const e = $("ed-erkl").value.trim();
+      if (!f) return edFehler("Bitte schreib zuerst eine Frage.");
+      let neu;
+      if (edTyp === "echtfake") neu = { k, f, a: ["Echt", "Fake"], fest: true, r: edEF, e };
+      else {
+        const zeilen = [0, 1, 2, 3].map(n => ({ t: $("ed-a" + n).value.trim(), s: $("ed-a" + n + "-sym") ? $("ed-a" + n + "-sym").value : "" }));
+        if (!zeilen[0].t) return edFehler("Bitte trag die richtige Antwort ein.");
+        const benutzt = [zeilen[0], ...zeilen.slice(1).filter(z => z.t)];
+        if (benutzt.length < 2) return edFehler("Bitte trag mindestens eine falsche Antwort ein.");
+        neu = { k, f, a: benutzt.map(z => z.t), e };
+        if (benutzt.some(z => z.s)) neu.i = benutzt.map(z => z.s);
+      }
+      if (edAlt && edAlt.bild) neu.bild = edAlt.bild;
+      const liste = fragenFuer(beStufe).slice();
+      if (beIndex >= 0) liste[beIndex] = neu; else liste.unshift(neu);
+      fragenSichern(beStufe, liste);
+      tonRichtig();
+      betreuerZeigen(beIndex >= 0 ? "Frage gespeichert." : "Neue Frage gespeichert. Sie steht ganz oben in der Liste.");
+    }
+
+    // Export und Import als Text, damit Betreuer ihre Fragen teilen können
+    function exportieren() {
+      const stufen = STUFEN.filter(s => fragenEigen(s));
+      const auswahl = stufen.length ? stufen : [beStufe];
+      const daten = { spiel: SPIELNAME, version: 1, fragen: {} };
+      auswahl.forEach(s => daten.fragen[s] = fragenFuer(s));
+      $("be-teilen").hidden = false;
+      $("be-hinweis").textContent = `Enthalten: ${auswahl.map(s => STUFEN_NAME[s]).join(", ")}. Kopiere den Text und schick ihn z. B. per Messenger an andere Betreuer. Sie fügen ihn bei „Fragen-Text importieren“ ein.`;
+      $("be-text").value = JSON.stringify(daten);
+      $("be-text").placeholder = "";
+      $("be-aktion").textContent = "Text kopieren";
+      $("be-aktion").onclick = kopieren;
+      beTMeldung("");
+    }
+    async function kopieren() {
+      const t = $("be-text");
+      t.focus(); t.select(); t.setSelectionRange(0, t.value.length);
+      let ok = false;
+      try { if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(t.value); ok = true; } } catch (e) { }
+      if (!ok) { try { ok = document.execCommand("copy"); } catch (e) { } }
+      beTMeldung(ok ? "Kopiert! Jetzt in den Messenger einfügen und verschicken." : "Bitte den markierten Text selbst kopieren (lange drücken, Kopieren).", !ok);
+    }
+    function importOeffnen() {
+      $("be-teilen").hidden = false;
+      $("be-hinweis").textContent = "Füge hier den Fragen-Text ein, den du von einem anderen Betreuer bekommen hast. Die Fragen der enthaltenen Stufen werden ersetzt.";
+      $("be-text").value = "";
+      $("be-text").placeholder = "Hier einfügen";
+      $("be-aktion").textContent = "Fragen übernehmen";
+      $("be-aktion").onclick = importieren;
+      beTMeldung("");
+      $("be-text").focus();
+    }
+    function frageReinigen(f) {
+      if (!f || typeof f.f !== "string" || !f.f.trim() || !Array.isArray(f.a)) return null;
+      const a = f.a.filter(x => typeof x === "string" && x.trim()).map(x => x.trim().slice(0, 120)).slice(0, 4);
+      if (a.length < 2) return null;
+      const q = { k: String(f.k || "Quiz").slice(0, 30), f: f.f.trim().slice(0, 300), a, e: String(f.e || "").slice(0, 400) };
+      if (f.fest) { q.fest = true; q.r = f.r === 1 ? 1 : 0; q.a = a.slice(0, 2); }
+      if (typeof f.bild === "string" && BILDER[f.bild]) q.bild = f.bild;
+      if (Array.isArray(f.i)) q.i = q.a.map((_, n) => typeof f.i[n] === "string" ? f.i[n].slice(0, 40) : "");
+      return q;
+    }
+    function importieren() {
+      let d;
+      try { d = JSON.parse($("be-text").value.trim()); } catch (e) { return beTMeldung("Das ist kein gültiger Fragen-Text. Bitte den ganzen Text kopieren und einfügen.", true); }
+      const sets = Array.isArray(d) ? { [beStufe]: d } : (d && d.fragen) || {};
+      const ergebnis = [];
+      STUFEN.forEach(s => {
+        if (!Array.isArray(sets[s])) return;
+        const gut = sets[s].map(frageReinigen).filter(Boolean);
+        if (!gut.length) return;
+        fragenSichern(s, gut);
+        ergebnis.push(`${gut.length} bei ${STUFEN_NAME[s]}`);
+      });
+      if (!ergebnis.length) return beTMeldung("In dem Text wurden keine Fragen gefunden.", true);
+      $("be-teilen").hidden = true;
+      listeZeichnen();
+      beTMeldung("Übernommen: " + ergebnis.join(", ") + ".");
+      tonRichtig();
     }
 
     function zugBeenden() {
+      zustand.runde++;
+      if (zustand.runde < zustand.runden) return uebergabeZeigen();
+      // Dieser Spieler ist mit allen Runden fertig
+      const sp = zustand.spieler[zustand.aktSpieler];
+      sp.fertig = true;
+      if (zustand.modus === "einzel") return einzelErgebnis();
+      if (zustand.aktSpieler + 1 >= zustand.spieler.length) return siegerehrung();
+      const naechster = zustand.spieler[zustand.aktSpieler + 1];
+      $("zw-titel").textContent = `${sp.name} ist fertig`;
+      $("zw-punkte").textContent = `${sp.punkte} Punkte`;
+      $("zw-liste").innerHTML = ranglisteHTML(zustand.spieler.filter(s => s.fertig));
+      $("zw-weiter").textContent = `Weiter zu ${naechster.name}`;
+      zeige("s-zwischen");
+    }
+
+    function naechsterSpieler() {
       zustand.aktSpieler++;
-      if (zustand.aktSpieler >= zustand.spieler.length) {
-        zustand.aktSpieler = 0;
-        zustand.runde++;
-        if (zustand.runde >= zustand.runden) return siegerehrung();
-        $("zw-titel").textContent = `Nach Runde ${zustand.runde}`;
-        $("zw-liste").innerHTML = ranglisteHTML();
-        return zeige("s-zwischen");
-      }
+      zustand.runde = 0;
       uebergabeZeigen();
     }
 
-    function sortiert() { return zustand.spieler.slice().sort((a, b) => b.punkte - a.punkte); }
+    function sortiert(liste) { return (liste || zustand.spieler).slice().sort((a, b) => b.punkte - a.punkte); }
 
-    function ranglisteHTML() {
+    function ranglisteHTML(liste) {
       let platz = 0, letzte = null;
-      return sortiert().map((s, i) => {
+      return sortiert(liste).map((s, i) => {
         if (s.punkte !== letzte) { platz = i; letzte = s.punkte; }
         return `<div class="rang"><span class="platz p${platz + 1}">${platz + 1}</span><span class="nm">${html(s.name)}</span><span class="pk">${s.punkte}</span></div>`;
       }).join("");
@@ -1948,9 +3587,27 @@
 
     function html(t) { const d = document.createElement("div"); d.textContent = t; return d.innerHTML; }
 
+    function einzelErgebnis() {
+      zustand.laeuft = false;
+      const sp = zustand.spieler[0];
+      const alt = rekordLesen();
+      const neu = !alt || sp.punkte > alt.punkte;
+      if (neu) rekordSchreiben(sp.name, sp.punkte);
+      $("ende-eyebrow").textContent = neu ? "Neuer Rekord!" : "Dein Ergebnis";
+      $("sieger-titel").textContent = `${sp.punkte} Punkte`;
+      $("podest").innerHTML = "";
+      $("end-liste").innerHTML = neu
+        ? `<div class="rekord-gross"><b>${alt ? "Du hast den alten Rekord von " + alt.punkte + " Punkten geknackt!" : "Dein erster Rekord ist aufgestellt."}</b><span>Schaffst du noch mehr?</span></div>`
+        : `<div class="rekord-gross"><b>Rekord: ${alt.punkte} Punkte von ${html(alt.name)}</b><span>Dir fehlen noch ${alt.punkte - sp.punkte + 1} Punkte bis zum neuen Rekord.</span></div>`;
+      zeige("s-ende");
+      tonFanfare();
+      if (neu) { setTimeout(tonFanfare, 900); konfetti(); }
+    }
+
     function siegerehrung() {
       zustand.laeuft = false;
       const liste = sortiert();
+      $("ende-eyebrow").textContent = "Siegerehrung";
       $("sieger-titel").textContent = "Glückwunsch, " + liste[0].name + "!";
       const plaetze = [
         { s: liste[1], h: 96, farbe: "#CFC6BC", n: 2 },

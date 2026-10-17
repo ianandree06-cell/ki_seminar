@@ -1823,6 +1823,249 @@
       margin-top: 12px;
     }
 
+    /* v6: Knoten-Schule, Richtig löschen, Einsatzbereit, Notruf-Steigerung */
+    .knoten-flaeche {
+      position: absolute;
+      inset: 74px 6px 6px;
+    }
+
+    .knoten-flaeche svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .auftrag.knoten-auftrag {
+      flex-direction: column;
+      gap: 2px;
+      white-space: normal;
+      width: calc(100% - 20px);
+      text-align: center;
+      border-radius: 18px;
+      padding: 8px 14px;
+      line-height: 1.25;
+    }
+
+    .knoten-auftrag span {
+      opacity: .8;
+      font-size: .85rem;
+    }
+
+    .knoten-ziel {
+      fill: var(--safran);
+      stroke: #fff;
+      stroke-width: 3;
+      animation: zielpuls 1s infinite;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    @keyframes zielpuls {
+      50% {
+        transform: scale(1.4);
+      }
+    }
+
+    .loeschspiel {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 16px;
+    }
+
+    .l-frage {
+      font: 600 1.25rem var(--display);
+      font-variation-settings: "SOFT" 100;
+      text-align: center;
+    }
+
+    .l-karte {
+      flex: 1;
+      width: 100%;
+      max-height: 230px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: #fffaf3;
+      border-radius: 24px;
+      box-shadow: inset 0 0 0 1.5px var(--sand-2);
+    }
+
+    .l-bild svg {
+      width: 120px;
+      height: 120px;
+      display: block;
+    }
+
+    .l-name {
+      font-size: 1.15rem;
+    }
+
+    .l-info {
+      min-height: 2.7em;
+      text-align: center;
+      font-weight: 600;
+      color: var(--tinte-weich);
+      line-height: 1.3;
+    }
+
+    .l-info.gut {
+      color: #4E6B42;
+    }
+
+    .l-info.schlecht {
+      color: var(--terrakotta);
+    }
+
+    .l-knoepfe {
+      width: 100%;
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 1fr;
+      gap: 8px;
+    }
+
+    .l-knopf {
+      border: 0;
+      border-radius: 20px;
+      background: #fffaf3;
+      box-shadow: inset 0 0 0 1.5px var(--sand-2), 0 4px 0 var(--sand-2);
+      padding: 10px 4px;
+      font: 600 .95rem var(--text);
+      color: var(--tinte);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .l-knopf span svg {
+      width: 38px;
+      height: 38px;
+      display: block;
+    }
+
+    .anziehen {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 14px;
+    }
+
+    .a-plaetze {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+    }
+
+    .a-platz {
+      flex: 0 1 48px;
+      aspect-ratio: 1;
+      border-radius: 14px;
+      border: 2px dashed var(--sand-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--tinte-weich);
+      font-weight: 700;
+    }
+
+    .a-platz.voll {
+      border-style: solid;
+      border-color: var(--salbei);
+      background: #E4ECDD;
+    }
+
+    .a-platz svg {
+      width: 80%;
+      height: 80%;
+    }
+
+    .a-frage {
+      text-align: center;
+      font: 600 1.15rem var(--display);
+      font-variation-settings: "SOFT" 100;
+      min-height: 1.4em;
+    }
+
+    .a-teile {
+      flex: 1;
+      display: grid;
+      gap: 10px;
+      grid-auto-rows: 1fr;
+    }
+
+    .a-teil {
+      border: 0;
+      border-radius: 20px;
+      background: #fffaf3;
+      box-shadow: inset 0 0 0 1.5px var(--sand-2), 0 4px 0 var(--sand-2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      font: 600 .82rem var(--text);
+      color: var(--tinte);
+      cursor: pointer;
+      padding: 6px;
+    }
+
+    .a-teil svg {
+      width: 50px;
+      height: 50px;
+    }
+
+    .a-teil.an {
+      opacity: .25;
+    }
+
+    .a-teil.tipp {
+      animation: puls .8s infinite;
+      box-shadow: inset 0 0 0 3px var(--safran), 0 4px 0 var(--sand-2);
+    }
+
+    .anzeige small.szenario {
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: .98rem;
+      opacity: .9;
+    }
+
+    .notruf-hinweis {
+      font-size: .9rem;
+      color: var(--safran);
+      min-height: 1.25em;
+      font-weight: 600;
+    }
+
+    .be-select {
+      width: 100%;
+      font: 500 1rem var(--text);
+      color: var(--tinte);
+      padding: 12px;
+      border: 1.5px solid var(--sand-2);
+      border-radius: 14px;
+      background: #fffaf3;
+      margin-bottom: 8px;
+    }
+
+    #vorlese-btn.aus {
+      opacity: .75;
+    }
+
+    .punkte-popup {
+      z-index: 6;
+    }
+
     @media (prefers-reduced-motion: reduce) {
 
       .flamme svg,
@@ -1843,6 +2086,7 @@
         <rect x="14" y="5" width="4" height="14" rx="1.5" />
       </svg>
     </button>
+    <button class="rund" id="vorlese-btn" onclick="vorlesenUmschalten()" aria-label="Vorlesen an oder aus"></button>
     <button class="rund" id="sound-btn" onclick="soundUmschalten()" aria-label="Sound an oder aus"></button>
   </div>
 
@@ -1895,10 +2139,10 @@
     <div class="karte">
       <div class="label">Schwierigkeit</div>
       <div class="auswahl" id="wahl-stufe">
-        <button class="wahl" data-wert="kids">Kids<small>6–9 Jahre</small></button>
-        <button class="wahl" data-wert="leicht">Leicht<small>10–12 Jahre</small></button>
-        <button class="wahl" data-wert="mittel">Mittel<small>13–14 Jahre</small></button>
-        <button class="wahl" data-wert="schwer">Schwer<small>15–17 Jahre</small></button>
+        <button class="wahl" data-wert="kids">Löschzwerge<small>empfohlen ab 6</small></button>
+        <button class="wahl" data-wert="leicht">Kleinbrand<small>empfohlen ab 10</small></button>
+        <button class="wahl" data-wert="mittel">Mittelbrand<small>empfohlen ab 13</small></button>
+        <button class="wahl" data-wert="schwer">Großbrand<small>empfohlen ab 15</small></button>
       </div>
     </div>
     <div class="karte">
@@ -1996,10 +2240,10 @@
     <div class="karte">
       <div class="label">Schwierigkeit</div>
       <div class="auswahl zwei" id="be-stufe">
-        <button class="wahl" data-wert="kids">Kids<small>6–9 Jahre</small></button>
-        <button class="wahl" data-wert="leicht">Leicht<small>10–12 Jahre</small></button>
-        <button class="wahl" data-wert="mittel">Mittel<small>13–14 Jahre</small></button>
-        <button class="wahl" data-wert="schwer">Schwer<small>15–17 Jahre</small></button>
+        <button class="wahl" data-wert="kids">Löschzwerge<small>empfohlen ab 6</small></button>
+        <button class="wahl" data-wert="leicht">Kleinbrand<small>empfohlen ab 10</small></button>
+        <button class="wahl" data-wert="mittel">Mittelbrand<small>empfohlen ab 13</small></button>
+        <button class="wahl" data-wert="schwer">Großbrand<small>empfohlen ab 15</small></button>
       </div>
       <div class="rekord" id="be-stand"></div>
       <p class="be-meldung" id="be-meldung"></p>
@@ -2018,6 +2262,12 @@
         <button class="btn" id="be-aktion"></button>
       </div>
       <p class="be-meldung" id="be-tmeldung"></p>
+    </div>
+    <div class="karte">
+      <div class="label">Vorlesestimme</div>
+      <select class="be-select" id="be-stimme" onchange="stimmeWaehlen()" aria-label="Vorlesestimme"></select>
+      <button class="mini" id="be-probe" onclick="stimmeProbe()">Probe hören</button>
+      <p class="be-hinweis" id="be-stimme-info"></p>
     </div>
     <div class="karte" id="be-liste"></div>
     <button class="btn leise" onclick="zeige('s-start')">Zurück zum Start</button>
@@ -2399,6 +2649,177 @@
     }
 
     // =====================================================================
+    //  KNOTEN (selbst berechnet und gezeichnet)
+    //  Jede Leine ist eine Punktliste [x, y, z]. z sagt, was oben liegt:
+    //  An jeder Kreuzung wird das Stück mit dem größeren z darüber gezeichnet.
+    // =====================================================================
+    function knotenParam(fx, fy, fz, schnitt, luecke, schwanz) {
+      // geschlossene Knotenkurve, an einer Stelle aufgeschnitten, Enden als Leinen herausgezogen
+      const n = 260, p = [];
+      for (let i = 0; i <= n; i++) {
+        const t = schnitt + luecke + (Math.PI * 2 - 2 * luecke) * i / n;
+        p.push([fx(t), fy(t), fz(t)]);
+      }
+      const verl = (a, b, l) => { const dx = a[0] - b[0], dy = a[1] - b[1], d = Math.hypot(dx, dy) || 1; return [a[0] + dx / d * l, a[1] + dy / d * l, a[2]]; };
+      const anfang = [], ende = [];
+      for (let k = 6; k >= 1; k--) anfang.push(verl(p[0], p[3], schwanz * k / 6));
+      for (let k = 1; k <= 6; k++) ende.push(verl(p[n], p[n - 3], schwanz * k / 6));
+      return [...anfang, ...p, ...ende];
+    }
+    function knotenGlatt(ctrl, schritte = 10) {
+      // Catmull-Rom durch die Stützpunkte
+      const p = [];
+      for (let i = 0; i < ctrl.length - 1; i++) {
+        const a = ctrl[Math.max(0, i - 1)], b = ctrl[i], c = ctrl[i + 1], d = ctrl[Math.min(ctrl.length - 1, i + 2)];
+        for (let s = 0; s < schritte; s++) {
+          const t = s / schritte, t2 = t * t, t3 = t2 * t;
+          p.push([0, 1, 2].map(k => .5 * (2 * b[k] + (-a[k] + c[k]) * t + (2 * a[k] - 5 * b[k] + 4 * c[k] - d[k]) * t2 + (-a[k] + 3 * b[k] - 3 * c[k] + d[k]) * t3)));
+        }
+      }
+      p.push(ctrl[ctrl.length - 1].slice());
+      return p;
+    }
+    const KNOTEN = {
+      ueberhand: {
+        name: "Überhandknoten",
+        tipp: "Schlaufe legen, Ende durchstecken.",
+        leinen: () => [knotenParam(t => Math.sin(t) + 2 * Math.sin(2 * t), t => -(Math.cos(t) - 2 * Math.cos(2 * t)), t => -Math.sin(3 * t), Math.PI, .55, 2.4)]
+      },
+      achter: {
+        name: "Achterknoten",
+        tipp: "Schlaufe legen, Ende hinter der Leine herum und von vorn durch die Schlaufe.",
+        leinen: () => [knotenGlatt([[100, 198, 0], [100, 160, 0], [100, 112, 0], [100, 72, 0], [104, 46, 0], [122, 30, 0], [146, 40, 0], [153, 70, 0], [141, 99, 0], [120, 110, .6], [100, 112, 1], [76, 118, .6], [62, 136, 0], [74, 152, -.6], [100, 150, -1], [127, 150, -.4], [143, 131, .3], [130, 104, 1], [113, 88, 0], [100, 80, -1], [82, 72, -.3], [56, 54, 0], [34, 32, 0]], 12)]
+      },
+      halbschlag: {
+        name: "Halbschlag",
+        tipp: "Leine über die Stange, dann das Ende einmal um die eigene Leine.",
+        stange: [0, 58, 200, 22],
+        leinen: () => [knotenGlatt([[64, 196, 1], [74, 140, 1], [82, 100, 1], [88, 74, 1], [96, 56, 0], [104, 64, -5], [108, 76, -5], [112, 86, 0], [114, 98, 2], [100, 106, 3], [80, 108, 3], [66, 114, -1], [74, 126, -2], [96, 132, 0], [126, 150, 0], [146, 180, 0]])]
+      }
+    };
+
+    function knotenBerechnen(def) {
+      let leinen = def.leinen();
+      // in eine Box 0..200 einpassen
+      const alle = leinen.flat();
+      let x0 = Math.min(...alle.map(p => p[0])), x1 = Math.max(...alle.map(p => p[0]));
+      let y0 = Math.min(...alle.map(p => p[1])), y1 = Math.max(...alle.map(p => p[1]));
+      if (def.stange) { x0 = 0; x1 = 200; y0 = Math.min(y0, def.stange[1]); y1 = Math.max(y1, def.stange[1] + def.stange[3]); }
+      const m = 16, s = Math.min((200 - 2 * m) / (x1 - x0), (200 - 2 * m) / (y1 - y0));
+      const ox = (200 - (x1 - x0) * s) / 2 - x0 * s, oy = (200 - (y1 - y0) * s) / 2 - y0 * s;
+      leinen = leinen.map(l => l.map(p => [p[0] * s + ox, p[1] * s + oy, p[2]]));
+      const stange = def.stange ? [0, def.stange[1] * s + oy, 200, def.stange[3] * s] : null;
+      // Längen entlang jeder Leine
+      const laengen = leinen.map(l => { const L = [0]; for (let i = 1; i < l.length; i++) L.push(L[i - 1] + Math.hypot(l[i][0] - l[i - 1][0], l[i][1] - l[i - 1][1])); return L; });
+      // Kreuzungen suchen
+      const kreuz = [];
+      for (let a = 0; a < leinen.length; a++) for (let b = a; b < leinen.length; b++) {
+        const A = leinen[a], B = leinen[b];
+        for (let i = 0; i < A.length - 1; i++) for (let j = (a === b ? i + 3 : 0); j < B.length - 1; j++) {
+          const p = A[i], p2 = A[i + 1], q = B[j], q2 = B[j + 1];
+          const rx = p2[0] - p[0], ry = p2[1] - p[1], sx = q2[0] - q[0], sy = q2[1] - q[1];
+          const den = rx * sy - ry * sx;
+          if (Math.abs(den) < 1e-9) continue;
+          const t = ((q[0] - p[0]) * sy - (q[1] - p[1]) * sx) / den, u = ((q[0] - p[0]) * ry - (q[1] - p[1]) * rx) / den;
+          if (t < 0 || t > 1 || u < 0 || u > 1) continue;
+          const za = p[2] + (p2[2] - p[2]) * t, zb = q[2] + (q2[2] - q[2]) * u;
+          const la = laengen[a][i] + (laengen[a][i + 1] - laengen[a][i]) * t, lb = laengen[b][j] + (laengen[b][j + 1] - laengen[b][j]) * u;
+          const x = p[0] + rx * t, y = p[1] + ry * t;
+          if (kreuz.some(c => Math.hypot(c.x - x, c.y - y) < 4)) continue;
+          kreuz.push(za >= zb ? { leine: a, pos: la, x, y } : { leine: b, pos: lb, x, y });
+        }
+      }
+      return { leinen, laengen, kreuz, stange };
+    }
+    function knotenStueck(l, L, von, bis) {
+      const pts = [];
+      for (let i = 0; i < l.length; i++) if (L[i] >= von && L[i] <= bis) pts.push(l[i]);
+      return pts;
+    }
+    const knotenD = (pts) => pts.length < 2 ? "" : "M" + pts.map(p => p[0].toFixed(1) + " " + p[1].toFixed(1)).join("L");
+    const LEINEN_FARBEN = [["#F3E6CC", "#8A6A45"], ["#D9483B", "#6E1A12"]];
+    const LEINEN_BLASS = ["#E7DACB", "#CDBBA5"];
+    // Zeichnet einen Knoten. fortschritt: null = ganz fertig gezeichnet, sonst Länge der "nachgefahrenen" Leine (nur Leine nr)
+    function knotenSVG(k, opt = {}) {
+      const { leinen, laengen, kreuz, stange } = k;
+      const B = 12, K = 8;
+      const schichten = [];  // je Schicht: Liste von {d, start, laenge, leine}
+      const basis = leinen.map((l, i) => ({ d: knotenD(l), start: 0, laenge: laengen[i][laengen[i].length - 1], leine: i, rund: true, kurz: 0 }));
+      const vorne = [];
+      if (stange) leinen.forEach((l, i) => {
+        let lauf = null;
+        l.forEach((p, n) => {
+          if (p[2] > -.5) { if (!lauf) lauf = { von: laengen[i][Math.max(0, n - 1)] }; lauf.bis = laengen[i][Math.min(l.length - 1, n + 1)]; }
+          else if (lauf) { vorne.push({ i, ...lauf }); lauf = null; }
+        });
+        if (lauf) vorne.push({ i, ...lauf });
+      });
+      const stuecke = (liste) => liste.map(s => ({
+        d: knotenD(knotenStueck(leinen[s.i], laengen[s.i], s.von, s.bis)), start: s.von, laenge: s.bis - s.von, leine: s.i,
+        dRand: s.kurz ? knotenD(knotenStueck(leinen[s.i], laengen[s.i], s.von + s.kurz, s.bis - s.kurz)) : null, kurz: s.kurz || 0
+      }));
+      const kr = kreuz.map(c => ({ i: c.leine, von: Math.max(0, c.pos - 15), bis: c.pos + 15, kurz: 4 }));
+      function zeichne(liste, farbeFn, dash) {
+        return liste.map(s => {
+          if (!s.d) return "";
+          const [kern, rand] = farbeFn(s.leine);
+          // Rand etwas kürzer als der Kern, damit an den Stückenden keine Naht sichtbar ist
+          const da = (start, laenge) => {
+            if (dash == null || s.leine !== opt.nr) return "";
+            return ` stroke-dasharray="${Math.max(0, Math.min(laenge, dash - start)).toFixed(1)} 9999"`;
+          };
+          const cap = s.rund ? "round" : "butt";
+          const dR = s.dRand != null ? s.dRand : s.d;
+          return (dR ? `<path d="${dR}" stroke="${rand}" stroke-width="${B}" stroke-linecap="${cap}"${da(s.start + s.kurz, s.laenge - 2 * s.kurz)}/>` : "") +
+            `<path d="${s.d}" stroke="${kern}" stroke-width="${K}" stroke-linecap="${cap}"${da(s.start, s.laenge)}/>`;
+        }).join("");
+      }
+      const farbe = (i) => LEINEN_FARBEN[i] || LEINEN_FARBEN[0];
+      const blass = () => LEINEN_BLASS;
+      const stangeSVG = stange ? `<rect x="${stange[0]}" y="${stange[1]}" width="${stange[2]}" height="${stange[3]}" rx="${stange[3] / 2}" fill="#9AA3AD"/><rect x="${stange[0]}" y="${stange[1] + 3}" width="${stange[2]}" height="${stange[3] * .3}" rx="2" fill="#C9D0D6"/>` : "";
+      let inhalt;
+      if (opt.nr == null) {
+        inhalt = zeichne(basis, farbe) + stangeSVG + zeichne(stuecke(vorne), farbe) + zeichne(stuecke(kr), farbe);
+      } else {
+        // Nachfahren: Ziel-Leine blass, darüber der schon geschaffte Teil in Farbe. Andere Leinen in Farbe.
+        const f = (i) => i === opt.nr ? blass() : farbe(i);
+        const lagen = (liste) => zeichne(liste, f) + zeichne(liste.filter(s => s.leine === opt.nr), farbe, opt.fortschritt);
+        inhalt = lagen(basis) + stangeSVG + lagen(stuecke(vorne)) + lagen(stuecke(kr));
+      }
+      return `<svg viewBox="0 0 200 200"${opt.attr || ""}><g fill="none" stroke-linejoin="round">${inhalt}</g>${opt.extra || ""}</svg>`;
+    }
+    const KNOTEN_FERTIG = {};
+    function knotenFertig(name) { return KNOTEN_FERTIG[name] || (KNOTEN_FERTIG[name] = knotenBerechnen(KNOTEN[name])); }
+    Object.keys(KNOTEN).forEach(name => Object.defineProperty(BILDER, "knoten_" + name, { get: () => knotenSVG(knotenFertig(name)), enumerable: true }));
+
+    // Bilder für "Richtig löschen" und "Einsatzbereit"
+    const FLAMME_KLEIN = (x, y, s = 1) => `<g transform="translate(${x} ${y}) scale(${s})"><path d="M0-16c4 7 9 10 9 17a9 9 0 0 1-18 0c0-5 3-7 4-11 1 3 2 4 3 4-1-4 0-7 2-10z" fill="#F07A2E"/><path d="M0-3c2 3 4 4 4 7a4 4 0 0 1-8 0c0-2 2-3 2-5 1 1 1 2 2 2z" fill="#F5C400"/></g>`;
+    const LOESCH_DINGE = {
+      holz: `<g fill="#9C6B3C" stroke="#6B4423" stroke-width="1.5"><rect x="6" y="34" width="36" height="7" rx="3.5"/><rect x="9" y="27" width="30" height="7" rx="3.5"/><rect x="13" y="20" width="22" height="7" rx="3.5"/></g>${FLAMME_KLEIN(24, 20, 1.1)}`,
+      papier: `<path d="M12 22h24l-3 22H15z" fill="#9AA3AD"/><path d="M15 26h18M16 32h16M16.5 38h15" stroke="#7B848D" stroke-width="1.5"/><path d="M17 22l3-6 5 4 4-5 2 7" fill="#fff" stroke="#BDB3A8"/>${FLAMME_KLEIN(24, 20, .9)}`,
+      lagerfeuer: `<g stroke="#6B4423" stroke-width="5" stroke-linecap="round"><path d="M10 42 38 34M10 34l28 8"/></g>${FLAMME_KLEIN(24, 32, 1.3)}`,
+      pfanne: `<ellipse cx="22" cy="34" rx="15" ry="6" fill="#4A4A4A"/><rect x="35" y="31" width="12" height="4" rx="2" fill="#2A1715"/><ellipse cx="22" cy="32" rx="12" ry="3.5" fill="#E8B84A"/>${FLAMME_KLEIN(22, 30, 1)}`,
+      steckdose: `<rect x="9" y="14" width="30" height="30" rx="6" fill="#fff" stroke="#BDB3A8" stroke-width="2"/><circle cx="24" cy="29" r="10" fill="#EEE"/><circle cx="20" cy="29" r="2" fill="#555"/><circle cx="28" cy="29" r="2" fill="#555"/>${FLAMME_KLEIN(36, 16, .8)}`,
+      laptop: `<rect x="10" y="16" width="28" height="18" rx="2" fill="#3A3A3A"/><rect x="12.5" y="18.5" width="23" height="13" fill="#5B9BE0"/><path d="M5 35h38l-3 5H8z" fill="#9AA3AD"/>${FLAMME_KLEIN(31, 18, .8)}`,
+      kanister: `<path d="M12 18l8-8h14v34H12z" fill="#C0392B"/><rect x="25" y="5" width="8" height="5" fill="#333"/><path d="M17 26l12 12M29 26 17 38" stroke="#fff" stroke-width="2.5" opacity=".6"/>${FLAMME_KLEIN(36, 14, .8)}`,
+      kleidung: `<path d="M14 12l7-3h6l7 3 7 9-6 4-3-4v23H16V21l-3 4-6-4z" fill="#3B7BE0"/>${FLAMME_KLEIN(30, 32, .9)}`
+    };
+    const LOESCH_ICONS = {
+      wasser: `<svg viewBox="0 0 48 48"><path d="M24 4c7 11 14 18 14 27a14 14 0 0 1-28 0c0-9 7-16 14-27z" fill="#5BB6F0"/></svg>`,
+      nein: `<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="none" stroke="#C0392B" stroke-width="5"/><path d="M12 12l24 24" stroke="#C0392B" stroke-width="5"/></svg>`,
+      decke: `<svg viewBox="0 0 48 48"><rect x="10" y="8" width="28" height="32" rx="3" fill="#C0392B"/><rect x="14" y="14" width="20" height="10" fill="#fff"/><path d="M18 30h12" stroke="#fff" stroke-width="3"/></svg>`,
+      co2: `<svg viewBox="0 0 48 48"><rect x="16" y="14" width="16" height="30" rx="6" fill="#2A1715"/><rect x="20" y="8" width="8" height="7" fill="#777"/><path d="M28 10h8l4 6" stroke="#777" stroke-width="3" fill="none"/><rect x="16" y="22" width="16" height="8" fill="#C0392B"/></svg>`
+    };
+    const SCHUTZ = {
+      hose: { n: "Hose", s: `<path d="M12 6h24l2 38h-9l-5-24-5 24h-9z" fill="#1F3A5F"/><rect x="12" y="6" width="24" height="5" fill="#16294A"/><path d="M11.5 30h9M27.5 30h9" stroke="#F5C400" stroke-width="3"/><path d="M11 35h9M28 35h9" stroke="#D9D9D9" stroke-width="2"/>` },
+      jacke: { n: "Jacke", s: `<path d="M16 6l8 4 8-4 10 7-4 9-4-3v25H14V19l-4 3-4-9z" fill="#1F3A5F"/><path d="M24 10v34" stroke="#16294A" stroke-width="2"/><path d="M14 32h20" stroke="#F5C400" stroke-width="3"/><path d="M14 36h20" stroke="#D9D9D9" stroke-width="2"/>` },
+      haube: { n: "Flammschutzhaube", s: `<path d="M24 4c10 0 15 7 15 16v18c0 4-4 6-15 6S9 42 9 38V20C9 11 14 4 24 4z" fill="#3A3A3A"/><ellipse cx="24" cy="22" rx="9" ry="8" fill="#E2B88A"/>` },
+      handschuhe: { n: "Handschuhe", s: `<g fill="#E8A33D" stroke="#7A4B12" stroke-width="1.5"><path d="M8 40V22c0-2 1-3 2.5-3S13 20 13 22v-8c0-2 1-3 2.5-3S18 12 18 14v-2c0-2 1-3 2.5-3s2.5 1 2.5 3v26c0 2-2 4-4 4H12c-2 0-4-2-4-4z"/><path d="M25 40V22c0-2 1-3 2.5-3S30 20 30 22v-8c0-2 1-3 2.5-3S35 12 35 14v-2c0-2 1-3 2.5-3S40 10 40 12v26c0 2-2 4-4 4h-7c-2 0-4-2-4-4z"/></g>` },
+      flipflops: { n: "Flip-Flops", s: `<ellipse cx="16" cy="26" rx="8" ry="16" fill="#E91E63"/><ellipse cx="33" cy="26" rx="8" ry="16" fill="#E91E63"/><path d="M11 22l5-6 5 6M28 22l5-6 5 6" stroke="#fff" stroke-width="2.5" fill="none"/>` },
+      kappe: { n: "Basecap", s: `<path d="M8 30a16 14 0 0 1 32 0z" fill="#43A047"/><path d="M30 30h14c0 3-3 5-8 5H24z" fill="#2E7D32"/><circle cx="24" cy="16.5" r="2" fill="#2E7D32"/>` }
+    };
+
+    // =====================================================================
     //  MINIGAMES
     //  Jedes Minigame ist ein Eintrag in dieser Liste. Neues Minigame:
     //  Objekt mit name, icon, anleitung und start(feld, stufe, fertig).
@@ -2711,19 +3132,47 @@
       {
         name: "Notruf 112",
         icon: `<svg viewBox="0 0 40 40"><path d="M12 6l5 1 2 7-3 2a16 16 0 0 0 8 8l2-3 7 2 1 5c0 2-2 4-4 4C18 32 8 22 8 10c0-2 2-4 4-4z" fill="#F6ECDF"/></svg>`,
-        anleitung: "Wähle so oft wie möglich die 112! Jeder richtige Notruf gibt 20 Punkte. Achtung: Bei mittel und schwer werden die Tasten gemischt.",
+        anleitung: "Wähle so schnell wie möglich den richtigen Notruf! Jeder Anruf gibt 20 Punkte. Es wird mit der Zeit schwerer: Die Tasten werden gemischt, und bei manchen Notfällen brauchst du die Polizei (110) statt der Feuerwehr (112).",
         kurz: "Tippe eins, eins, zwei!",
         start(feld, stufe, fertig) {
-          let punkte = 0, eingabe = "";
+          const kids = zustand.stufe === "kids";
+          let punkte = 0, eingabe = "", anrufe = 0, ziel = "112", modus = -1, verdeckt = false, hinweisGen = 0;
           feld.style.background = "linear-gradient(#F6ECDF, #EADAC4)";
           const box = document.createElement("div");
           box.className = "telefon";
-          box.innerHTML = `<div class="anzeige"><small>Wähle</small><div class="nummer"></div></div><div class="tastatur"></div>`;
+          box.innerHTML = `<div class="anzeige"><small class="szenario"></small><div class="nummer"></div><div class="notruf-hinweis"></div></div><div class="tastatur"></div>`;
           feld.appendChild(box);
           const nummer = box.querySelector(".nummer"), tastatur = box.querySelector(".tastatur");
+          const szenario = box.querySelector(".szenario"), hinweisEl = box.querySelector(".notruf-hinweis");
           const ZIFFERN = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "*", "0", "#"];
+          const FEUERWEHR = ["Es brennt!", "Unfall mit Verletzten!", "Jemand ist bewusstlos!", "Rauch im Treppenhaus!"];
+          const POLIZEI = ["Einbrecher im Haus!", "Ein Fahrrad wird geklaut!", "Schlägerei auf der Straße!"];
+          // Es wird mit jedem Anruf schwerer: 0 = feste Tasten, 1 = pro Anruf gemischt, 2 = nach jeder Ziffer gemischt
+          function modusFuer(n) {
+            if (kids) return n < 2 ? 0 : 1;
+            return [n < 1 ? 0 : n < 3 ? 1 : 2, n < 2 ? 1 : 2, 2][stufe];
+          }
+          function hinweis(text) {
+            hinweisEl.textContent = text;
+            const g = ++hinweisGen;
+            nach(1800, () => { if (g === hinweisGen) hinweisEl.textContent = ""; });
+          }
           function anzeigen() {
-            nummer.innerHTML = "112".split("").map((z, i) => `<span class="${i < eingabe.length ? "ok" : ""}">${z}</span>`).join("");
+            nummer.innerHTML = ziel.split("").map((z, i) => `<span class="${i < eingabe.length ? "ok" : ""}">${i < eingabe.length || !verdeckt ? z : "•"}</span>`).join("");
+          }
+          function neuerAnruf() {
+            const alt = modus;
+            modus = modusFuer(anrufe);
+            const polizei = !kids && (stufe > 0 || anrufe >= 3) && Math.random() < [.35, .4, .45][stufe];
+            ziel = polizei ? "110" : "112";
+            verdeckt = !kids && (stufe > 0 || anrufe >= 3);
+            const liste = polizei ? POLIZEI : FEUERWEHR;
+            szenario.textContent = verdeckt ? liste[Math.floor(Math.random() * liste.length)] + " Welche Nummer?" : (kids ? "Wähle 112" : "Wähle den Notruf");
+            eingabe = "";
+            if (alt >= 0 && modus > alt) hinweis(modus === 1 ? "Achtung: Jetzt werden die Tasten gemischt!" : "Jetzt mischen sie nach jeder Ziffer!");
+            else if (anrufe === 3 && verdeckt && stufe === 0) hinweis("Jetzt musst du die Nummer selbst wissen!");
+            tasten(modus >= 1);
+            anzeigen();
           }
           function tasten(gemischt) {
             const reihenfolge = gemischt ? mischen(ZIFFERN) : ZIFFERN;
@@ -2736,30 +3185,34 @@
                 ev.preventDefault();
                 if (uhr.pausiert) return;
                 t.animate([{ transform: "scale(.88)" }, { transform: "scale(1)" }], 150);
-                if (z === "112"[eingabe.length]) {
+                if (z === ziel[eingabe.length]) {
                   eingabe += z;
                   ton(500 + eingabe.length * 120, .07, "triangle");
-                  if (eingabe === "112") {
+                  if (eingabe === ziel) {
                     punkte += 20; mgPunkte(punkte);
-                    zeigePunkte(feld, "50%", "40%", "+20");
+                    zeigePunkte(feld, "50%", "40%", ziel === "110" ? "Polizei! +20" : "+20");
                     tonRichtig(); vibriere(40);
-                    eingabe = "";
+                    anrufe++;
                     box.classList.add("verbunden");
                     setTimeout(() => box.classList.remove("verbunden"), 250);
-                    if (stufe >= 1) tasten(true);
-                  } else if (stufe === 2) tasten(true);
+                    neuerAnruf();
+                    return;
+                  } else if (modus === 2) tasten(true);
                 } else {
+                  const falscheNummer = eingabe === "11" && verdeckt;
                   eingabe = "";
+                  if (stufe === 2) { punkte = Math.max(0, punkte - 5); mgPunkte(punkte); }
                   tonFalsch(); vibriere([50, 40, 50]);
                   box.animate([{ transform: "translateX(-6px)" }, { transform: "translateX(6px)" }, { transform: "none" }], 250);
+                  if (falscheNummer) hinweis(ziel === "110" ? "Hier hilft die Polizei: 110!" : "Hier kommt die Feuerwehr: 112!");
+                  if (modus === 2) tasten(true);
                 }
                 anzeigen();
               });
               tastatur.appendChild(t);
             });
           }
-          tasten(stufe >= 1);
-          anzeigen();
+          neuerAnruf();
           zeitbalken(mgDauer(), () => fertig(punkte));
         }
       },
@@ -2829,11 +3282,12 @@
       {
         name: "Memory",
         icon: `<svg viewBox="0 0 40 40"><rect x="5" y="8" width="13" height="18" rx="3" fill="#F6ECDF"/><rect x="22" y="14" width="13" height="18" rx="3" fill="none" stroke="#F6ECDF" stroke-width="3"/></svg>`,
-        anleitung: "Decke zwei Karten auf und finde die Paare mit gleichen Feuerwehr-Sachen. Jedes Paar gibt 15 Punkte.",
-        kurz: "Finde zwei gleiche Bilder!",
+        anleitung: "Am Anfang siehst du alle Karten kurz. Merk sie dir! Dann deckst du immer zwei Karten auf und suchst die Paare. Jedes Paar gibt 15 Punkte.",
+        kurz: "Merk dir die Bilder. Dann finde zwei gleiche!",
         start(feld, stufe, fertig) {
-          const paare = [3, 4, 6][stufe];
-          const spalten = [2, 2, 3][stufe];
+          const paare = [3, 4, 5][stufe];
+          const spalten = 2;
+          const vorschau = zustand.stufe === "kids" ? 2200 : [1800, 1500, 1300][stufe];   // am Anfang alle Karten kurz zeigen
           let punkte = 0, offen = [], gesperrt = false;
           feld.style.background = "linear-gradient(#F6ECDF, #EADAC4)";
           const brett = document.createElement("div");
@@ -2868,16 +3322,245 @@
               });
               brett.appendChild(k);
             });
+            const karten = [...brett.children];
+            gesperrt = true;
+            karten.forEach(k => k.classList.add("offen"));
+            nach(vorschau, () => { karten.forEach(k => k.classList.remove("offen")); gesperrt = false; });
           }
           legen();
+          zeitbalken(mgDauer() + [0, 2000, 6000][stufe], () => fertig(punkte));
+        }
+      },
+      {
+        name: "Knoten-Schule",
+        icon: `<svg viewBox="0 0 40 40"><path d="M6 34C14 26 12 10 21 8s12 10 4 15-14 2-11-5 14-4 20 16" fill="none" stroke="#F6ECDF" stroke-width="4" stroke-linecap="round"/></svg>`,
+        anleitung: "Lerne Feuerwehrknoten! Fahre die Leine mit dem Finger vom Startpunkt bis zum Ende nach. So siehst du, wie der Knoten gelegt wird. Jeder fertige Knoten gibt 30 Bonuspunkte.",
+        kurz: "Fahre die Leine mit dem Finger nach!",
+        start(feld, stufe, fertig) {
+          const kids = zustand.stufe === "kids";
+          const folge = kids ? ["ueberhand"] : [["ueberhand", "achter"], ["achter", "halbschlag", "ueberhand"], ["achter", "halbschlag"]][stufe];
+          const toleranz = kids ? 24 : [20, 17, 15][stufe];
+          let punkte = 0, nr = 0, knoten, gesamt, fort, gezaehlt, fertigGelegt, druck = false, neuZeichnen = true;
+          feld.style.background = "linear-gradient(#F6ECDF, #EADAC4)";
+          const auftrag = document.createElement("div");
+          auftrag.className = "auftrag knoten-auftrag";
+          const flaeche = document.createElement("div");
+          flaeche.className = "knoten-flaeche";
+          feld.append(flaeche, auftrag);
+          function neuerKnoten() {
+            const name = folge[nr++ % folge.length];
+            knoten = knotenFertig(name);
+            const L = knoten.laengen[0];
+            gesamt = L[L.length - 1];
+            fort = 0; gezaehlt = 0; fertigGelegt = false; neuZeichnen = true;
+            auftrag.innerHTML = kids ? `<b>Fahre die Leine nach!</b>` : `<b>${KNOTEN[name].name}</b><span>${KNOTEN[name].tipp}</span>`;
+          }
+          function punktBei(laenge) {
+            const l = knoten.leinen[0], L = knoten.laengen[0];
+            let i = 0;
+            while (i < L.length - 1 && L[i + 1] < laenge) i++;
+            return l[i];
+          }
+          function zeichnen() {
+            const p = punktBei(fort);
+            const start = fort < 2 ? `<text x="${p[0]}" y="${p[1] + 22}" text-anchor="middle" font-size="11" font-weight="700" fill="#B3141C" font-family="Outfit, Arial, sans-serif">START</text>` : "";
+            flaeche.innerHTML = knotenSVG(knoten, { nr: 0, fortschritt: fort, extra: fertigGelegt ? "" : `<circle class="knoten-ziel" cx="${p[0]}" cy="${p[1]}" r="9"/>${start}` });
+          }
+          function folgen(ev) {
+            if (uhr.pausiert || fertigGelegt) return;
+            const svg = flaeche.querySelector("svg");
+            if (!svg) return;
+            const pt = svg.createSVGPoint();
+            pt.x = ev.clientX; pt.y = ev.clientY;
+            const q = pt.matrixTransform(svg.getScreenCTM().inverse());
+            const l = knoten.leinen[0], L = knoten.laengen[0];
+            let bester = -1;
+            for (let i = 0; i < l.length; i++) {
+              if (L[i] < fort - 6 || L[i] > fort + 30) continue;
+              if (Math.hypot(l[i][0] - q.x, l[i][1] - q.y) < toleranz) bester = Math.max(bester, L[i]);
+            }
+            if (bester <= fort) return;
+            fort = bester; neuZeichnen = true;
+            while (fort - gezaehlt >= 30) { gezaehlt += 30; punkte += 3; mgPunkte(punkte); ton(420 + (fort / gesamt) * 500, .03, "triangle"); }
+            if (fort >= gesamt - 5) {
+              fort = gesamt; fertigGelegt = true;
+              punkte += 30; mgPunkte(punkte);
+              zeigePunkte(feld, "50%", "45%", "Geschafft! +30");
+              tonRichtig(); vibriere(40);
+              nach(1100, neuerKnoten);
+            }
+          }
+          flaeche.addEventListener("pointerdown", (ev) => { ev.preventDefault(); druck = true; folgen(ev); });
+          flaeche.addEventListener("pointermove", (ev) => { if (druck) { ev.preventDefault(); folgen(ev); } });
+          window.addEventListener("pointerup", () => druck = false);
+          neuerKnoten();
+          jedesBild(() => { if (neuZeichnen) { neuZeichnen = false; zeichnen(); } });
+          zeitbalken(mgDauer() + 5000, () => fertig(punkte));
+        }
+      },
+      {
+        name: "Richtig löschen",
+        icon: `<svg viewBox="0 0 40 40"><rect x="13" y="12" width="13" height="24" rx="5" fill="#F6ECDF"/><rect x="16" y="6" width="7" height="6" fill="#F6ECDF"/><path d="M23 8h7l3 4" stroke="#F6ECDF" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`,
+        anleitung: "Was brennt da? Wähle das richtige Löschmittel. Richtig gibt 15 Punkte, falsch kostet 5. Denk dran: Fett, Strom und Benzin nie mit Wasser löschen!",
+        kurz: "Darf hier Wasser drauf? Tippe Ja oder Nein!",
+        start(feld, stufe, fertig) {
+          const zwei = zustand.stufe === "kids" || stufe === 0;
+          const kids = zustand.stufe === "kids";
+          const DINGE = zwei ? [
+            ["holz", "Holzstapel", 0, "Holz kannst du mit Wasser löschen."],
+            ["papier", "Papierkorb", 0, "Papier kannst du mit Wasser löschen."],
+            ["lagerfeuer", "Lagerfeuer", 0, "Ein Lagerfeuer löscht man mit Wasser."],
+            ["pfanne", "Fett in der Pfanne", 1, "Nie Wasser auf Fett! Deckel drauf."],
+            ["steckdose", "Steckdose", 1, "Wasser leitet Strom. Lebensgefahr!"],
+            ["laptop", "Laptop", 1, "Bei Strom kein Wasser!"],
+            ["kanister", "Benzinkanister", 1, "Benzin schwimmt auf Wasser und brennt weiter."]
+          ] : [
+            ["holz", "Holzstapel", 0, "Holz, Papier und Stoff: Wasser kühlt am besten."],
+            ["papier", "Papierkorb", 0, "Papier löscht man mit Wasser."],
+            ["lagerfeuer", "Lagerfeuer", 0, "Ein Lagerfeuer löscht man mit Wasser."],
+            ["pfanne", "Fett in der Pfanne", 1, "Fettbrand: Löschdecke oder Deckel, nie Wasser!"],
+            ["kleidung", "Brennende Jacke", 1, "Brennende Kleidung: Löschdecke um die Person."],
+            ["steckdose", "Steckdose", 2, "Strom: CO₂-Löscher, nie Wasser."],
+            ["laptop", "Laptop", 2, "Elektrogeräte: CO₂-Löscher, kein Wasser."]
+          ];
+          const KNOEPFE = zwei ? [["Ja, Wasser", "wasser"], ["Nein!", "nein"]] : [["Wasser", "wasser"], ["Löschdecke", "decke"], ["CO₂-Löscher", "co2"]];
+          let punkte = 0, gesperrt = false, letztes = -1, aktuell;
+          feld.style.background = "linear-gradient(#F6ECDF, #EADAC4)";
+          const box = document.createElement("div");
+          box.className = "loeschspiel";
+          box.innerHTML = `<div class="l-frage">${zwei ? "Darf hier Wasser drauf?" : "Womit löschst du?"}</div><div class="l-karte"><div class="l-bild"></div><b class="l-name"></b></div><div class="l-info"></div><div class="l-knoepfe"></div>`;
+          feld.appendChild(box);
+          const knoepfe = box.querySelector(".l-knoepfe");
+          KNOEPFE.forEach(([text, art], i) => {
+            const b = document.createElement("button");
+            b.className = "l-knopf " + art;
+            b.innerHTML = `<span>${LOESCH_ICONS[art]}</span>${text}`;
+            b.addEventListener("pointerdown", (ev) => { ev.preventDefault(); waehlen(i, b); });
+            knoepfe.appendChild(b);
+          });
+          function neu() {
+            let i;
+            do { i = Math.floor(Math.random() * DINGE.length); } while (i === letztes && DINGE.length > 1);
+            letztes = i; aktuell = DINGE[i];
+            box.querySelector(".l-bild").innerHTML = `<svg viewBox="0 0 48 48">${LOESCH_DINGE[aktuell[0]]}</svg>`;
+            box.querySelector(".l-name").textContent = aktuell[1];
+            box.querySelector(".l-info").textContent = "";
+            box.querySelector(".l-info").className = "l-info";
+            box.querySelector(".l-karte").animate([{ transform: "scale(.85)", opacity: 0 }, { transform: "none", opacity: 1 }], 200);
+            gesperrt = false;
+          }
+          function waehlen(i, b) {
+            if (uhr.pausiert || gesperrt) return;
+            gesperrt = true;
+            const ok = i === aktuell[2];
+            const info = box.querySelector(".l-info");
+            info.textContent = (ok ? "Richtig! " : "Falsch. ") + aktuell[3];
+            info.className = "l-info " + (ok ? "gut" : "schlecht");
+            if (ok) { punkte += 15; tonRichtig(); vibriere(25); zeigePunkte(feld, "50%", "38%", "+15"); }
+            else { if (!kids) punkte = Math.max(0, punkte - 5); tonFalsch(); vibriere([60, 40, 60]); if (!kids) zeigePunkte(feld, "50%", "38%", "−5", true); b.animate([{ transform: "translateX(-6px)" }, { transform: "translateX(6px)" }, { transform: "none" }], 250); }
+            mgPunkte(punkte);
+            nach(ok ? (stufe === 2 ? 900 : 1300) : 2100, neu);
+          }
+          neu();
+          zeitbalken(mgDauer(), () => fertig(punkte));
+        }
+      },
+      {
+        name: "Einsatzbereit",
+        icon: `<svg viewBox="0 0 48 48">${"<path d=\"M7 31a17 17 0 0 1 34 0z\" fill=\"#F6ECDF\"/><rect x=\"3\" y=\"30\" width=\"42\" height=\"7\" rx=\"3.5\" fill=\"#F6ECDF\"/>"}</svg>`,
+        anleitung: "Zieh die Schutzkleidung in der richtigen Reihenfolge an! Tippe die Teile nacheinander an. Jedes richtige Teil gibt 10 Punkte, komplett angezogen gibt es 30 Bonuspunkte.",
+        kurz: "Was ziehst du zuerst an? Tippe der Reihe nach!",
+        start(feld, stufe, fertig) {
+          const kids = zustand.stufe === "kids";
+          const ALLE = [["hose", "Hose"], ["stiefel", "Stiefel"], ["jacke", "Jacke"], ["haube", "Flammschutzhaube"], ["helm", "Helm"], ["handschuhe", "Handschuhe"]];
+          const reihe = kids ? ALLE.filter(t => ["hose", "stiefel", "jacke", "helm"].includes(t[0])) : stufe === 0 ? ALLE.filter(t => t[0] !== "haube") : ALLE;
+          const falle = kids ? [] : [[], [["flipflops", "Flip-Flops"]], [["flipflops", "Flip-Flops"], ["kappe", "Basecap"]]][stufe];
+          let punkte = 0, schritt = 0, gesperrt = false, hilfe = 0;
+          feld.style.background = "linear-gradient(#F6ECDF, #EADAC4)";
+          const box = document.createElement("div");
+          box.className = "anziehen";
+          box.innerHTML = `<div class="a-plaetze"></div><div class="a-frage"></div><div class="a-teile"></div>`;
+          feld.appendChild(box);
+          const plaetze = box.querySelector(".a-plaetze"), teile = box.querySelector(".a-teile");
+          const teilSVG = (k) => `<svg viewBox="0 0 48 48">${(ICONS[k] || SCHUTZ[k]).s}</svg>`;
+          function runde() {
+            schritt = 0; gesperrt = false;
+            plaetze.innerHTML = reihe.map((_, i) => `<div class="a-platz"><span>${i + 1}</span></div>`).join("");
+            teile.innerHTML = "";
+            teile.style.gridTemplateColumns = `repeat(${reihe.length + falle.length > 4 ? 3 : 2}, 1fr)`;
+            mischen([...reihe, ...falle]).forEach(([k, n]) => {
+              const b = document.createElement("button");
+              b.className = "a-teil";
+              b.dataset.k = k;
+              b.innerHTML = `${teilSVG(k)}<span>${n}</span>`;
+              b.addEventListener("pointerdown", (ev) => { ev.preventDefault(); tippen(b, k); });
+              teile.appendChild(b);
+            });
+            frage();
+          }
+          function frage() {
+            box.querySelector(".a-frage").textContent = schritt === 0 ? "Was ziehst du zuerst an?" : "Und was kommt als Nächstes?";
+            clearHilfe();
+            const g = ++hilfe;
+            if (kids) nach(2500, () => { if (g !== hilfe || schritt >= reihe.length) return; const b = teile.querySelector(`[data-k="${reihe[schritt][0]}"]`); b && b.classList.add("tipp"); });
+          }
+          function clearHilfe() { teile.querySelectorAll(".tipp").forEach(b => b.classList.remove("tipp")); }
+          function tippen(b, k) {
+            if (uhr.pausiert || gesperrt || b.classList.contains("an")) return;
+            if (k === reihe[schritt][0]) {
+              b.classList.add("an");
+              plaetze.children[schritt].innerHTML = teilSVG(k);
+              plaetze.children[schritt].classList.add("voll");
+              schritt++;
+              punkte += 10; mgPunkte(punkte);
+              ton(500 + schritt * 80, .08, "triangle"); vibriere(20);
+              if (schritt === reihe.length) {
+                gesperrt = true;
+                punkte += 30; mgPunkte(punkte);
+                zeigePunkte(feld, "50%", "45%", "Einsatzbereit! +30");
+                tonRichtig();
+                nach(1200, runde);
+              } else frage();
+            } else {
+              if (!kids) { punkte = Math.max(0, punkte - 5); mgPunkte(punkte); zeigePunkte(feld, "50%", "45%", "−5", true); }
+              tonFalsch(); vibriere([60, 40, 60]);
+              b.animate([{ transform: "translateX(-6px)" }, { transform: "translateX(6px)" }, { transform: "none" }], 250);
+              const info = { flipflops: "Flip-Flops schützen nicht!", kappe: "Im Einsatz trägst du einen Helm." }[k];
+              box.querySelector(".a-frage").textContent = info || "Noch nicht! Was kommt vorher?";
+            }
+          }
+          runde();
           zeitbalken(mgDauer(), () => fertig(punkte));
         }
       }
     ];
 
+    FRAGEN.kids.push(
+      { k: "Knoten", f: "Was ist ein Knoten?", a: ["Knoten", "Apfel", "Ball"], i: ["bild:knoten_ueberhand", "apfel", "ball"], e: "Das ist ein Knoten in der Leine. Knoten lernt man bei der Feuerwehr!" }
+    );
+    FRAGEN.leicht.unshift(
+      { k: "Knoten", f: "Wie heißt dieser einfache Knoten?", bild: "knoten_ueberhand", a: ["Überhandknoten", "Kreuzknoten", "Mastwurf", "Achterknoten"], e: "Der Überhandknoten ist der einfachste Knoten. Aus ihm wird mit einer Extra-Runde der Achterknoten." },
+      { k: "Knoten", f: "Dieser Knoten sieht aus wie eine Zahl. Wie heißt er?", bild: "knoten_achter", a: ["Achterknoten", "Nullknoten", "Dreierknoten", "Ringknoten"], e: "Der Achterknoten sieht aus wie eine 8. Er verhindert zum Beispiel, dass eine Leine durch eine Öse rutscht." },
+      { k: "Knoten", f: "Wie heißt das Seil bei der Feuerwehr?", a: ["Leine", "Strick", "Kordel", "Faden"], e: "Bei der Feuerwehr sagt man Leine, zum Beispiel Feuerwehrleine oder Mehrzweckleine." },
+      { k: "Knoten", f: "Wozu braucht die Feuerwehr Knoten?", a: ["Zum Sichern und Hochziehen von Geräten", "Zum Basteln", "Nur zur Deko", "Zum Schuhe binden"], e: "Mit Knoten sichert man Geräte und Personen oder zieht ein Strahlrohr nach oben." }
+    );
+    FRAGEN.mittel.unshift(
+      { k: "Knoten", f: "Wie heißt dieser Knoten an der Stange?", bild: "knoten_halbschlag", a: ["Halbschlag", "Kreuzknoten", "Achterknoten", "Schotenstich"], e: "Beim Halbschlag wird das Ende einmal um die eigene Leine gelegt. Er sichert zum Beispiel einen Mastwurf zusätzlich." },
+      { k: "Knoten", f: "Welcher Knoten ist auf dem Bild?", bild: "knoten_achter", a: ["Achterknoten", "Überhandknoten", "Halbschlag", "Mastwurf"], e: "Achterknoten: eine Runde mehr als beim Überhandknoten, darum sieht er aus wie eine 8." },
+      { k: "Knoten", f: "Mit welchem Knoten verbindet man zwei gleich dicke Leinen?", a: ["Kreuzknoten", "Mastwurf", "Halbschlag", "Achterknoten"], e: "Der Kreuzknoten verbindet zwei gleich dicke Leinen: links über rechts, dann rechts über links." },
+      { k: "Knoten", f: "Mit welchem Knoten befestigt man eine Leine an einer Stange oder einem Rohr?", a: ["Mastwurf", "Kreuzknoten", "Überhandknoten", "Schotenstich"], e: "Der Mastwurf hält gut an Stangen, Rohren und Geräten, zum Beispiel beim Hochziehen." },
+      { k: "Knoten", f: "Welcher Knoten bildet eine feste Schlinge, die sich nicht zuzieht?", a: ["Pfahlstich", "Halbschlag", "Kreuzknoten", "Überhandknoten"], e: "Der Pfahlstich (auch Palstek) bildet eine feste Schlinge, zum Beispiel um einen Pfahl." }
+    );
+    FRAGEN.schwer.unshift(
+      { k: "Knoten", f: "Mit welchem Knoten verbindet man zwei unterschiedlich dicke Leinen?", a: ["Schotenstich", "Kreuzknoten", "Mastwurf", "Achterknoten"], e: "Der Schotenstich hält auch bei verschieden dicken Leinen. Der Kreuzknoten würde sich hier lösen." },
+      { k: "Knoten", f: "Wie sichert man ein Strahlrohr, das mit der Leine hochgezogen wird?", a: ["Mastwurf und Halbschlag", "Nur ein Kreuzknoten", "Nur ein Überhandknoten", "Gar nicht"], e: "Der Mastwurf hält das Gerät, ein Halbschlag sichert zusätzlich, damit nichts herausrutscht." },
+      { k: "Knoten", f: "Wofür nimmt man einen Achterknoten am Ende einer Leine?", a: ["Damit die Leine nicht durch eine Öse oder Rolle rutscht", "Um zwei Leinen zu verbinden", "Um eine Person zu retten", "Damit die Leine kürzer aussieht"], e: "Am Leinenende wirkt der Achterknoten als Stopper." },
+      { k: "Knoten", f: "Was ist auf dem Bild zu sehen?", bild: "knoten_halbschlag", a: ["Ein Halbschlag um eine Stange", "Ein Kreuzknoten", "Ein Pfahlstich", "Ein Schotenstich"], e: "Das Leinenende ist einmal um die eigene Leine gelegt: ein Halbschlag." }
+    );
+
     const PUNKTE_RICHTIG = 100;
     const STUFEN = ["kids", "leicht", "mittel", "schwer"];
-    const STUFEN_NAME = { kids: "Kids", leicht: "Leicht", mittel: "Mittel", schwer: "Schwer" };
+    const STUFEN_NAME = { kids: "Löschzwerge", leicht: "Kleinbrand", mittel: "Mittelbrand", schwer: "Großbrand" };
     const QUIZ_ZEIT = { kids: 30000, leicht: 25000, mittel: 20000, schwer: 15000 };   // Zeit pro Quizfrage in ms
     function mgDauer() { return zustand.stufe === "kids" ? 20000 : 15000; }           // Zeit pro Minigame in ms
     function mgStufe() { return Math.max(0, STUFEN.indexOf(zustand.stufe) - 1); }      // Kids spielen wie leicht
@@ -3143,9 +3826,9 @@
       $("ueb-spiel").textContent = mg.name;
       const kids = zustand.stufe === "kids";
       $("ueb-anleitung").textContent = kids ? mg.kurz : mg.anleitung;
-      uebText = `${sp.name}, du bist dran! ${mg.name}. ${kids ? mg.kurz : mg.anleitung}`;
+      uebText = kids ? `${sp.name}! ${mg.kurz}` : `${mg.name}. ${mg.anleitung}`;
       zeige("s-uebergabe");
-      if (kids && soundAn) vorlesen(uebText, $("ueb-vorlesen"));
+      if (kids) automatischVorlesen(uebText, $("ueb-vorlesen"));
     }
 
     function minigameStarten() {
@@ -3206,13 +3889,29 @@
     }
 
     // ---------- Vorlesen (Kids-Modus und Lautsprecher-Knopf) ----------
+    // Die Stimme kommt vom Handy. Wir nehmen die natürlichste deutsche Stimme, die es anbietet,
+    // und lassen Spaß- und Roboterstimmen weg. Im Betreuer-Modus kann man eine andere wählen.
     const SPRECHEN = "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+    const SPASS_STIMMEN = /(eddy|flo|grandma|grandpa|oma|opa|reed|rocko|sandy|shelley|albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|fred|junior|kathy|ralph|hysterical|deranged)/i;
     let deStimme = null;
+    let vorlesenAn = speicherLaden().vorlesen !== false;
+    function stimmeBewerten(v) {
+      let p = 0;
+      if (/^de[-_]DE/i.test(v.lang)) p += 5; else if (/^de/i.test(v.lang)) p += 3;
+      if (/premium|enhanced|erweitert|natural|neural|online|wavenet/i.test(v.name)) p += 10;
+      if (/google/i.test(v.name)) p += 6;
+      if (/anna|petra|helena|marlene|katja|vicki|hedda|sabine|amala|seraphina|elke/i.test(v.name)) p += 2;
+      if (SPASS_STIMMEN.test(v.name)) p -= 100;
+      return p;
+    }
+    function stimmenListe() {
+      try { return speechSynthesis.getVoices().filter(v => /^de/i.test(v.lang)).sort((a, b) => stimmeBewerten(b) - stimmeBewerten(a)); } catch (e) { return []; }
+    }
     function stimmeSuchen() {
-      try {
-        const v = speechSynthesis.getVoices();
-        deStimme = v.find(x => /^de[-_]DE/i.test(x.lang)) || v.find(x => /^de/i.test(x.lang)) || null;
-      } catch (e) { }
+      const liste = stimmenListe();
+      const gewuenscht = speicherLaden().stimme;
+      deStimme = liste.find(v => v.name === gewuenscht) || liste.find(v => stimmeBewerten(v) > -50) || null;
+      if ($("s-betreuer").classList.contains("aktiv")) stimmeAuswahlFuellen();
     }
     if (SPRECHEN) { stimmeSuchen(); try { speechSynthesis.onvoiceschanged = stimmeSuchen; } catch (e) { } }
     document.querySelectorAll(".vorlesen").forEach(b => b.hidden = !SPRECHEN);
@@ -3220,10 +3919,12 @@
       if (!SPRECHEN || !text) return;
       try {
         speechSynthesis.cancel();
+        speechSynthesis.resume();
         document.querySelectorAll(".vorlesen.spricht").forEach(b => b.classList.remove("spricht"));
         const u = new SpeechSynthesisUtterance(text);
         u.lang = "de-DE";
-        u.rate = zustand.stufe === "kids" ? .9 : 1;
+        u.rate = zustand.stufe === "kids" ? 1.05 : 1.1;
+        u.pitch = zustand.stufe === "kids" ? 1.1 : 1;
         if (deStimme) u.voice = deStimme;
         if (knopf) { knopf.classList.add("spricht"); u.onend = u.onerror = () => knopf.classList.remove("spricht"); }
         speechSynthesis.speak(u);
@@ -3231,14 +3932,51 @@
     }
     function vorleseStopp() {
       if (!SPRECHEN) return;
-      try { speechSynthesis.cancel(); } catch (e) { }
+      // pause() vor cancel(): manche iPhones hören sonst nicht sofort auf
+      try { speechSynthesis.pause(); speechSynthesis.cancel(); } catch (e) { }
       document.querySelectorAll(".vorlesen.spricht").forEach(b => b.classList.remove("spricht"));
     }
+    function automatischVorlesen(text, knopf) { if (vorlesenAn) vorlesen(text, knopf); }
     // iPhones erlauben Sprache erst nach einem Tipp. Darum beim Spielstart einmal leise "sprechen".
     function vorleseFreischalten() {
       if (!SPRECHEN) return;
-      try { const u = new SpeechSynthesisUtterance(" "); u.volume = 0; u.lang = "de-DE"; speechSynthesis.speak(u); } catch (e) { }
+      try { speechSynthesis.resume(); const u = new SpeechSynthesisUtterance(" "); u.volume = 0; u.lang = "de-DE"; speechSynthesis.speak(u); } catch (e) { }
     }
+    const ICON_VORLESEN = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h10a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 4v-4H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M19 8a4 4 0 0 1 0 5M21.5 5.5a7.5 7.5 0 0 1 0 10"/></svg>`;
+    const ICON_VORLESEN_AUS = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h10a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 4v-4H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M18 8l5 5M23 8l-5 5"/></svg>`;
+    function vorleseKnopf() {
+      const b = $("vorlese-btn");
+      b.hidden = !SPRECHEN;
+      b.innerHTML = vorlesenAn ? ICON_VORLESEN : ICON_VORLESEN_AUS;
+      b.classList.toggle("aus", !vorlesenAn);
+      b.setAttribute("aria-label", vorlesenAn ? "Vorlesen ausschalten" : "Vorlesen einschalten");
+    }
+    function vorlesenUmschalten() {
+      vorlesenAn = !vorlesenAn;
+      try { const g = speicherLaden(); g.vorlesen = vorlesenAn; localStorage.setItem("fw-spiel", JSON.stringify(g)); } catch (e) { }
+      vorleseKnopf();
+      if (vorlesenAn) vorlesen("Vorlesen ist an."); else vorleseStopp();
+    }
+    vorleseKnopf();
+    function stimmeAuswahlFuellen() {
+      const s = $("be-stimme"), info = $("be-stimme-info");
+      const liste = SPRECHEN ? stimmenListe() : [];
+      s.innerHTML = "";
+      liste.forEach((v, i) => { const o = document.createElement("option"); o.value = v.name; o.textContent = v.name + (i === 0 ? " (empfohlen)" : ""); s.appendChild(o); });
+      s.hidden = !liste.length;
+      $("be-probe").hidden = !liste.length;
+      if (deStimme) s.value = deStimme.name;
+      info.textContent = liste.length
+        ? "Wie die Stimme klingt, hängt vom Handy ab. Tipp fürs iPhone: Unter Einstellungen › Bedienungshilfen › Gesprochene Inhalte › Stimmen › Deutsch kannst du eine bessere Stimme laden (Erweitert oder Premium). Danach das Spiel neu laden."
+        : "Auf diesem Gerät wurde keine deutsche Vorlesestimme gefunden.";
+    }
+    function stimmeWaehlen() {
+      const name = $("be-stimme").value;
+      try { const g = speicherLaden(); g.stimme = name; localStorage.setItem("fw-spiel", JSON.stringify(g)); } catch (e) { }
+      deStimme = stimmenListe().find(v => v.name === name) || deStimme;
+      stimmeProbe();
+    }
+    function stimmeProbe() { vorlesen("Hallo! Ich lese euch die Fragen vor. Viel Spaß bei Blaulicht Battle!", $("be-probe")); }
     let uebText = "", quizText = "";
     function uebVorlesen() { vorlesen(uebText, $("ueb-vorlesen")); }
     function quizVorlesen() { vorlesen(quizText, $("quiz-vorlesen")); }
@@ -3322,7 +4060,7 @@
         $("quiz-erklaerung").hidden = false;
         $("quiz-weiter").hidden = false;
         quizText = erg.textContent + " " + loesung + (frage.e || "");
-        if (kids && soundAn) vorlesen(quizText, $("quiz-vorlesen"));
+        if (kids) automatischVorlesen(quizText, $("quiz-vorlesen"));
         setTimeout(() => $("quiz-weiter").scrollIntoView({ behavior: "smooth", block: "end" }), 80);
       }
 
@@ -3347,7 +4085,7 @@
       });
       zeige("s-quiz");
       zeitbalken(QUIZ_ZEIT[zustand.stufe] || 20000, () => aufloesen(null), "quiz-zeit");
-      if (kids && soundAn) vorlesen(quizText, $("quiz-vorlesen"));
+      if (kids) automatischVorlesen(quizText, $("quiz-vorlesen"));
     }
 
     // ---------- Betreuer-Modus ----------
@@ -3363,6 +4101,7 @@
       listeZeichnen();
       beMeldung(meldung || "");
       zeige("s-betreuer");
+      stimmeAuswahlFuellen();
     }
     function beMeldung(text, fehler) { const m = $("be-meldung"); m.textContent = text; m.classList.toggle("fehler", !!fehler); }
     function beTMeldung(text, fehler) { const m = $("be-tmeldung"); m.textContent = text; m.classList.toggle("fehler", !!fehler); }

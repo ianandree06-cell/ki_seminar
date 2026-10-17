@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#d50000">
+<title>Blaulicht Battle</title>
+<style>
+  :root {
+    --rot: #d50000;
+    --rot-dunkel: #8e0000;
+    --gelb: #ffd600;
+    --weiss: #ffffff;
+    --schwarz: #1a1a1a;
+    --gruen: #2e7d32;
+    --blau: #1565c0;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body {
+    margin: 0; height: 100%;
+    font-family: "Comic Sans MS", "Chalkboard SE", "Comic Neue", "Trebuchet MS", sans-serif;
+    background: var(--rot);
+    color: var(--schwarz);
+    touch-action: manipulation;
+    user-select: none; -webkit-user-select: none;
+    overflow: hidden;
+  }
+  body {
+    background:
+      repeating-linear-gradient(45deg, rgba(255,255,255,.06) 0 20px, transparent 20px 40px),
+      radial-gradient(circle at 50% 0%, #ff3d00, var(--rot) 60%, var(--rot-dunkel));
+  }
+  .screen {
+    position: fixed; inset: 0;
+    display: none; flex-direction: column; align-items: center;
+    padding: max(16px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom));
+    overflow-y: auto;
+  }
+  .screen.aktiv { display: flex; animation: rein .3s ease-out; }
+  @keyframes rein { from { transform: scale(.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+  h1, h2 {
+    color: var(--weiss); text-align: center; margin: 8px 0 12px;
+    text-shadow: 3px 3px 0 var(--schwarz), -1px -1px 0 var(--schwarz), 1px -1px 0 var(--schwarz), -1px 1px 0 var(--schwarz);
+    letter-spacing: 1px;
+  }
+  h1 { font-size: 2.4rem; line-height: 1.1; }
+  h2 { font-size: 1.8rem; }
+
+  .karte {
+    background: var(--weiss); border: 4px solid var(--schwarz); border-radius: 20px;
+    box-shadow: 6px 6px 0 var(--schwarz);
+    padding: 16px; width: 100%; max-width: 480px; margin-bottom: 16px;
+  }
+  .btn {
+    display: block; width: 100%; max-width: 480px;
+    font: inherit; font-size: 1.4rem; font-weight: bold;
+    padding: 18px 12px; margin: 8px 0;
+    border: 4px solid var(--schwarz); border-radius: 18px;
+    background: var(--gelb); color: var(--schwarz);
+    box-shadow: 0 6px 0 var(--schwarz);
+    cursor: pointer;
+  }
+  .btn:active { transform: translateY(5px); box-shadow: 0 1px 0 var(--schwarz); }
+  .btn.weiss { background: var(--weiss); }
+  .btn.klein { font-size: 1.1rem; padding: 12px; }
+  .btn:disabled { opacity: .5; }
+
+  .logo { font-size: 6rem; text-align: center; margin-top: 20px; animation: wackeln 1.5s infinite; }
+  @keyframes wackeln { 0%,100% { transform: rotate(-6deg); } 50% { transform: rotate(6deg); } }
+
+  .spieler-zeile { display: flex; gap: 8px; margin-bottom: 8px; }
+  .spieler-zeile input {
+    flex: 1; font: inherit; font-size: 1.2rem; padding: 12px;
+    border: 3px solid var(--schwarz); border-radius: 12px; min-width: 0;
+  }
+  .spieler-zeile button {
+    font-size: 1.4rem; width: 52px; border: 3px solid var(--schwarz); border-radius: 12px; background: #ffcdd2;
+  }
+  .auswahl { display: flex; gap: 10px; }
+  .auswahl .btn { margin: 4px 0; font-size: 1.15rem; padding: 14px 6px; }
+  .auswahl .btn.gewaehlt { background: var(--rot); color: var(--weiss); }
+  .hinweis { font-size: .95rem; color: #555; margin: 4px 0 10px; }
+  .label { font-weight: bold; font-size: 1.15rem; margin-bottom: 6px; }
+
+  .gross { font-size: 1.3rem; text-align: center; line-height: 1.4; }
+  .name-gross { font-size: 2.4rem; font-weight: bold; color: var(--rot); text-align: center; margin: 10px 0; }
+
+  /* Kopfzeile im Spiel */
+  #sound-btn {
+    position: fixed; top: max(6px, env(safe-area-inset-top)); right: 8px; z-index: 100;
+    width: 48px; height: 48px; font-size: 1.5rem; line-height: 1;
+    border: 4px solid var(--schwarz); border-radius: 50%; background: var(--weiss);
+    box-shadow: 0 4px 0 var(--schwarz); cursor: pointer; padding: 0;
+  }
+  #sound-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--schwarz); }
+  #sound-btn.aus { background: #bdbdbd; }
+  .screen > h1:first-child, .screen > h2:first-child { padding: 0 56px; }
+  @keyframes strasse { to { background-position: 0 60px; } }
+  @keyframes blinken { 50% { opacity: .2; } }
+  .kopf {
+    padding-right: 60px;
+    width: 100%; max-width: 480px; display: flex; justify-content: space-between; align-items: center;
+    color: var(--weiss); font-weight: bold; font-size: 1.2rem; text-shadow: 2px 2px 0 var(--schwarz); margin-bottom: 8px;
+  }
+  .zeitbalken { margin-top: 6px; width: 100%; max-width: 480px; height: 18px; background: rgba(0,0,0,.35); border: 3px solid var(--schwarz); border-radius: 10px; overflow: hidden; margin-bottom: 10px; }
+  .zeitbalken div { height: 100%; width: 100%; background: var(--gelb); transition: width .1s linear; }
+
+  /* Minigame-Feld */
+  #spielfeld {
+    position: relative; width: 100%; max-width: 480px; flex: 1; min-height: 300px;
+    background: linear-gradient(#90caf9, #e3f2fd 55%, #a5d6a7 55%, #81c784);
+    border: 4px solid var(--schwarz); border-radius: 20px; overflow: hidden;
+    box-shadow: 6px 6px 0 var(--schwarz);
+  }
+
+  /* Quiz */
+  .frage { font-size: 1.35rem; font-weight: bold; text-align: center; line-height: 1.35; }
+  .antwort { text-align: left; font-size: 1.15rem; padding: 16px 14px; background: var(--weiss); }
+  .antwort.richtig { background: #69f0ae; animation: puls .4s; }
+  .antwort.falsch { background: #ff8a80; animation: schuetteln .4s; }
+  @keyframes puls { 50% { transform: scale(1.05); } }
+  @keyframes schuetteln { 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+  .erklaerung { display: none; }
+  .erklaerung.zeigen { display: block; animation: rein .3s; }
+  .ergebnis-emoji { font-size: 3.5rem; text-align: center; }
+
+  /* Rangliste */
+  .rang { display: flex; align-items: center; gap: 10px; font-size: 1.25rem; padding: 10px 6px; border-bottom: 2px dashed #ccc; }
+  .rang:last-child { border-bottom: none; }
+  .rang .platz { width: 44px; font-size: 1.6rem; text-align: center; }
+  .rang .nm { flex: 1; font-weight: bold; }
+  .rang .pkt { font-weight: bold; color: var(--rot); }
+
+  .podest { display: flex; align-items: flex-end; justify-content: center; gap: 8px; width: 100%; max-width: 480px; margin: 10px 0 16px; }
+  .podest > div { flex: 1; text-align: center; color: var(--weiss); font-weight: bold; text-shadow: 2px 2px 0 var(--schwarz); }
+  .podest .sockel { background: var(--gelb); border: 4px solid var(--schwarz); border-radius: 12px 12px 0 0; color: var(--schwarz); text-shadow: none; font-size: 2rem; display: flex; align-items: center; justify-content: center; }
+  .podest .pname { font-size: 1.05rem; word-break: break-word; margin-bottom: 4px; }
+
+  .konfetti { position: fixed; top: -20px; font-size: 1.6rem; pointer-events: none; animation: fallen linear forwards; z-index: 50; }
+  @keyframes fallen { to { transform: translateY(110vh) rotate(720deg); } }
+
+  .punkte-popup {
+    position: absolute; font-weight: bold; font-size: 1.5rem; color: var(--weiss);
+    text-shadow: 2px 2px 0 var(--schwarz); pointer-events: none; animation: hoch .7s ease-out forwards;
+  }
+  @keyframes hoch { to { transform: translateY(-50px); opacity: 0; } }
+</style>
+</head>
+<body>
+
+<button id="sound-btn" onclick="soundUmschalten()" aria-label="Sound an oder aus">🔊</button>
+
+<!-- ================= STARTBILDSCHIRM ================= -->
+<section class="screen aktiv" id="s-start">
+  <div class="logo">🚒</div>
+  <h1 id="titel">Blaulicht Battle</h1>
+  <div class="karte gross">Minigames, Quizfragen und Punkte.<br>Ein Handy, reihum weitergeben! 🔥➡️💧</div>
+  <button class="btn" onclick="zeige('s-setup')">Los geht's! 🚨</button>
+</section>
+
+<!-- ================= EINSTELLUNGEN ================= -->
+<section class="screen" id="s-setup">
+  <h2>Wer spielt mit?</h2>
+  <div class="karte">
+    <div class="label">Spieler (2 bis 8)</div>
+    <div id="spieler-liste"></div>
+    <button class="btn weiss klein" id="btn-plus" onclick="spielerHinzu('')">➕ Spieler hinzufügen</button>
+  </div>
+  <div class="karte">
+    <div class="label">Schwierigkeit</div>
+    <div class="auswahl" id="wahl-schwierigkeit">
+      <button class="btn" data-wert="leicht">🧒 Leicht<br><small>10–13 Jahre</small></button>
+      <button class="btn" data-wert="schwer">🧑‍🚒 Schwer<br><small>14–17 Jahre</small></button>
+    </div>
+  </div>
+  <div class="karte">
+    <div class="label">Runden</div>
+    <div class="auswahl" id="wahl-runden">
+      <button class="btn" data-wert="3">3</button>
+      <button class="btn" data-wert="5">5</button>
+      <button class="btn" data-wert="7">7</button>
+    </div>
+  </div>
+  <button class="btn" onclick="spielStarten()">Einsatz starten! 🚒</button>
+  <div style="height:20px"></div>
+</section>
+
+<!-- ================= ÜBERGABE ================= -->
+<section class="screen" id="s-uebergabe">
+  <h2 id="ueb-runde">Runde 1</h2>
+  <div class="karte">
+    <div class="gross">📱 Gib das Handy an</div>
+    <div class="name-gross" id="ueb-name">Name</div>
+    <div class="gross" id="ueb-spiel"></div>
+    <p class="gross hinweis" id="ueb-anleitung"></p>
+  </div>
+  <button class="btn" onclick="minigameStarten()">Ich bin bereit! 💪</button>
+</section>
+
+<!-- ================= MINIGAME ================= -->
+<section class="screen" id="s-minigame">
+  <div class="kopf"><span id="mg-name">Minigame</span><span id="mg-punkte">0 Pkt</span></div>
+  <div class="zeitbalken"><div id="mg-zeit"></div></div>
+  <div id="spielfeld"></div>
+</section>
+
+<!-- ================= QUIZ ================= -->
+<section class="screen" id="s-quiz">
+  <div class="kopf"><span id="quiz-spieler">Name</span><span>❓ Quizfrage</span></div>
+  <div class="karte"><div class="frage" id="quiz-frage">Frage</div></div>
+  <div id="quiz-antworten" style="width:100%;max-width:480px"></div>
+  <div class="karte erklaerung" id="quiz-erklaerung">
+    <div class="ergebnis-emoji" id="quiz-emoji"></div>
+    <div class="gross" id="quiz-ergebnis"></div>
+    <p id="quiz-text"></p>
+  </div>
+  <button class="btn erklaerung" id="quiz-weiter" onclick="zugBeenden()">Weiter ➡️</button>
+</section>
+
+<!-- ================= ZWISCHENSTAND ================= -->
+<section class="screen" id="s-zwischen">
+  <h2 id="zw-titel">Zwischenstand</h2>
+  <div class="karte" id="zw-liste"></div>
+  <button class="btn" onclick="naechsterZug()">Weiter ➡️</button>
+</section>
+
+<!-- ================= SIEGEREHRUNG ================= -->
+<section class="screen" id="s-ende">
+  <h1>🏆 Siegerehrung 🏆</h1>
+  <div class="podest" id="podest"></div>
+  <div class="karte" id="end-liste"></div>
+  <button class="btn" onclick="nochmal()">Nochmal spielen 🔁</button>
+  <button class="btn weiss klein" onclick="zeige('s-setup')">Neue Spieler / Einstellungen</button>
+  <div style="height:20px"></div>
+</section>
+
+<script>
+// =====================================================================
+//  SPIELNAME: von der Gruppe gewählt
+// =====================================================================
+const SPIELNAME = "Blaulicht Battle";
+
+// =====================================================================
+//  QUIZFRAGEN
+//  So ist eine Frage aufgebaut:
+//    { f: "Die Frage?",
+//      a: ["RICHTIGE Antwort", "falsch", "falsch", "falsch"],
+//      e: "Kurze Erklärung, die nach der Antwort angezeigt wird." }
+//  WICHTIG: Die richtige Antwort steht IMMER an erster Stelle.
+//  Im Spiel werden die Antworten automatisch gemischt.
+//  Neue Frage = einfach eine Zeile nach dem gleichen Muster ergänzen.
+// =====================================================================
+const FRAGEN = {
+  leicht: [
+    { f: "Welche Nummer wählst du, wenn es brennt?", a: ["112", "110", "115", "911"], e: "Die 112 ist der Notruf für Feuerwehr und Rettungsdienst, in ganz Europa und kostenlos." },
+    { f: "Welche Nummer hat die Polizei?", a: ["110", "112", "116", "100"], e: "Die Polizei erreichst du unter 110. Feuerwehr und Rettungsdienst unter 112." },
+    { f: "Was sagst du beim Notruf als Erstes?", a: ["Wo ist es passiert?", "Wie spät es ist", "Wie alt ich bin", "Meine Lieblingsfarbe"], e: "Die Leitstelle muss zuerst wissen, WO etwas passiert ist, damit Hilfe losfahren kann." },
+    { f: "Wann legst du beim Notruf auf?", a: ["Wenn die Leitstelle es sagt", "Sofort nach dem ersten Satz", "Nach 10 Sekunden", "Gar nicht"], e: "Warte auf Rückfragen! Die Leitstelle beendet das Gespräch." },
+    { f: "Was braucht ein Feuer zum Brennen?", a: ["Brennstoff, Sauerstoff und Wärme", "Nur Wasser", "Nur Wind", "Sand und Steine"], e: "Das ist das Verbrennungsdreieck. Fehlt eine Seite, geht das Feuer aus." },
+    { f: "Wie löscht Wasser ein Feuer vor allem?", a: ["Es kühlt", "Es färbt", "Es macht Lärm", "Es zieht Strom"], e: "Wasser nimmt viel Wärme auf und kühlt den brennenden Stoff ab." },
+    { f: "Ein Topf mit Fett brennt. Was machst du?", a: ["Deckel drauf, Herd aus", "Wasser drüberkippen", "Pusten", "Den Topf schütteln"], e: "Niemals Wasser auf brennendes Fett! Es gibt eine Stichflamme (Fettexplosion). Der Deckel nimmt dem Feuer die Luft." },
+    { f: "Im Raum ist Rauch. Wie bewegst du dich?", a: ["Gebückt, nah am Boden", "Auf Zehenspitzen", "Ganz aufrecht", "Springend"], e: "Rauch steigt nach oben. Unten ist die Luft am besten und die Sicht klarer." },
+    { f: "Darfst du bei einem Brand den Aufzug nehmen?", a: ["Nein, nur die Treppe", "Ja, immer", "Nur nach oben", "Nur mit Freunden"], e: "Ein Aufzug kann stecken bleiben und sich mit Rauch füllen. Nimm die Treppe." },
+    { f: "Deine Kleidung brennt. Was tust du?", a: ["Stehen bleiben, hinlegen, rollen", "Wegrennen", "Mit den Armen wedeln", "Hochspringen"], e: "Wegrennen facht das Feuer an. Hinlegen und Rollen erstickt die Flammen." },
+    { f: "Wofür ist ein Rauchmelder da?", a: ["Er warnt laut vor Rauch", "Er löscht das Feuer", "Er ruft die Polizei", "Er misst die Temperatur draußen"], e: "Rauchmelder piepen laut und wecken dich, bevor du im Schlaf Rauch einatmest." },
+    { f: "Wo kommen Rauchmelder hin?", a: ["An die Zimmerdecke", "Auf den Boden", "In den Kühlschrank", "Hinter das Sofa"], e: "Rauch steigt nach oben, darum gehören Rauchmelder an die Decke." },
+    { f: "Eine Tür ist im Brandfall heiß. Was tust du?", a: ["Nicht öffnen", "Schnell aufreißen", "Dagegen treten", "Durchs Schlüsselloch pusten"], e: "Dahinter brennt es wahrscheinlich. Bleib im Raum, dichte die Tür ab und mach dich am Fenster bemerkbar." },
+    { f: "Was bedeutet ein grünes Schild mit weißem, laufendem Männchen?", a: ["Rettungsweg / Notausgang", "Spielplatz", "Hier ist es verboten", "Sporthalle"], e: "Grüne Schilder zeigen Rettungswege und Erste Hilfe." },
+    { f: "Welche Farbe haben Brandschutzzeichen, z. B. für Feuerlöscher?", a: ["Rot", "Grün", "Blau", "Gelb"], e: "Rote Schilder zeigen Brandschutz-Einrichtungen wie Feuerlöscher oder Löschschlauch." },
+    { f: "Welche Form hat ein Warnzeichen?", a: ["Gelbes Dreieck", "Blauer Kreis", "Grünes Rechteck", "Roter Stern"], e: "Warnzeichen sind gelbe Dreiecke mit schwarzem Rand, z. B. für Stromgefahr." },
+    { f: "Was zeigt ein runder Kreis mit rotem Rand und rotem Balken?", a: ["Ein Verbot", "Einen Notausgang", "Einen Feuerlöscher", "Erste Hilfe"], e: "Runde Schilder mit rotem Rand und Querbalken sind Verbotszeichen." },
+    { f: "Was bedeutet ein rundes blaues Schild?", a: ["Ein Gebot: Das musst du tun", "Ein Verbot", "Eine Warnung", "Einen Fluchtweg"], e: "Blaue runde Schilder sind Gebotszeichen, z. B. 'Gehörschutz tragen'." },
+    { f: "Was bedeuten Blaulicht und Martinshorn zusammen?", a: ["Sofort Platz machen!", "Langsam weiterfahren wie immer", "Hupen", "Hinterherfahren"], e: "Wenn ein Einsatzfahrzeug mit Blaulicht UND Martinshorn kommt, müssen alle sofort freie Bahn schaffen." },
+    { f: "Wofür steht die Abkürzung 'DLK'?", a: ["Drehleiter mit Korb", "Doppel-Lösch-Kanone", "Dicker Lastkraftwagen", "Deutscher Lösch-Klub"], e: "Mit der Drehleiter rettet die Feuerwehr Menschen aus hohen Stockwerken." },
+    { f: "Was ist ein 'TLF'?", a: ["Tanklöschfahrzeug", "Telefonfahrzeug", "Turbo-Leiter-Fahrzeug", "Transport-Lager-Fahrzeug"], e: "Ein Tanklöschfahrzeug hat einen großen Wassertank an Bord." },
+    { f: "Wofür braucht ein Feuerwehrmann ein Atemschutzgerät?", a: ["Gegen giftigen Rauch", "Zum Tauchen im See", "Damit er schneller rennt", "Gegen Kälte"], e: "Brandrauch ist sehr giftig. Mit Atemschutz atmet man saubere Luft aus der Flasche." },
+    { f: "Wer ist der Schutzpatron der Feuerwehr?", a: ["Der heilige Florian", "Der heilige Nikolaus", "Der heilige Martin", "Der heilige Georg"], e: "Der heilige Florian ist der Schutzpatron der Feuerwehrleute. Sein Gedenktag ist der 4. Mai." },
+    { f: "Wie viele Meter ist eine Feuerwehrleine lang?", a: ["30 Meter", "5 Meter", "100 Meter", "2 Meter"], e: "Die Feuerwehrleine ist 30 Meter lang und wird im Leinenbeutel getragen." },
+    { f: "Mit welchem Knoten verbindet man zwei gleich dicke Leinen?", a: ["Kreuzknoten", "Schleife", "Mastwurf", "Halbschlag"], e: "Der Kreuzknoten verbindet zwei gleich starke Leinen." },
+    { f: "Was ist ein Hydrant?", a: ["Eine Wasser-Entnahmestelle", "Ein Feuerwehrhelm", "Ein Löschpulver", "Ein Funkgerät"], e: "Am Hydranten holt die Feuerwehr Wasser aus der Trinkwasserleitung." },
+    { f: "Wie sollst du mit einem Feuerlöscher löschen?", a: ["Mit dem Wind im Rücken", "Gegen den Wind", "Von ganz weit oben", "Mit geschlossenen Augen"], e: "Mit dem Wind im Rücken kommt das Löschmittel ans Feuer und der Rauch weht von dir weg." },
+    { f: "Wohin zielst du mit dem Feuerlöscher?", a: ["Auf die Glut, unten am Feuer", "In den Rauch", "In die Luft", "Auf die Zuschauer"], e: "Gelöscht wird dort, wo es brennt: unten an der Glut, nicht in die Flammen oder den Rauch." },
+    { f: "Welche Brandklasse hat brennendes Holz oder Papier?", a: ["A", "B", "C", "D"], e: "Brandklasse A sind feste Stoffe, die mit Glut brennen: Holz, Papier, Stoff." },
+    { f: "Welche Brandklasse hat brennendes Benzin?", a: ["B", "A", "D", "F"], e: "Brandklasse B sind brennbare Flüssigkeiten wie Benzin, Öl oder Lack." },
+    { f: "Du siehst einen Brand. Was ist das Wichtigste zuerst?", a: ["Selbst in Sicherheit gehen und 112 rufen", "Fotos machen", "Ganz nah hingehen", "Abwarten"], e: "Erst bringst du dich in Sicherheit, dann rufst du die 112 und warnst andere." },
+    { f: "Was darf man vor einem Notausgang nicht tun?", a: ["Dinge davor abstellen", "Daran vorbeigehen", "Das Schild anschauen", "Die Tür benutzen"], e: "Fluchtwege und Notausgänge müssen immer frei bleiben." }
+  ],
+  schwer: [
+    { f: "Welche Brandklasse gilt für brennende Gase?", a: ["C", "A", "B", "F"], e: "Brandklasse C: Gase wie Propan, Methan oder Wasserstoff." },
+    { f: "Welche Brandklasse gilt für brennende Metalle?", a: ["D", "C", "B", "E"], e: "Brandklasse D: Metalle wie Magnesium oder Aluminium. Hier braucht man Spezial-Löschpulver." },
+    { f: "Welche Brandklasse gilt für Speiseöle und -fette?", a: ["F", "B", "D", "A"], e: "Brandklasse F gibt es für Fettbrände in Küchen. Dafür gibt es spezielle Fettbrandlöscher." },
+    { f: "Welche Brandklasse gibt es heute nicht mehr?", a: ["E", "D", "F", "C"], e: "Die Brandklasse E (elektrische Anlagen) wurde abgeschafft. Moderne Löscher geben stattdessen an, bis zu welcher Spannung sie geeignet sind." },
+    { f: "Aus wie vielen Einsatzkräften besteht eine Löschgruppe?", a: ["9 (1/8)", "6 (1/5)", "3 (1/2)", "12 (1/11)"], e: "Eine Gruppe hat einen Gruppenführer und 8 Mann: Maschinist, Melder, Angriffs-, Wasser- und Schlauchtrupp." },
+    { f: "Aus wie vielen Einsatzkräften besteht eine Staffel?", a: ["6 (1/5)", "9 (1/8)", "4 (1/3)", "22 (1/21)"], e: "Eine Staffel: Staffelführer, Maschinist, Angriffstrupp und Wassertrupp." },
+    { f: "Welcher Trupp geht zuerst mit dem Strahlrohr zur Brandbekämpfung vor?", a: ["Angriffstrupp", "Wassertrupp", "Schlauchtrupp", "Melder"], e: "Der Angriffstrupp rettet Menschen und bekämpft das Feuer mit dem ersten Rohr." },
+    { f: "Was ist die Hauptaufgabe des Wassertrupps beim Löscheinsatz?", a: ["Wasserversorgung herstellen", "Fahrzeug fahren", "Funkverkehr führen", "Verletzte betreuen"], e: "Der Wassertrupp stellt die Wasserversorgung von der Wasserentnahmestelle bis zum Verteiler her." },
+    { f: "Wer bedient die Feuerlöschpumpe?", a: ["Der Maschinist", "Der Melder", "Der Angriffstruppführer", "Der Gruppenführer"], e: "Der Maschinist fährt das Fahrzeug und bedient Pumpe und Aggregate." },
+    { f: "Welchen Durchmesser hat ein B-Schlauch?", a: ["75 mm", "42 mm", "110 mm", "25 mm"], e: "B-Schläuche haben 75 mm. C-Schläuche sind dünner (42 oder 52 mm), A-Saugschläuche dicker (110 mm)." },
+    { f: "Wie heißt das Kupplungssystem der deutschen Feuerwehrschläuche?", a: ["Storz-Kupplung", "Klick-Kupplung", "Bajonett-Stecker", "Euro-Gewinde"], e: "Die Storz-Kupplung ist symmetrisch: Es gibt kein 'Vater' und 'Mutter', beide Seiten passen zusammen." },
+    { f: "Welche Abgänge hat ein normaler Verteiler?", a: ["C – B – C", "B – B – B", "A – C – A", "C – C – C – C"], e: "In den Verteiler geht ein B-Schlauch rein. Raus gehen zwei C-Abgänge und in der Mitte ein B-Abgang." },
+    { f: "Wofür nutzt man den Schotenstek?", a: ["Zwei ungleich dicke Leinen verbinden", "Eine Person sichern", "Einen Schlauch abdichten", "Ein Rohr hochziehen"], e: "Der Schotenstek verbindet Leinen unterschiedlicher Stärke. Für gleich starke nimmt man den Kreuzknoten." },
+    { f: "Wofür ist der Mastwurf gut?", a: ["Leine an einem Gegenstand befestigen", "Zwei Leinen verbinden", "Leine kürzen", "Knoten lösen"], e: "Mit dem Mastwurf befestigt man eine Leine schnell, z. B. an einem Rohr oder Pfosten." },
+    { f: "Was steht auf der orangen Gefahrgut-Warntafel unten?", a: ["Die UN-Nummer des Stoffes", "Das Kennzeichen des LKW", "Die Telefonnummer der Firma", "Das Gewicht der Ladung"], e: "Oben steht die Gefahrnummer, unten die vierstellige UN-Nummer, die den Stoff genau benennt." },
+    { f: "Was bedeutet ein 'X' vor der Gefahrnummer?", a: ["Reagiert gefährlich mit Wasser", "Ist harmlos", "Ist explosiv", "Ist leer"], e: "X heißt: Der Stoff reagiert gefährlich mit Wasser. Also kein Wasser einsetzen!" },
+    { f: "Welcher Stoff hat die UN-Nummer 1203?", a: ["Benzin", "Wasser", "Milch", "Sand"], e: "UN 1203 ist Benzin (Ottokraftstoff). Die Gefahrnummer 33 bedeutet: leicht entzündbare Flüssigkeit." },
+    { f: "Wofür steht das 'G' in der GAMS-Regel?", a: ["Gefahr erkennen", "Gas abdrehen", "Gruppe sammeln", "Gerät holen"], e: "GAMS: Gefahr erkennen, Absperren, Menschenrettung durchführen, Spezialkräfte nachfordern." },
+    { f: "Wofür steht das 'S' in der GAMS-Regel?", a: ["Spezialkräfte nachfordern", "Schlauch legen", "Sirene einschalten", "Strom abschalten"], e: "Bei Gefahrgut fordert die Feuerwehr Spezialkräfte nach, z. B. einen Gefahrstoffzug." },
+    { f: "Was gehört zu den Gefahren der Einsatzstelle (Gefahrenmatrix 'AAAA C EEEE')?", a: ["Atemgifte", "Autobahn", "Aufregung im Publikum", "Ampelausfall"], e: "Die vier A: Atemgifte, Angstreaktion, Ausbreitung, Atomare Strahlung." },
+    { f: "Ab welchem Alter darf man frühestens Atemschutzgeräteträger werden?", a: ["18 Jahre", "14 Jahre", "16 Jahre", "25 Jahre"], e: "Atemschutzgeräteträger müssen mindestens 18 Jahre alt, gesund und ausgebildet sein." },
+    { f: "Mit welchem Druck ist eine moderne Pressluftflasche gefüllt?", a: ["300 bar", "3 bar", "30 bar", "3000 bar"], e: "Moderne Atemluftflaschen haben meist 300 bar. Das ist etwa 150-mal so viel wie in einem Autoreifen." },
+    { f: "Was ist ein Flashover?", a: ["Alles Brennbare im Raum entzündet sich schlagartig", "Ein Blitz bei Gewitter", "Ein Fehlalarm", "Ein Wasserrohrbruch"], e: "Beim Flashover (Rauchdurchzündung) wird der Raum so heiß, dass sich alles gleichzeitig entzündet." },
+    { f: "Wie löscht Schaum vor allem?", a: ["Ersticken: Er trennt Brennstoff und Luft", "Er färbt die Flammen", "Er bläst das Feuer aus", "Er macht das Feuer schwer"], e: "Schaum legt eine Decke über den Brennstoff. So kommt kein Sauerstoff mehr ran." },
+    { f: "Wie löscht ein CO₂-Löscher?", a: ["Er verdrängt den Sauerstoff (Ersticken)", "Er kühlt mit Wasser", "Er streut Sand", "Er saugt das Feuer ein"], e: "Kohlendioxid verdrängt den Sauerstoff. Er wird vor allem bei elektrischen Anlagen eingesetzt." },
+    { f: "Für welche Brandklassen ist ein ABC-Pulverlöscher geeignet?", a: ["A, B und C", "Nur A", "Nur D", "A und F"], e: "Der Name sagt es: Feste Stoffe (A), Flüssigkeiten (B) und Gase (C)." },
+    { f: "Was bedeutet die Zahl direkt hinter dem 'H' auf dem Hydrantenschild?", a: ["Durchmesser der Wasserleitung in mm", "Hausnummer", "Wassertemperatur", "Höhe über dem Meer"], e: "Z. B. H 100 heißt: Die Leitung hat 100 mm Durchmesser. Die anderen Zahlen geben die Entfernung zum Hydranten in Metern an." },
+    { f: "Welche Farbe hat ein Hinweisschild für Unterflurhydranten?", a: ["Weiß mit rotem Rand", "Blau mit weißem Rand", "Grün mit weißem Rand", "Gelb mit schwarzem Rand"], e: "Unterflurhydrant-Schilder sind weiß mit rotem Rand und einem 'H'." },
+    { f: "Wo bildet man auf einer dreispurigen Autobahn die Rettungsgasse?", a: ["Zwischen der linken und der mittleren Spur", "Zwischen mittlerer und rechter Spur", "Auf dem Standstreifen", "Gar nicht"], e: "Ganz links fahren nach links, alle anderen nach rechts. Die Gasse liegt zwischen der linken Spur und den anderen." },
+    { f: "Auf welche drei Arten breitet sich Wärme aus?", a: ["Leitung, Strömung, Strahlung", "Wind, Regen, Schnee", "Rauch, Ruß, Asche", "Druck, Zug, Stoß"], e: "Wärmeleitung (durch Material), Wärmeströmung (heiße Gase steigen auf) und Wärmestrahlung." },
+    { f: "Wofür steht 'FwDV'?", a: ["Feuerwehr-Dienstvorschrift", "Feuerwehr-Dachverband", "Fahrzeug-Wartungs-Daten-Verzeichnis", "Funk-Weiterleitungs-Dienst"], e: "Die Feuerwehr-Dienstvorschriften regeln, wie Einsätze und Ausbildung ablaufen." },
+    { f: "Wofür steht 'HLF'?", a: ["Hilfeleistungslöschgruppenfahrzeug", "Hochleistungs-Lösch-Fahrzeug", "Hubrettungs-Leiter-Fahrzeug", "Hilfs-Licht-Fahrzeug"], e: "Das HLF kann löschen und hat Werkzeug für technische Hilfe, z. B. bei Verkehrsunfällen." },
+    { f: "Wie heißt das Leistungsabzeichen der Jugendfeuerwehr in mehreren Stufen?", a: ["Jugendflamme", "Feuerstern", "Löschpokal", "Florianspreis"], e: "Die Jugendflamme gibt es in den Stufen 1, 2 und 3." },
+    { f: "In welchem Jahr wurde die Deutsche Jugendfeuerwehr gegründet?", a: ["1964", "1919", "1990", "2001"], e: "Die Deutsche Jugendfeuerwehr wurde 1964 gegründet." }
+  ]
+};
+
+// =====================================================================
+//  MINIGAMES
+//  Jedes Minigame ist ein Eintrag in dieser Liste. Neues Minigame:
+//  Objekt mit name, emoji, anleitung und start(feld, schwer, fertig)
+//  ergänzen. "fertig(punkte)" aufrufen, wenn es vorbei ist.
+//  Die Minigames wechseln sich der Reihe nach ab.
+// =====================================================================
+const MINIGAMES = [
+  {
+    name: "Feuer löschen",
+    emoji: "🔥",
+    anleitung: "Tippe so schnell du kannst auf die Feuer, um sie zu löschen! Jedes Feuer gibt Punkte.",
+    start(feld, schwer, fertig) {
+      const DAUER = 15000;
+      const neuesFeuerAlle = schwer ? 550 : 900;   // ms zwischen neuen Feuern
+      const klicksProFeuer = schwer ? 2 : 1;
+      const lebensdauer = schwer ? 2200 : 3500;    // so lange brennt ein Feuer, bevor es sich ausbreitet
+      let punkte = 0;
+      const timer = [];
+
+      function feuer(x, y) {
+        if (!aktiv || feld.children.length > 14) return;
+        const el = document.createElement("div");
+        el.textContent = "🔥";
+        el.style.cssText = `position:absolute;left:${x}%;top:${y}%;font-size:52px;transform:translate(-50%,-50%);transition:transform .15s;touch-action:none;`;
+        let leben = klicksProFeuer;
+        el.addEventListener("pointerdown", (ev) => {
+          ev.preventDefault();
+          if (!aktiv || leben <= 0) return;
+          leben--;
+          ton(500 + Math.random() * 200, 0.05, "square");
+          if (leben > 0) { el.style.transform = "translate(-50%,-50%) scale(.75)"; return; }
+          punkte += 10;
+          zeigePunkte(feld, el.style.left, el.style.top, "+10");
+          el.textContent = "💨";
+          setTimeout(() => el.remove(), 250);
+          vibriere(30);
+          mgPunkte(punkte);
+        });
+        feld.appendChild(el);
+        // Wird nicht gelöscht? Dann breitet es sich aus!
+        timer.push(setTimeout(() => {
+          if (leben > 0 && el.isConnected) {
+            el.style.transform = "translate(-50%,-50%) scale(1.3)";
+            feuer(Math.min(90, Math.max(10, parseFloat(x) + (Math.random() * 30 - 15))),
+                  Math.min(90, Math.max(10, parseFloat(y) + (Math.random() * 30 - 15))));
+          }
+        }, lebensdauer));
+      }
+      function zufall() { feuer(10 + Math.random() * 80, 12 + Math.random() * 76); }
+
+      let aktiv = true;
+      zufall(); zufall();
+      const iv = setInterval(zufall, neuesFeuerAlle);
+      zeitbalken(DAUER, () => {
+        aktiv = false;
+        clearInterval(iv); timer.forEach(clearTimeout);
+        fertig(punkte);
+      });
+    }
+  }
+  ,
+  {
+    name: "Schläuche kuppeln",
+    emoji: "🧯",
+    anleitung: "Verbinde die passenden Kupplungen: Tippe links auf einen Schlauch und dann rechts auf das gleiche Zeichen in der gleichen Farbe!",
+    start(feld, schwer, fertig) {
+      const DAUER = 15000;
+      const anzahl = schwer ? 5 : 3;               // Paare pro Durchgang
+      const SORTEN = [
+        { farbe: "#e53935", zeichen: "★" },
+        { farbe: "#1e88e5", zeichen: "●" },
+        { farbe: "#fdd835", zeichen: "▲" },
+        { farbe: "#43a047", zeichen: "■" },
+        { farbe: "#8e24aa", zeichen: "♥" }
+      ];
+      let punkte = 0, aktiv = true, gewaehlt = null, offen = 0;
+
+      // Linien zwischen verbundenen Kupplungen
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("viewBox", "0 0 100 100");
+      svg.setAttribute("preserveAspectRatio", "none");
+      svg.style.cssText = "position:absolute;inset:0;width:100%;height:100%;pointer-events:none;";
+
+      function kupplung(sorte, x, y, seite) {
+        const el = document.createElement("div");
+        el.textContent = sorte.zeichen;
+        el.style.cssText = `position:absolute;left:${x}%;top:${y}%;width:66px;height:66px;transform:translate(-50%,-50%);
+          border:5px solid #1a1a1a;border-radius:50%;background:${sorte.farbe};color:#fff;font-size:2rem;
+          display:flex;align-items:center;justify-content:center;text-shadow:2px 2px 0 #1a1a1a;
+          box-shadow:0 4px 0 #1a1a1a;transition:transform .12s;touch-action:none;`;
+        // Schlauchstück zum Rand
+        const schlauch = document.createElement("div");
+        schlauch.style.cssText = `position:absolute;top:${y}%;height:16px;transform:translateY(-50%);background:#f5f5f5;
+          border:3px solid #1a1a1a;${seite === "links" ? "left:0;width:" + x + "%" : "right:0;width:" + (100 - x) + "%"};`;
+        feld.append(schlauch, el);
+        return { el, sorte, x, y, seite, fertig: false };
+      }
+
+      function durchgang() {
+        feld.innerHTML = "";
+        feld.appendChild(svg);
+        svg.innerHTML = "";
+        const sorten = mischen(SORTEN).slice(0, anzahl);
+        const rechts = mischen(sorten);
+        const teile = [];
+        sorten.forEach((s, i) => teile.push(kupplung(s, 18, (i + 1) * 100 / (anzahl + 1), "links")));
+        rechts.forEach((s, i) => teile.push(kupplung(s, 82, (i + 1) * 100 / (anzahl + 1), "rechts")));
+        offen = anzahl;
+        teile.forEach(t => t.el.addEventListener("pointerdown", (ev) => {
+          ev.preventDefault();
+          if (!aktiv || t.fertig) return;
+          if (!gewaehlt || gewaehlt.seite === t.seite) {
+            if (gewaehlt) gewaehlt.el.style.transform = "translate(-50%,-50%)";
+            gewaehlt = t;
+            t.el.style.transform = "translate(-50%,-50%) scale(1.25)";
+            ton(520, .05);
+            return;
+          }
+          const a = gewaehlt; gewaehlt = null;
+          a.el.style.transform = "translate(-50%,-50%)";
+          if (a.sorte === t.sorte) {
+            a.fertig = t.fertig = true;
+            const linie = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            linie.setAttribute("x1", a.x); linie.setAttribute("y1", a.y);
+            linie.setAttribute("x2", t.x); linie.setAttribute("y2", t.y);
+            linie.setAttribute("stroke", a.sorte.farbe);
+            linie.setAttribute("stroke-width", "14");
+            linie.setAttribute("stroke-linecap", "round");
+            linie.setAttribute("vector-effect", "non-scaling-stroke");
+            svg.appendChild(linie);
+            punkte += 15;
+            mgPunkte(punkte);
+            zeigePunkte(feld, t.x + "%", t.y + "%", "+15");
+            tonRichtig(); vibriere(30);
+            if (--offen === 0) setTimeout(() => { if (aktiv) durchgang(); }, 450);
+          } else {
+            [a, t].forEach(x => x.el.animate(
+              [{ marginLeft: "0" }, { marginLeft: "-8px" }, { marginLeft: "8px" }, { marginLeft: "0" }], 300));
+            tonFalsch(); vibriere([60, 40, 60]);
+          }
+        }));
+      }
+
+      durchgang();
+      zeitbalken(DAUER, () => { aktiv = false; fertig(punkte); });
+    }
+  },
+  {
+    name: "Ausweichen",
+    emoji: "🚒",
+    anleitung: "Das Einsatzfahrzeug ist unterwegs! Tippe links oder rechts, um die Spur zu wechseln, und weiche den Hindernissen aus.",
+    start(feld, schwer, fertig) {
+      const DAUER = 15000;
+      const SPUREN = [100 / 6, 300 / 6, 500 / 6];   // Mitte der 3 Spuren in %
+      const tempo = schwer ? 55 : 35;               // % der Feldhöhe pro Sekunde
+      const neuAlle = schwer ? 650 : 1000;          // ms zwischen neuen Hindernissen
+      const DINGE = ["🚧", "🚗", "🛢️", "🪨", "🚙"];
+      let spur = 1, punkte = 0, aktiv = true, geschuetztBis = 0, letztes = 0, zuletzt = performance.now();
+      const hindernisse = [];
+
+      const strasse = document.createElement("div");
+      strasse.style.cssText = "position:absolute;inset:0;background:#616161;touch-action:none;";
+      [33.3, 66.6].forEach(x => {
+        const l = document.createElement("div");
+        l.style.cssText = `position:absolute;top:0;bottom:0;left:${x}%;width:6px;margin-left:-3px;
+          background:repeating-linear-gradient(to bottom,#fff 0 30px,transparent 30px 60px);animation:strasse .35s linear infinite;`;
+        strasse.appendChild(l);
+      });
+      const auto = document.createElement("div");
+      auto.textContent = "🚒";
+      auto.style.cssText = `position:absolute;bottom:4%;left:${SPUREN[1]}%;font-size:58px;transform:translateX(-50%);transition:left .12s;`;
+      strasse.appendChild(auto);
+      feld.appendChild(strasse);
+
+      strasse.addEventListener("pointerdown", (ev) => {
+        ev.preventDefault();
+        if (!aktiv) return;
+        const r = strasse.getBoundingClientRect();
+        spur = Math.max(0, Math.min(2, spur + (ev.clientX - r.left < r.width / 2 ? -1 : 1)));
+        auto.style.left = SPUREN[spur] + "%";
+        ton(380, .04, "square");
+      });
+
+      function neu(jetzt) {
+        // Bei "schwer" manchmal zwei Hindernisse gleichzeitig, aber nie alle drei Spuren zu
+        const spuren = mischen([0, 1, 2]).slice(0, schwer && Math.random() < .35 ? 2 : 1);
+        spuren.forEach(s => {
+          const el = document.createElement("div");
+          el.textContent = DINGE[Math.floor(Math.random() * DINGE.length)];
+          el.style.cssText = `position:absolute;left:${SPUREN[s]}%;top:-12%;font-size:46px;transform:translateX(-50%);`;
+          strasse.appendChild(el);
+          hindernisse.push({ el, spur: s, y: -12 });
+        });
+        letztes = jetzt;
+      }
+
+      function schritt(jetzt) {
+        if (!aktiv) return;
+        const dt = Math.min(.05, (jetzt - zuletzt) / 1000);
+        zuletzt = jetzt;
+        if (jetzt - letztes > neuAlle) neu(jetzt);
+        for (let i = hindernisse.length - 1; i >= 0; i--) {
+          const h = hindernisse[i];
+          h.y += tempo * dt;
+          h.el.style.top = h.y + "%";
+          if (h.spur === spur && h.y > 74 && h.y < 92 && jetzt > geschuetztBis) {
+            // Zusammenstoß!
+            punkte = Math.max(0, punkte - 20);
+            mgPunkte(punkte);
+            zeigePunkte(feld, SPUREN[spur] + "%", "70%", "-20");
+            geschuetztBis = jetzt + 1000;
+            auto.style.animation = "blinken .2s 5";
+            setTimeout(() => auto.style.animation = "", 1000);
+            ton(150, .3, "sawtooth"); vibriere(200);
+            h.el.remove(); hindernisse.splice(i, 1);
+          } else if (h.y > 100) {
+            punkte += 10;
+            mgPunkte(punkte);
+            h.el.remove(); hindernisse.splice(i, 1);
+          }
+        }
+        requestAnimationFrame(schritt);
+      }
+      neu(performance.now());
+      requestAnimationFrame(schritt);
+      zeitbalken(DAUER, () => { aktiv = false; fertig(punkte); });
+    }
+  }
+];
+
+const PUNKTE_RICHTIG = 100;
+
+// =====================================================================
+//  AB HIER: Spielablauf (muss für neue Fragen nicht geändert werden)
+// =====================================================================
+const zustand = {
+  spieler: [],        // { name, punkte }
+  schwierigkeit: "leicht",
+  runden: 5,
+  runde: 0,
+  aktSpieler: 0,
+  fragenStapel: [],
+  mgReihenfolge: [],
+  minigamePunkte: 0
+};
+
+document.getElementById("titel").textContent = SPIELNAME;
+document.title = SPIELNAME;
+
+function zeige(id) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("aktiv"));
+  document.getElementById(id).classList.add("aktiv");
+  if (id === "s-setup") setupVorbereiten();
+}
+
+// ---------- Ton & Vibration ----------
+let audio;
+let soundAn = speicherLaden().sound !== false;
+function soundUmschalten() {
+  soundAn = !soundAn;
+  soundKnopf();
+  try { localStorage.setItem("fw-spiel", JSON.stringify({ ...speicherLaden(), sound: soundAn })); } catch (e) {}
+  if (soundAn) ton(660, .1);
+}
+function soundKnopf() {
+  const b = document.getElementById("sound-btn");
+  b.textContent = soundAn ? "🔊" : "🔇";
+  b.classList.toggle("aus", !soundAn);
+}
+soundKnopf();
+function ton(freq, dauer = 0.12, typ = "sine", start = 0) {
+  if (!soundAn) return;
+  try {
+    audio = audio || new (window.AudioContext || window.webkitAudioContext)();
+    const o = audio.createOscillator(), g = audio.createGain();
+    o.type = typ; o.frequency.value = freq;
+    g.gain.setValueAtTime(0.15, audio.currentTime + start);
+    g.gain.exponentialRampToValueAtTime(0.001, audio.currentTime + start + dauer);
+    o.connect(g); g.connect(audio.destination);
+    o.start(audio.currentTime + start); o.stop(audio.currentTime + start + dauer + 0.02);
+  } catch (e) {}
+}
+function tonRichtig() { ton(660, .12); ton(880, .2, "sine", .12); }
+function tonFalsch() { ton(200, .3, "sawtooth"); }
+function tonFanfare() { [523, 659, 784, 1047].forEach((f, i) => ton(f, .25, "triangle", i * .18)); }
+function vibriere(ms) { try { navigator.vibrate && navigator.vibrate(ms); } catch (e) {} }
+
+// ---------- Einstellungen ----------
+function speicherLaden() {
+  try { return JSON.parse(localStorage.getItem("fw-spiel") || "{}"); } catch (e) { return {}; }
+}
+function speichern() {
+  try {
+    localStorage.setItem("fw-spiel", JSON.stringify({
+      sound: soundAn,
+      namen: zustand.spieler.map(s => s.name),
+      schwierigkeit: zustand.schwierigkeit,
+      runden: zustand.runden
+    }));
+  } catch (e) {}
+}
+
+function setupVorbereiten() {
+  const liste = document.getElementById("spieler-liste");
+  if (liste.children.length) return;
+  const gespeichert = speicherLaden();
+  const namen = gespeichert.namen && gespeichert.namen.length >= 2 ? gespeichert.namen : ["", ""];
+  namen.forEach(n => spielerHinzu(n));
+  zustand.schwierigkeit = gespeichert.schwierigkeit || "leicht";
+  zustand.runden = gespeichert.runden || 5;
+  auswahlSetzen("wahl-schwierigkeit", zustand.schwierigkeit);
+  auswahlSetzen("wahl-runden", String(zustand.runden));
+}
+
+function spielerHinzu(name) {
+  const liste = document.getElementById("spieler-liste");
+  if (liste.children.length >= 8) return;
+  const zeile = document.createElement("div");
+  zeile.className = "spieler-zeile";
+  const input = document.createElement("input");
+  input.placeholder = "Name Spieler " + (liste.children.length + 1);
+  input.maxLength = 14;
+  input.value = name;
+  const weg = document.createElement("button");
+  weg.textContent = "✖";
+  weg.onclick = () => {
+    if (liste.children.length > 2) { zeile.remove(); plusButton(); }
+  };
+  zeile.append(input, weg);
+  liste.appendChild(zeile);
+  plusButton();
+}
+function plusButton() {
+  document.getElementById("btn-plus").style.display =
+    document.getElementById("spieler-liste").children.length >= 8 ? "none" : "block";
+}
+
+function auswahlSetzen(gruppe, wert) {
+  document.querySelectorAll("#" + gruppe + " .btn").forEach(b =>
+    b.classList.toggle("gewaehlt", b.dataset.wert === wert));
+}
+document.querySelectorAll("#wahl-schwierigkeit .btn").forEach(b => b.onclick = () => {
+  zustand.schwierigkeit = b.dataset.wert; auswahlSetzen("wahl-schwierigkeit", b.dataset.wert); ton(600, .06);
+});
+document.querySelectorAll("#wahl-runden .btn").forEach(b => b.onclick = () => {
+  zustand.runden = parseInt(b.dataset.wert); auswahlSetzen("wahl-runden", b.dataset.wert); ton(600, .06);
+});
+
+function mischen(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+
+// ---------- Spielablauf ----------
+function spielStarten() {
+  const inputs = [...document.querySelectorAll("#spieler-liste input")];
+  const namen = inputs.map((i, n) => i.value.trim() || ("Spieler " + (n + 1)));
+  zustand.spieler = namen.map(n => ({ name: n, punkte: 0 }));
+  zustand.runde = 0;
+  zustand.aktSpieler = 0;
+  zustand.fragenStapel = mischen(FRAGEN[zustand.schwierigkeit]);
+  zustand.mgReihenfolge = mischen(MINIGAMES.map((_, i) => i));
+  speichern();
+  ton(440, .1); ton(660, .15, "sine", .1);
+  uebergabeZeigen();
+}
+
+function nochmal() {
+  zustand.spieler.forEach(s => s.punkte = 0);
+  zustand.runde = 0; zustand.aktSpieler = 0;
+  zustand.fragenStapel = mischen(FRAGEN[zustand.schwierigkeit]);
+  zustand.mgReihenfolge = mischen(MINIGAMES.map((_, i) => i));
+  uebergabeZeigen();
+}
+
+// Jede Runde ein anderes Minigame: zufällige Reihenfolge, dann der Reihe nach im Kreis
+function aktuellesMinigame() {
+  const r = zustand.mgReihenfolge;
+  return MINIGAMES[r[zustand.runde % r.length]];
+}
+
+function uebergabeZeigen() {
+  const mg = aktuellesMinigame();
+  document.getElementById("ueb-runde").textContent = `Runde ${zustand.runde + 1} von ${zustand.runden}`;
+  document.getElementById("ueb-name").textContent = zustand.spieler[zustand.aktSpieler].name;
+  document.getElementById("ueb-spiel").textContent = `Minigame: ${mg.emoji} ${mg.name}`;
+  document.getElementById("ueb-anleitung").textContent = mg.anleitung;
+  zeige("s-uebergabe");
+}
+
+function minigameStarten() {
+  const mg = aktuellesMinigame();
+  const feld = document.getElementById("spielfeld");
+  feld.innerHTML = "";
+  document.getElementById("mg-name").textContent = mg.emoji + " " + mg.name;
+  mgPunkte(0);
+  zeige("s-minigame");
+  // kurzer Countdown
+  let n = 3;
+  const cd = document.createElement("div");
+  cd.style.cssText = "position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:7rem;font-weight:bold;color:#fff;text-shadow:4px 4px 0 #000;";
+  feld.appendChild(cd);
+  document.getElementById("mg-zeit").style.width = "100%";
+  const tick = () => {
+    if (n > 0) { cd.textContent = n; ton(440, .1); n--; setTimeout(tick, 700); }
+    else {
+      cd.textContent = "LOS!"; ton(880, .2);
+      setTimeout(() => {
+        cd.remove();
+        mg.start(feld, zustand.schwierigkeit === "schwer", (punkte) => {
+          zustand.minigamePunkte = punkte;
+          zustand.spieler[zustand.aktSpieler].punkte += punkte;
+          feld.innerHTML = `<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(0,0,0,.45);color:#fff;text-shadow:3px 3px 0 #000;text-align:center;">
+            <div style="font-size:4rem">⏱️</div><div style="font-size:2.2rem;font-weight:bold">Zeit um!</div>
+            <div style="font-size:1.8rem">+${punkte} Punkte</div></div>`;
+          tonFanfare();
+          setTimeout(quizZeigen, 1800);
+        });
+      }, 500);
+    }
+  };
+  tick();
+}
+
+function mgPunkte(p) { document.getElementById("mg-punkte").textContent = p + " Pkt"; }
+
+function zeitbalken(dauer, ende) {
+  const balken = document.getElementById("mg-zeit");
+  const start = Date.now();
+  const iv = setInterval(() => {
+    const rest = Math.max(0, 1 - (Date.now() - start) / dauer);
+    balken.style.width = (rest * 100) + "%";
+    balken.style.background = rest < .25 ? "#ff1744" : "";
+    if (rest <= 0) { clearInterval(iv); ende(); }
+  }, 100);
+}
+
+function zeigePunkte(feld, left, top, text) {
+  const p = document.createElement("div");
+  p.className = "punkte-popup";
+  p.textContent = text;
+  p.style.left = left; p.style.top = top;
+  feld.appendChild(p);
+  setTimeout(() => p.remove(), 700);
+}
+
+function quizZeigen() {
+  if (!zustand.fragenStapel.length) zustand.fragenStapel = mischen(FRAGEN[zustand.schwierigkeit]);
+  const frage = zustand.fragenStapel.pop();
+  const richtig = frage.a[0];
+  document.getElementById("quiz-spieler").textContent = "👤 " + zustand.spieler[zustand.aktSpieler].name;
+  document.getElementById("quiz-frage").textContent = frage.f;
+  document.getElementById("quiz-erklaerung").classList.remove("zeigen");
+  document.getElementById("quiz-weiter").classList.remove("zeigen");
+  const box = document.getElementById("quiz-antworten");
+  box.innerHTML = "";
+  let beantwortet = false;
+  mischen(frage.a).forEach(antwort => {
+    const b = document.createElement("button");
+    b.className = "btn antwort";
+    b.textContent = antwort;
+    b.onclick = () => {
+      if (beantwortet) return;
+      beantwortet = true;
+      const ok = antwort === richtig;
+      [...box.children].forEach(x => { if (x.textContent === richtig) x.classList.add("richtig"); });
+      if (!ok) b.classList.add("falsch");
+      if (ok) { zustand.spieler[zustand.aktSpieler].punkte += PUNKTE_RICHTIG; tonRichtig(); vibriere(60); }
+      else { tonFalsch(); vibriere([80, 50, 80]); }
+      document.getElementById("quiz-emoji").textContent = ok ? "🎉" : "😬";
+      document.getElementById("quiz-ergebnis").innerHTML = ok
+        ? `<b>Richtig! +${PUNKTE_RICHTIG} Punkte</b>`
+        : `<b>Leider falsch.</b><br>Richtig ist: ${richtig}`;
+      document.getElementById("quiz-text").textContent = "💡 " + frage.e;
+      document.getElementById("quiz-erklaerung").classList.add("zeigen");
+      document.getElementById("quiz-weiter").classList.add("zeigen");
+      setTimeout(() => document.getElementById("quiz-weiter").scrollIntoView({ behavior: "smooth", block: "end" }), 100);
+    };
+    box.appendChild(b);
+  });
+  zeige("s-quiz");
+}
+
+function zugBeenden() {
+  zustand.aktSpieler++;
+  if (zustand.aktSpieler >= zustand.spieler.length) {
+    zustand.aktSpieler = 0;
+    zustand.runde++;
+    if (zustand.runde >= zustand.runden) return siegerehrung();
+    // Nach jeder kompletten Runde: Zwischenstand
+    document.getElementById("zw-titel").textContent = `Stand nach Runde ${zustand.runde}`;
+    document.getElementById("zw-liste").innerHTML = ranglisteHTML();
+    return zeige("s-zwischen");
+  }
+  uebergabeZeigen();
+}
+function naechsterZug() { uebergabeZeigen(); }
+
+function sortiert() { return zustand.spieler.slice().sort((a, b) => b.punkte - a.punkte); }
+
+function ranglisteHTML() {
+  const medaille = ["🥇", "🥈", "🥉"];
+  let platz = 0, letzte = null;
+  return sortiert().map((s, i) => {
+    if (s.punkte !== letzte) { platz = i; letzte = s.punkte; }
+    return `<div class="rang"><span class="platz">${medaille[platz] || (platz + 1) + "."}</span>
+      <span class="nm">${html(s.name)}</span><span class="pkt">${s.punkte}</span></div>`;
+  }).join("");
+}
+
+function html(t) { const d = document.createElement("div"); d.textContent = t; return d.innerHTML; }
+
+function siegerehrung() {
+  const liste = sortiert();
+  const plaetze = [
+    { s: liste[1], h: 90, m: "🥈" },
+    { s: liste[0], h: 130, m: "🥇" },
+    { s: liste[2], h: 60, m: "🥉" }
+  ];
+  document.getElementById("podest").innerHTML = plaetze.map(p => p.s ? `
+    <div><div class="pname">${p.m === "🥇" ? "👑<br>" : ""}${html(p.s.name)}<br>${p.s.punkte}</div>
+    <div class="sockel" style="height:${p.h}px">${p.m}</div></div>` : "<div></div>").join("");
+  document.getElementById("end-liste").innerHTML = ranglisteHTML();
+  zeige("s-ende");
+  tonFanfare();
+  setTimeout(tonFanfare, 900);
+  konfetti();
+}
+
+function konfetti() {
+  const zeichen = ["🎉", "⭐", "🚒", "🔥", "💧", "🏆", "🎊"];
+  for (let i = 0; i < 40; i++) {
+    const k = document.createElement("div");
+    k.className = "konfetti";
+    k.textContent = zeichen[i % zeichen.length];
+    k.style.left = Math.random() * 100 + "vw";
+    k.style.animationDuration = (2.5 + Math.random() * 2.5) + "s";
+    k.style.animationDelay = (Math.random() * 1.5) + "s";
+    document.body.appendChild(k);
+    setTimeout(() => k.remove(), 6500);
+  }
+}
+</script>
+</body>
+</html>
